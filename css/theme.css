@@ -1,0 +1,384 @@
+/*!
+* PS1 Light Mode x PS1 Dark Mode
+* Full Theme File — pure PlayStation palette, no Xbox colors
+*/
+
+/* ==========================================================
+   1. PALETTE & VARIABLE DEFINITIONS
+   ========================================================== */
+
+:root {
+  /* Static PS1 face-button colors — used for the social icons
+     (always all 4 on screen at once) and as the rotation pool
+     for the single "accent" color that JS cycles on toggle. */
+  --ps-red: #E4000F;
+  --ps-yellow: #FFC200;
+  --ps-blue: #00439C;
+  --ps-green: #00AA13;
+
+  /* Neutral shade used for hover text / contrast, independent of theme */
+  --ps1-dark: #1A1A1A;
+
+  /* Rotating accent — the actual color values are set inline on
+     :root by scripts.js each time the toggle is clicked. These are
+     just the defaults for first paint (Red). */
+  --ps1-accent: var(--ps-red);
+  --ps1-accent-text: #FFFFFF;
+
+  /* Convenience aliases so the rest of the file only has to think
+     in terms of "accent" rather than the PS1-specific name. */
+  --accent: var(--ps1-accent);
+  --accent-contrast: var(--ps1-accent-text);
+}
+
+/* Light mode: PS1 grey */
+:root,
+[data-theme="light"] {
+  --bg: #A8A8A8;
+  --surface: #C2C2C2;
+  --card-bg: #B6B6B6;
+  --border: #6E6E6E;
+  --text: #1A1A1A;
+  --text-muted: #4A4A4A;
+}
+
+/* Dark mode: PS1 dark grey */
+[data-theme="dark"] {
+  --bg: #2A2A2A;
+  --surface: #383838;
+  --card-bg: #333333;
+  --border: #565656;
+  --text: #ECECEC;
+  --text-muted: #B0B0B0;
+}
+
+/* ==========================================================
+   2. BASE STYLES & TYPOGRAPHY
+   ========================================================== */
+html {
+  transition: background-color 0.25s ease;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 1rem;
+  line-height: 1.5;
+  background-color: var(--bg) !important;
+  color: var(--text);
+}
+
+body,
+#mainNav,
+.masthead,
+.page-section,
+.footer,
+.copyright,
+.portfolio-modal .modal-content,
+.form-control,
+.btn,
+.divider-custom-line,
+.portfolio-item-caption,
+.card {
+  transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+}
+
+/* Headings & Accent Text — this is where the rotating PS1 accent shows up */
+h1, h2, h3, h4, h5, h6, .accent-text {
+  color: var(--accent);
+  transition: color 0.3s ease;
+}
+
+.page-section-heading.text-secondary,
+.portfolio-modal-title.text-secondary {
+  color: var(--accent) !important;
+}
+
+section#about .page-section-heading.text-white,
+.masthead-heading,
+.masthead-subheading {
+  color: var(--accent-contrast) !important;
+}
+
+a {
+  color: var(--accent);
+}
+a:hover {
+  color: var(--ps1-dark);
+}
+[data-theme="dark"] a:hover {
+  color: #ffffff;
+}
+
+::selection {
+  background-color: var(--accent);
+  color: var(--accent-contrast);
+}
+
+/* ==========================================================
+   3. NAVIGATION BAR
+   ========================================================== */
+#mainNav {
+  transition: all 0.3s ease-in-out;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  background-color: var(--surface) !important;
+  border-bottom: 3px solid var(--accent);
+}
+
+#mainNav .navbar-brand {
+  color: var(--text) !important;
+  letter-spacing: 0.05em;
+  font-weight: 700;
+}
+
+#mainNav .navbar-nav .nav-item .nav-link {
+  color: var(--text) !important;
+  font-weight: 600;
+}
+
+#mainNav .navbar-nav .nav-item .nav-link.active,
+#mainNav .navbar-nav .nav-item .nav-link:hover {
+  color: var(--accent) !important;
+}
+
+@media (min-width: 992px) {
+  #mainNav .navbar-nav > li.nav-item > a.nav-link.active {
+    color: var(--accent-contrast) !important;
+    background: var(--accent);
+    border-radius: 0.35rem;
+  }
+}
+
+#mainNav .navbar-toggler {
+  background-color: var(--accent) !important;
+  color: var(--accent-contrast) !important;
+  border: 2px solid var(--border);
+}
+
+/* Theme Toggle Button (light/dark + accent rotate, in one click) */
+#themeToggle,
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  margin-left: 0.5rem;
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  background-color: var(--surface);
+  color: var(--accent);
+  cursor: pointer;
+  font-size: 1.1rem;
+  line-height: 1;
+  padding: 0;
+  flex: 0 0 auto;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  transition: transform 0.1s ease, background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+#themeToggle:hover,
+.theme-toggle:hover {
+  background-color: var(--accent);
+  color: var(--accent-contrast);
+}
+#themeToggle:active,
+.theme-toggle:active {
+  transform: scale(0.92);
+}
+#themeToggle:focus-visible,
+.theme-toggle:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.theme-toggle .fa-sun { display: none; }
+.theme-toggle .fa-moon { display: inline-block; }
+[data-theme="dark"] .theme-toggle .fa-sun { display: inline-block; }
+[data-theme="dark"] .theme-toggle .fa-moon { display: none; }
+
+/* ==========================================================
+   4. HERO / MASTHEAD
+   ========================================================== */
+.masthead {
+  background-color: var(--accent) !important;
+  color: var(--accent-contrast) !important;
+  border-bottom: 2px solid var(--border);
+}
+.masthead .masthead-avatar {
+  border: 3px solid var(--accent-contrast);
+  border-radius: 50%;
+  background-color: var(--surface);
+}
+.masthead .divider-custom-line {
+  background-color: var(--accent-contrast) !important;
+}
+.masthead .divider-custom-icon {
+  color: var(--accent-contrast) !important;
+}
+
+/* ==========================================================
+   5. SECTIONS & DIVIDERS
+   ========================================================== */
+.page-section {
+  background-color: var(--bg);
+}
+.divider-custom-line {
+  background-color: var(--accent) !important;
+}
+.divider-custom-icon {
+  color: var(--accent) !important;
+}
+
+/* "About" Section Surface Styling */
+section#about.bg-primary {
+  background-color: var(--surface) !important;
+  color: var(--text) !important;
+  border-top: 2px solid var(--border);
+  border-bottom: 2px solid var(--border);
+}
+section#about.bg-primary h2,
+section#about.bg-primary p {
+  color: var(--text) !important;
+}
+section#about .divider-custom-line {
+  background-color: var(--accent) !important;
+}
+section#about .divider-custom-icon {
+  color: var(--accent) !important;
+}
+section#about .btn-outline-light {
+  color: var(--text) !important;
+  border: 2px solid var(--border) !important;
+}
+section#about .btn-outline-light:hover {
+  background-color: var(--accent) !important;
+  border-color: var(--accent) !important;
+  color: var(--accent-contrast) !important;
+}
+
+/* ==========================================================
+   6. CONSOLE FACE-BUTTON SOCIALS (PS1 Quad-Color)
+   ========================================================== */
+.btn {
+  border-radius: 0.35rem;
+}
+.btn-primary {
+  --bs-btn-color: var(--accent-contrast);
+  --bs-btn-bg: var(--accent);
+  --bs-btn-border-color: var(--border);
+  --bs-btn-hover-color: var(--accent-contrast);
+  --bs-btn-hover-bg: var(--ps1-dark);
+  --bs-btn-hover-border-color: var(--border);
+  background-color: var(--accent) !important;
+  border-color: var(--accent) !important;
+  color: var(--accent-contrast) !important;
+  border-width: 2px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-social {
+  background-color: var(--surface);
+  border: 2px solid var(--border);
+  color: var(--text);
+}
+
+/* PS Logo Quad-Colors (Red, Yellow, Blue, Green) — always all 4 on
+   screen together, same in light & dark mode, independent of the
+   rotating page accent. Text/border take the button's PS1 color;
+   hover fills the background with that same PS1 color. */
+.btn-social:nth-child(1) { border-color: var(--ps-red); color: var(--ps-red); }
+.btn-social:nth-child(1):hover { background-color: var(--ps-red); color: #ffffff; }
+
+.btn-social:nth-child(2) { border-color: var(--ps-yellow); color: var(--ps-yellow); }
+.btn-social:nth-child(2):hover { background-color: var(--ps-yellow); color: var(--ps1-dark); }
+
+.btn-social:nth-child(3) { border-color: var(--ps-blue); color: var(--ps-blue); }
+.btn-social:nth-child(3):hover { background-color: var(--ps-blue); color: #ffffff; }
+
+.btn-social:nth-child(4) { border-color: var(--ps-green); color: var(--ps-green); }
+.btn-social:nth-child(4):hover { background-color: var(--ps-green); color: #ffffff; }
+
+/* ==========================================================
+   7. PORTFOLIO GRID & TRANSLUCENT CARDS
+   ========================================================== */
+.card {
+  background-color: var(--card-bg) !important;
+  border: 2px solid var(--accent);
+  color: var(--text);
+}
+
+.portfolio .portfolio-item {
+  border: 2px solid var(--border);
+  border-radius: 0.35rem;
+  background-color: var(--surface);
+}
+[data-theme="dark"] .portfolio .portfolio-item {
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.45);
+}
+.portfolio .portfolio-item .portfolio-item-caption {
+  background-color: color-mix(in srgb, var(--accent) 88%, transparent);
+}
+.portfolio .portfolio-item .portfolio-item-caption .portfolio-item-caption-content {
+  color: var(--accent-contrast);
+}
+
+/* ==========================================================
+   8. MODALS & FORMS
+   ========================================================== */
+.portfolio-modal .modal-content {
+  background-color: var(--surface);
+  color: var(--text);
+  border: 2px solid var(--accent);
+  border-radius: 0.5rem;
+}
+[data-theme="dark"] .portfolio-modal .modal-content {
+  backdrop-filter: blur(12px);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.45);
+}
+.portfolio-modal .btn-close {
+  color: var(--text);
+  opacity: 1;
+}
+[data-theme="dark"] .portfolio-modal .btn-close {
+  filter: invert(1) grayscale(100%) brightness(200%);
+}
+
+.form-control {
+  background-color: var(--surface);
+  color: var(--text);
+  border-color: var(--border);
+}
+.form-control::placeholder {
+  color: var(--text-muted);
+}
+.form-control:focus {
+  background-color: var(--surface);
+  color: var(--text);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 0.2rem color-mix(in srgb, var(--accent) 25%, transparent);
+}
+.form-floating label {
+  color: var(--text-muted) !important;
+}
+
+/* ==========================================================
+   9. FOOTER & COPYRIGHT
+   ========================================================== */
+.footer {
+  background-color: var(--surface) !important;
+  color: var(--text) !important;
+  border-top: 2px solid var(--accent);
+}
+.footer h4 {
+  color: var(--accent);
+}
+.footer .lead a {
+  color: var(--accent);
+}
+
+.copyright {
+  background-color: var(--bg) !important;
+  color: var(--text-muted) !important;
+  border-top: 2px solid var(--border);
+}
