@@ -1,66 +1,109 @@
-window.addEventListener('DOMContentLoaded', event => {
-    // PS1 face-button accent rotation: Red, Yellow, Blue, Green
-    const ps1Accents = [
-        { name: 'Red', varName: '--ps-red', textColor: '#FFFFFF' },
-        { name: 'Yellow', varName: '--ps-yellow', textColor: '#1A1A1A' },
-        { name: 'Blue', varName: '--ps-blue', textColor: '#FFFFFF' },
-        { name: 'Green', varName: '--ps-green', textColor: '#FFFFFF' }
-    ];
+window.addEventListener('DOMContentLoaded', () => {
+  const root = document.documentElement;
+  const themeToggle = document.getElementById('themeToggle');
+  const STORAGE_KEY = 'theme';
 
-    const root = document.documentElement;
-    const themeToggle = document.getElementById('themeToggle');
+  /**
+   * Resolve the theme to use on load:
+   * 1. A theme the user explicitly picked before (localStorage)
+   * 2. Otherwise, the OS-level preference (prefers-color-scheme)
+   * 3. Otherwise, light.
+   * (This mirrors the inline <head> script that already set the
+   * attribute before first paint — this just keeps everything in sync.)
+   */
+  function getStoredTheme() {
+    return localStorage.getItem(STORAGE_KEY);
+  }
 
-    function applyAccent(index) {
-        const accent = ps1Accents[index];
-        root.style.setProperty('--ps1-accent', `var(${accent.varName})`);
-        root.style.setProperty('--ps1-accent-text', accent.textColor);
+  function getPreferredTheme() {
+    const stored = getStoredTheme();
+    if (stored === 'light' || stored === 'dark') return stored;
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }
 
-        if (themeToggle) {
-            themeToggle.title = `Toggle theme (accent: ${accent.name})`;
-            themeToggle.setAttribute('aria-label', `Toggle theme, current accent ${accent.name}`);
-        }
-
-        localStorage.setItem('accentIndex', String(index));
+  function applyTheme(theme, { persist = true } = {}) {
+    root.setAttribute('data-theme', theme);
+    if (persist) {
+      localStorage.setItem(STORAGE_KEY, theme);
     }
-
-    function applyTheme(theme) {
-        root.setAttribute('data-theme', theme);
-        localStorage.setItem('theme', theme);
-    }
-
-    // Restore accent from last visit (or default to Red)
-    const savedAccentIndex = parseInt(localStorage.getItem('accentIndex'), 10);
-    let accentIndex = Number.isInteger(savedAccentIndex) ? savedAccentIndex % ps1Accents.length : 0;
-    applyAccent(accentIndex);
-
-    // Theme (light/dark) was already set on <html> before first paint
-    // by the inline script in <head>; nothing to do here on load.
-
     if (themeToggle) {
-        themeToggle.addEventListener('click', () => {
-            // Flip light/dark
-            const currentTheme = root.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
-            const nextTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            applyTheme(nextTheme);
-
-            // Rotate to the next PS1 accent color
-            accentIndex = (accentIndex + 1) % ps1Accents.length;
-            applyAccent(accentIndex);
-        });
+      const label = theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode';
+      themeToggle.setAttribute('aria-label', label);
+      themeToggle.title = label;
+      themeToggle.setAttribute('aria-pressed', theme === 'dark' ? 'true' : 'false');
     }
+  }
 
-    // Navbar shrink function
-    var navbarShrink = function () {
-        const navbarCollapsible = document.body.querySelector('#mainNav');
-        if (!navbarCollapsible) return;
+  // Sync with whatever the head script already applied.
+  applyTheme(getPreferredTheme(), { persist: false });
 
-        if (window.scrollY === 0) {
-            navbarCollapsible.classList.remove('navbar-shrink');
-        } else {
-            navbarCollapsible.classList.add('navbar-shrink');
-        }
+  if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+      const current = root.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+      applyTheme(current === 'dark' ? 'light' : 'dark');
+    });
+  }
+
+  // If the user has never explicitly chosen a theme, keep following the
+  // OS preference live (e.g. their system switches to dark mode at night).
+  if (window.matchMedia) {
+    const media = window.matchMedia('(prefers-color-scheme: dark)');
+    const handleSystemChange = (event) => {
+      if (!getStoredTheme()) {
+        applyTheme(event.matches ? 'dark' : 'light', { persist: false });
+      }
     };
+    if (media.addEventListener) {
+      media.addEventListener('change', handleSystemChange);
+    } else if (media.addListener) {
+      media.addListener(handleSystemChange);
+    }
+  }
 
-    navbarShrink();
-    document.addEventListener('scroll', navbarShrink);
+  // Navbar shrink on scroll
+  const navbarShrink = () => {
+    const nav = document.getElementById('mainNav');
+    if (!nav) return;
+    nav.classList.toggle('navbar-shrink', window.scrollY > 0);
+  };
+  navbarShrink();
+  document.addEventListener('scroll', navbarShrink);
+
+  // Bootstrap collapse: close the mobile menu after a nav link is clicked
+  document.querySelectorAll('#navbarSupportedContent .nav-link').forEach((link) => {
+    link.addEventListener('click', () => {
+      const nav = document.getElementById('navbarSupportedContent');
+      if (nav && nav.classList.contains('show') && window.bootstrap) {
+        window.bootstrap.Collapse.getOrCreateInstance(nav).hide();
+      }
+    });
+  });
+
+  // Lightweight contact form handling (no backend wired up — just UX feedback)
+  const form = document.getElementById('contactForm');
+  if (form) {
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      if (!form.checkValidity()) {
+        form.classList.add('was-validated');
+        return;
+      }
+      const submitButton = document.getElementById('submitButton');
+      const originalLabel = submitButton.textContent;
+      submitButton.disabled = true;
+      submitButton.textContent = 'Message sent';
+      form.reset();
+      form.classList.remove('was-validated');
+      setTimeout(() => {
+        submitButton.disabled = false;
+        submitButton.textContent = originalLabel;
+      }, 2500);
+    });
+  }
+
+  // Footer year
+  const yearEl = document.getElementById('year');
+  if (yearEl) {
+    yearEl.textContent = new Date().getFullYear();
+  }
 });

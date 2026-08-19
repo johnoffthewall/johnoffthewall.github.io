@@ -1,192 +1,162 @@
 /*!
-* PS1 Light Mode x PS1 Dark Mode
-* Full Theme File — pure PlayStation palette, no Xbox colors
-*/
+ * Amphibian (light) x Turtle (dark) — two-palette day/night theme
+ * Semantic variable architecture: --bg-main, --bg-surface, --primary,
+ * --secondary, --accent, --text-color (plus a few practical derivatives:
+ * --bg-card, --text-muted, --border, --on-primary, --on-accent).
+ */
 
 /* ==========================================================
-   1. PALETTE & VARIABLE DEFINITIONS
+   1. PALETTE DEFINITIONS
    ========================================================== */
 
-:root {
-  /* Static PS1 face-button colors — used for the social icons
-     (always all 4 on screen at once) and as the rotation pool
-     for the single "accent" color that JS cycles on toggle. */
-  --ps-red: #E4000F;
-  --ps-yellow: #FFC200;
-  --ps-blue: #00439C;
-  --ps-green: #00AA13;
-
-  /* Neutral shade used for hover text / contrast, independent of theme */
-  --ps1-dark: #1A1A1A;
-
-  /* Rotating accent — the actual color values are set inline on
-     :root by scripts.js each time the toggle is clicked. These are
-     just the defaults for first paint (Red). */
-  --ps1-accent: var(--ps-red);
-  --ps1-accent-text: #FFFFFF;
-
-  /* Convenience aliases so the rest of the file only has to think
-     in terms of "accent" rather than the PS1-specific name. */
-  --accent: var(--ps1-accent);
-  --accent-contrast: var(--ps1-accent-text);
-}
-
-/* Light mode: PS1 grey */
+/* Light mode — "Amphibian Palette" (default, mirrors a sunlit pond) */
 :root,
 [data-theme="light"] {
-  --bg: #A8A8A8;
-  --surface: #C2C2C2;
-  --card-bg: #B6B6B6;
-  --border: #6E6E6E;
-  --text: #1A1A1A;
-  --text-muted: #4A4A4A;
+  --bg-main: #F8F9FA;             /* Base Light Background — Off-White */
+  --bg-surface: #15CDCA;          /* Surface / Highlight Elements — Teal */
+  --primary: #3E54D3;             /* Primary Accent / Hero Background — Royal Blue */
+  --secondary: #4F80E2;           /* Secondary Accent / Active Buttons — Soft Blue */
+  --accent: #4FE0B6;              /* Vibrant Accent / Success Indicators — Mint Green */
+  --text-color: #1A1D20;          /* Primary Text — Dark Charcoal */
+
+  /* Practical derivatives, built from the palette above */
+  --bg-card: #FFFFFF;
+  --text-muted: color-mix(in srgb, var(--text-color) 62%, transparent);
+  --border: color-mix(in srgb, var(--text-color) 14%, transparent);
+  --on-primary: #FFFFFF;          /* text sitting on --primary / --secondary */
+  --on-accent: #113B33;           /* text sitting on the bright --bg-surface / --accent chips */
+  --shadow: 0 10px 30px rgba(26, 29, 32, 0.12);
 }
 
-/* Dark mode: PS1 dark grey */
+/* Dark mode — "Turtle Palette" (a slower, shelled counterpart) */
 [data-theme="dark"] {
-  --bg: #2A2A2A;
-  --surface: #383838;
-  --card-bg: #333333;
-  --border: #565656;
-  --text: #ECECEC;
-  --text-muted: #B0B0B0;
+  --bg-main: #1C1E1E;             /* Base Dark Background — Deep Charcoal */
+  --bg-surface: #557B83;          /* Surface / Card Background — Muted Slate Blue */
+  --primary: #39AEA9;             /* Primary Accent / Brand Color — Teal Accent */
+  --secondary: #A2D5AB;           /* Secondary Accent / Links — Soft Sage Green */
+  --accent: #E5EFC1;              /* High-Contrast Text / Highlights — Light Cream */
+  --text-color: #E5EFC1;          /* High-Contrast Text / Highlights — Light Cream */
+
+  --bg-card: #263030;
+  --text-muted: color-mix(in srgb, var(--text-color) 66%, transparent);
+  --border: color-mix(in srgb, var(--accent) 20%, transparent);
+  --on-primary: #0F1717;          /* dark text reads better on the mid-value teal */
+  --on-accent: #1C1E1E;
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
 }
 
 /* ==========================================================
-   2. BASE STYLES & TYPOGRAPHY
+   2. GLOBAL / TRANSITIONS
    ========================================================== */
 html {
-  transition: background-color 0.25s ease;
+  scroll-behavior: smooth;
+}
+
+*,
+*::before,
+*::after {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition: none !important; }
 }
 
 body {
   margin: 0;
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  font-size: 1rem;
-  line-height: 1.5;
-  background-color: var(--bg) !important;
-  color: var(--text);
-}
-
-body,
-#mainNav,
-.masthead,
-.page-section,
-.footer,
-.copyright,
-.portfolio-modal .modal-content,
-.form-control,
-.btn,
-.divider-custom-line,
-.portfolio-item-caption,
-.card {
-  transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
-}
-
-/* Headings & Accent Text — this is where the rotating PS1 accent shows up */
-h1, h2, h3, h4, h5, h6, .accent-text {
-  color: var(--accent);
-  transition: color 0.3s ease;
-}
-
-.page-section-heading.text-secondary,
-.portfolio-modal-title.text-secondary {
-  color: var(--accent) !important;
-}
-
-section#about .page-section-heading.text-white,
-.masthead-heading,
-.masthead-subheading {
-  color: var(--accent-contrast) !important;
+  background-color: var(--bg-main);
+  color: var(--text-color);
 }
 
 a {
-  color: var(--accent);
+  color: var(--primary);
+  text-decoration: none;
+}
+[data-theme="dark"] a {
+  color: var(--secondary);
 }
 a:hover {
-  color: var(--ps1-dark);
+  color: var(--secondary);
 }
 [data-theme="dark"] a:hover {
-  color: #ffffff;
+  color: var(--accent);
 }
 
 ::selection {
   background-color: var(--accent);
-  color: var(--accent-contrast);
+  color: var(--on-accent);
 }
 
 /* ==========================================================
-   3. NAVIGATION BAR
+   3. NAVBAR
    ========================================================== */
 #mainNav {
-  transition: all 0.3s ease-in-out;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-  background-color: var(--surface) !important;
-  border-bottom: 3px solid var(--accent);
+  background-color: var(--bg-card);
+  border-bottom: 1px solid var(--border);
+  box-shadow: var(--shadow);
 }
-
+#mainNav.navbar-shrink {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
 #mainNav .navbar-brand {
-  color: var(--text) !important;
-  letter-spacing: 0.05em;
+  color: var(--text-color) !important;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
   font-weight: 700;
+  letter-spacing: 0.02em;
 }
-
-#mainNav .navbar-nav .nav-item .nav-link {
-  color: var(--text) !important;
+#mainNav .navbar-nav .nav-link {
+  color: var(--text-color) !important;
   font-weight: 600;
+  margin: 0 0.35rem;
 }
-
-#mainNav .navbar-nav .nav-item .nav-link.active,
-#mainNav .navbar-nav .nav-item .nav-link:hover {
-  color: var(--accent) !important;
+#mainNav .navbar-nav .nav-link:hover,
+#mainNav .navbar-nav .nav-link:focus-visible {
+  color: var(--primary) !important;
 }
-
-@media (min-width: 992px) {
-  #mainNav .navbar-nav > li.nav-item > a.nav-link.active {
-    color: var(--accent-contrast) !important;
-    background: var(--accent);
-    border-radius: 0.35rem;
-  }
+[data-theme="dark"] #mainNav .navbar-nav .nav-link:hover,
+[data-theme="dark"] #mainNav .navbar-nav .nav-link:focus-visible {
+  color: var(--secondary) !important;
 }
-
 #mainNav .navbar-toggler {
-  background-color: var(--accent) !important;
-  color: var(--accent-contrast) !important;
-  border: 2px solid var(--border);
+  color: var(--text-color);
+  border-color: var(--border);
 }
 
-/* Theme Toggle Button (light/dark + accent rotate, in one click) */
-#themeToggle,
+/* Theme toggle switch */
 .theme-toggle {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   width: 2.5rem;
   height: 2.5rem;
-  margin-left: 0.5rem;
-  border: 2px solid var(--accent);
+  margin-left: 0.25rem;
+  border: 2px solid var(--primary);
   border-radius: 50%;
-  background-color: var(--surface);
-  color: var(--accent);
+  background-color: transparent;
+  color: var(--primary);
   cursor: pointer;
-  font-size: 1.1rem;
-  line-height: 1;
+  font-size: 1rem;
   padding: 0;
-  flex: 0 0 auto;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-  transition: transform 0.1s ease, background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
 }
-#themeToggle:hover,
+[data-theme="dark"] .theme-toggle {
+  border-color: var(--secondary);
+  color: var(--secondary);
+}
 .theme-toggle:hover {
-  background-color: var(--accent);
-  color: var(--accent-contrast);
+  background-color: var(--primary);
+  color: var(--on-primary);
 }
-#themeToggle:active,
+[data-theme="dark"] .theme-toggle:hover {
+  background-color: var(--secondary);
+  color: var(--on-primary);
+}
 .theme-toggle:active {
   transform: scale(0.92);
 }
-#themeToggle:focus-visible,
 .theme-toggle:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
@@ -200,185 +170,212 @@ a:hover {
    4. HERO / MASTHEAD
    ========================================================== */
 .masthead {
-  background-color: var(--accent) !important;
-  color: var(--accent-contrast) !important;
-  border-bottom: 2px solid var(--border);
+  background-color: var(--primary);
+  color: var(--on-primary);
 }
-.masthead .masthead-avatar {
-  border: 3px solid var(--accent-contrast);
-  border-radius: 50%;
-  background-color: var(--surface);
+.masthead-subheading,
+.masthead-heading,
+.masthead-tagline {
+  color: var(--on-primary);
 }
 .masthead .divider-custom-line {
-  background-color: var(--accent-contrast) !important;
+  background-color: var(--on-primary);
 }
 .masthead .divider-custom-icon {
-  color: var(--accent-contrast) !important;
+  color: var(--on-primary);
+}
+.masthead .btn-primary {
+  background-color: var(--bg-card);
+  border-color: var(--bg-card);
+  color: var(--primary);
+}
+.masthead .btn-primary:hover {
+  background-color: var(--accent);
+  border-color: var(--accent);
+  color: var(--on-accent);
 }
 
 /* ==========================================================
-   5. SECTIONS & DIVIDERS
+   5. SECTIONS, HEADINGS, DIVIDERS
    ========================================================== */
 .page-section {
-  background-color: var(--bg);
+  background-color: var(--bg-main);
+  color: var(--text-color);
+}
+.page-section.bg-light {
+  background-color: color-mix(in srgb, var(--bg-surface) 8%, var(--bg-main));
+}
+.page-section-heading {
+  color: var(--text-color);
 }
 .divider-custom-line {
-  background-color: var(--accent) !important;
+  background-color: var(--primary);
 }
 .divider-custom-icon {
-  color: var(--accent) !important;
+  color: var(--primary);
 }
-
-/* "About" Section Surface Styling */
-section#about.bg-primary {
-  background-color: var(--surface) !important;
-  color: var(--text) !important;
-  border-top: 2px solid var(--border);
-  border-bottom: 2px solid var(--border);
-}
-section#about.bg-primary h2,
-section#about.bg-primary p {
-  color: var(--text) !important;
-}
-section#about .divider-custom-line {
-  background-color: var(--accent) !important;
-}
-section#about .divider-custom-icon {
-  color: var(--accent) !important;
-}
-section#about .btn-outline-light {
-  color: var(--text) !important;
-  border: 2px solid var(--border) !important;
-}
-section#about .btn-outline-light:hover {
-  background-color: var(--accent) !important;
-  border-color: var(--accent) !important;
-  color: var(--accent-contrast) !important;
+.divider-light .divider-custom-line,
+.divider-light .divider-custom-icon {
+  color: var(--on-primary);
+  background-color: var(--on-primary);
 }
 
 /* ==========================================================
-   6. CONSOLE FACE-BUTTON SOCIALS (PS1 Quad-Color)
+   6. BUTTONS
    ========================================================== */
-.btn {
-  border-radius: 0.35rem;
-}
 .btn-primary {
-  --bs-btn-color: var(--accent-contrast);
-  --bs-btn-bg: var(--accent);
-  --bs-btn-border-color: var(--border);
-  --bs-btn-hover-color: var(--accent-contrast);
-  --bs-btn-hover-bg: var(--ps1-dark);
-  --bs-btn-hover-border-color: var(--border);
+  background-color: var(--primary) !important;
+  border-color: var(--primary) !important;
+  color: var(--on-primary) !important;
+}
+.btn-primary:hover,
+.btn-primary:focus-visible {
+  background-color: var(--secondary) !important;
+  border-color: var(--secondary) !important;
+  color: var(--on-primary) !important;
+}
+.btn-secondary {
+  background-color: var(--secondary) !important;
+  border-color: var(--secondary) !important;
+  color: var(--on-primary) !important;
+}
+.btn-secondary:hover,
+.btn-secondary:focus-visible {
   background-color: var(--accent) !important;
   border-color: var(--accent) !important;
-  color: var(--accent-contrast) !important;
-  border-width: 2px;
-  transition: background-color 0.3s ease;
-}
-
-.btn-social {
-  background-color: var(--surface);
-  border: 2px solid var(--border);
-  color: var(--text);
-}
-
-/* PS Logo Quad-Colors (Red, Yellow, Blue, Green) — always all 4 on
-   screen together, same in light & dark mode, independent of the
-   rotating page accent. Text/border take the button's PS1 color;
-   hover fills the background with that same PS1 color. */
-.btn-social:nth-child(1) { border-color: var(--ps-red); color: var(--ps-red); }
-.btn-social:nth-child(1):hover { background-color: var(--ps-red); color: #ffffff; }
-
-.btn-social:nth-child(2) { border-color: var(--ps-yellow); color: var(--ps-yellow); }
-.btn-social:nth-child(2):hover { background-color: var(--ps-yellow); color: var(--ps1-dark); }
-
-.btn-social:nth-child(3) { border-color: var(--ps-blue); color: var(--ps-blue); }
-.btn-social:nth-child(3):hover { background-color: var(--ps-blue); color: #ffffff; }
-
-.btn-social:nth-child(4) { border-color: var(--ps-green); color: var(--ps-green); }
-.btn-social:nth-child(4):hover { background-color: var(--ps-green); color: #ffffff; }
-
-/* ==========================================================
-   7. PORTFOLIO GRID & TRANSLUCENT CARDS
-   ========================================================== */
-.card {
-  background-color: var(--card-bg) !important;
-  border: 2px solid var(--accent);
-  color: var(--text);
-}
-
-.portfolio .portfolio-item {
-  border: 2px solid var(--border);
-  border-radius: 0.35rem;
-  background-color: var(--surface);
-}
-[data-theme="dark"] .portfolio .portfolio-item {
-  backdrop-filter: blur(10px);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.45);
-}
-.portfolio .portfolio-item .portfolio-item-caption {
-  background-color: color-mix(in srgb, var(--accent) 88%, transparent);
-}
-.portfolio .portfolio-item .portfolio-item-caption .portfolio-item-caption-content {
-  color: var(--accent-contrast);
+  color: var(--on-accent) !important;
 }
 
 /* ==========================================================
-   8. MODALS & FORMS
+   7. PORTFOLIO GRID
    ========================================================== */
-.portfolio-modal .modal-content {
-  background-color: var(--surface);
-  color: var(--text);
-  border: 2px solid var(--accent);
-  border-radius: 0.5rem;
+.portfolio-item {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  height: 100%;
 }
-[data-theme="dark"] .portfolio-modal .modal-content {
-  backdrop-filter: blur(12px);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.45);
+.portfolio-thumb {
+  height: 9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--on-primary);
+  font-size: 2rem;
 }
-.portfolio-modal .btn-close {
-  color: var(--text);
-  opacity: 1;
+.badge-tag {
+  display: inline-block;
+  background-color: var(--bg-surface);
+  color: var(--on-accent);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  margin-bottom: 0.6rem;
 }
-[data-theme="dark"] .portfolio-modal .btn-close {
-  filter: invert(1) grayscale(100%) brightness(200%);
+.portfolio-item-title {
+  color: var(--text-color);
+}
+.portfolio-item-desc {
+  color: var(--text-muted);
+}
+.portfolio-item:hover {
+  border-color: var(--secondary);
+}
+.portfolio-item:hover .portfolio-item-title {
+  color: var(--secondary);
 }
 
+/* ==========================================================
+   8. CTA SECTION
+   ========================================================== */
+.cta-section {
+  background-color: var(--secondary);
+  color: var(--on-primary);
+}
+.cta-section .page-section-heading,
+.cta-lead {
+  color: var(--on-primary);
+}
+.cta-section .btn-secondary {
+  background-color: var(--bg-card) !important;
+  border-color: var(--bg-card) !important;
+  color: var(--secondary) !important;
+}
+.cta-section .btn-secondary:hover {
+  background-color: var(--accent) !important;
+  border-color: var(--accent) !important;
+  color: var(--on-accent) !important;
+}
+
+/* ==========================================================
+   9. FORMS
+   ========================================================== */
 .form-control {
-  background-color: var(--surface);
-  color: var(--text);
-  border-color: var(--border);
+  background-color: var(--bg-card);
+  color: var(--text-color);
+  border: 1px solid var(--border);
 }
 .form-control::placeholder {
   color: var(--text-muted);
 }
 .form-control:focus {
-  background-color: var(--surface);
-  color: var(--text);
-  border-color: var(--accent);
-  box-shadow: 0 0 0 0.2rem color-mix(in srgb, var(--accent) 25%, transparent);
+  background-color: var(--bg-card);
+  color: var(--text-color);
+  border-color: var(--primary);
+  box-shadow: 0 0 0 0.2rem color-mix(in srgb, var(--primary) 25%, transparent);
 }
-.form-floating label {
-  color: var(--text-muted) !important;
+.form-floating > label {
+  color: var(--text-muted);
 }
 
 /* ==========================================================
-   9. FOOTER & COPYRIGHT
+   10. FOOTER & COPYRIGHT
    ========================================================== */
 .footer {
-  background-color: var(--surface) !important;
-  color: var(--text) !important;
-  border-top: 2px solid var(--accent);
+  background-color: var(--bg-card);
+  color: var(--text-color);
+  border-top: 1px solid var(--border);
+}
+[data-theme="dark"] .footer {
+  background-color: #171919;
 }
 .footer h4 {
-  color: var(--accent);
+  color: var(--primary);
 }
-.footer .lead a {
-  color: var(--accent);
+[data-theme="dark"] .footer h4 {
+  color: var(--secondary);
+}
+.btn-social {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  border: 2px solid var(--primary);
+  color: var(--primary);
+  margin-right: 0.5rem;
+}
+[data-theme="dark"] .btn-social {
+  border-color: var(--secondary);
+  color: var(--secondary);
+}
+.btn-social:hover {
+  background-color: var(--primary);
+  color: var(--on-primary);
+}
+[data-theme="dark"] .btn-social:hover {
+  background-color: var(--secondary);
+  color: var(--on-primary);
 }
 
 .copyright {
-  background-color: var(--bg) !important;
-  color: var(--text-muted) !important;
-  border-top: 2px solid var(--border);
+  background-color: var(--bg-main);
+  color: var(--text-muted);
+  border-top: 1px solid var(--border);
 }
