@@ -89,82 +89,92 @@ a:hover {
 }
 
 /* ==========================================================
-   3. NAVBAR
+   3. DOCK NAVIGATION
    ========================================================== */
-#mainNav {
-  background-color: var(--bg-card);
-  border-bottom: 1px solid var(--border);
+.dock-nav {
+  background-color: color-mix(in srgb, var(--bg-card) 88%, transparent);
+  border: 1px solid var(--border);
   box-shadow: var(--shadow);
 }
-#mainNav.navbar-shrink {
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
+.dock-item {
+  color: var(--text-muted);
 }
-#mainNav .navbar-brand {
-  color: var(--text-color) !important;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-}
-#mainNav .navbar-nav .nav-link {
-  color: var(--text-color) !important;
-  font-weight: 600;
-  margin: 0 0.35rem;
-}
-#mainNav .navbar-nav .nav-link:hover,
-#mainNav .navbar-nav .nav-link:focus-visible {
-  color: var(--primary) !important;
-}
-[data-theme="dark"] #mainNav .navbar-nav .nav-link:hover,
-[data-theme="dark"] #mainNav .navbar-nav .nav-link:focus-visible {
-  color: var(--secondary) !important;
-}
-#mainNav .navbar-toggler {
-  color: var(--text-color);
-  border-color: var(--border);
-}
-
-/* Theme toggle switch */
-.theme-toggle {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 2.5rem;
-  height: 2.5rem;
-  margin-left: 0.25rem;
-  border: 2px solid var(--primary);
-  border-radius: 50%;
-  background-color: transparent;
-  color: var(--primary);
-  cursor: pointer;
-  font-size: 1rem;
-  padding: 0;
-}
-[data-theme="dark"] .theme-toggle {
-  border-color: var(--secondary);
-  color: var(--secondary);
-}
-.theme-toggle:hover {
+.dock-item:hover,
+.dock-item:focus-visible {
+  color: var(--on-primary);
   background-color: var(--primary);
-  color: var(--on-primary);
 }
-[data-theme="dark"] .theme-toggle:hover {
+[data-theme="dark"] .dock-item:hover,
+[data-theme="dark"] .dock-item:focus-visible {
   background-color: var(--secondary);
-  color: var(--on-primary);
 }
-.theme-toggle:active {
-  transform: scale(0.92);
-}
-.theme-toggle:focus-visible {
+.dock-item:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
 }
-.theme-toggle .fa-sun { display: none; }
-.theme-toggle .fa-moon { display: inline-block; }
-[data-theme="dark"] .theme-toggle .fa-sun { display: inline-block; }
-[data-theme="dark"] .theme-toggle .fa-moon { display: none; }
+.dock-item.active {
+  color: var(--primary);
+  background-color: color-mix(in srgb, var(--primary) 14%, transparent);
+}
+[data-theme="dark"] .dock-item.active {
+  color: var(--secondary);
+  background-color: color-mix(in srgb, var(--secondary) 16%, transparent);
+}
+
+/* Hero portrait placeholder */
+.hero-portrait {
+  border: 3px solid var(--on-primary);
+  color: var(--on-primary);
+  background-color: color-mix(in srgb, var(--on-primary) 12%, transparent);
+}
+
+/* Theme-reactive photo duotone — the actual tint color for the
+   hero portrait, portfolio thumbnails, and lightbox popup photo.
+   Uses --primary directly, so it re-colors on its own whenever
+   the theme (and therefore --primary) changes; the grayscale +
+   blend mechanics live in styles.css. */
+.hero-portrait::after,
+.portfolio-thumb.portfolio-photo::after,
+.glightbox-container .gslide-image::after {
+  background-color: var(--primary);
+  opacity: 0.85;
+}
+[data-theme="dark"] .hero-portrait::after,
+[data-theme="dark"] .portfolio-thumb.portfolio-photo::after,
+[data-theme="dark"] .glightbox-container .gslide-image::after {
+  opacity: 0.75;
+}
+
+/* ==========================================================
+   THEME TOGGLE (dock item)
+   A J-shaped sidestripe mark on its own disc within the dock.
+   The disc's colors follow the palette (so it visibly changes
+   between the "Amphibian" light look and the "Turtle" dark look);
+   the flip animation itself lives in styles.css.
+   ========================================================== */
+.dock-toggle {
+  color: inherit;
+}
+.dock-toggle .toggle-disc {
+  background-color: var(--bg-main);
+  border: 2px solid var(--primary);
+  color: var(--primary);
+}
+[data-theme="dark"] .dock-toggle .toggle-disc {
+  border-color: var(--secondary);
+  color: var(--secondary);
+}
+.dock-toggle:hover .toggle-disc {
+  background-color: var(--primary);
+  color: var(--on-primary);
+}
+[data-theme="dark"] .dock-toggle:hover .toggle-disc {
+  background-color: var(--secondary);
+  color: var(--on-primary);
+}
+.dock-toggle:active .toggle-disc {
+  transform: scale(0.92);
+}
 
 /* ==========================================================
    4. HERO / MASTHEAD
@@ -202,7 +212,7 @@ a:hover {
   background-color: var(--bg-main);
   color: var(--text-color);
 }
-.page-section.bg-light {
+.page-section.section-tint {
   background-color: color-mix(in srgb, var(--bg-surface) 8%, var(--bg-main));
 }
 .page-section-heading {
@@ -258,30 +268,41 @@ a:hover {
   height: 100%;
 }
 .portfolio-thumb {
-  height: 9rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   color: var(--on-primary);
-  font-size: 2rem;
 }
-.badge-tag {
-  display: inline-block;
-  background-color: var(--bg-surface);
-  color: var(--on-accent);
-  font-size: 0.72rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  padding: 0.25rem 0.6rem;
-  border-radius: 999px;
-  margin-bottom: 0.6rem;
+.portfolio-placeholder {
+  flex-direction: column;
+  gap: 0.4rem;
+  background-color: color-mix(in srgb, var(--text-color) 6%, var(--bg-main));
+  color: var(--text-muted);
+  background-image:
+    repeating-linear-gradient(135deg,
+      color-mix(in srgb, var(--text-color) 4%, transparent) 0 10px,
+      transparent 10px 20px);
+}
+[data-theme="dark"] .portfolio-placeholder {
+  background-color: color-mix(in srgb, var(--accent) 5%, var(--bg-main));
+}
+.portfolio-item:hover .portfolio-placeholder {
+  color: var(--secondary);
+}
+
+.portfolio-item-body {
+  background: linear-gradient(180deg,
+    transparent 0%,
+    rgba(0, 0, 0, 0.45) 20%,
+    rgba(0, 0, 0, 0.82) 50%,
+    rgba(0, 0, 0, 0.94) 100%);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
 }
 .portfolio-item-title {
-  color: var(--text-color);
+  color: #FFFFFF;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.65);
 }
 .portfolio-item-desc {
-  color: var(--text-muted);
+  color: rgba(255, 255, 255, 0.92);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
 }
 .portfolio-item:hover {
   border-color: var(--secondary);
@@ -378,4 +399,183 @@ a:hover {
   background-color: var(--bg-main);
   color: var(--text-muted);
   border-top: 1px solid var(--border);
+}
+
+/* ==========================================================
+   11. GLIGHTBOX THEMING — "dialog box" skin
+   Re-skins GLightbox as a centered, bordered, rounded dialog
+   that matches the site palette: a transparent/tinted backdrop
+   (no dark scrim), a square image on the left and a title +
+   description panel on the right. Next/prev are hidden — this
+   is a single-image viewer, not a slideshow.
+
+   --gbox-w / --gbox-h are fixed pixel targets (not vw/vh): the
+   left image column is a square sized off --gbox-h (so ~600px
+   tall pairs with a ~600px-wide image), and the right column
+   takes the rest of --gbox-w. max-width / max-height still cap
+   things on small viewports. The close button's position is
+   calculated from the same variables (see the responsive
+   overrides in styles.css).
+   ========================================================== */
+.glightbox-container {
+  --gbox-w: 920px;
+  --gbox-h: 600px;
+}
+
+/* Transparent, theme-tinted backdrop instead of a dark scrim */
+.glightbox-container .goverlay {
+  background: color-mix(in srgb, var(--bg-main) 22%, transparent);
+  backdrop-filter: blur(3px);
+}
+
+/* The dialog panel itself. GLightbox's JS sets inline width/height
+   on this element based on the loaded image's natural size — the
+   !important overrides make sure our fixed dialog size always wins. */
+.glightbox-container .ginner-container {
+  display: flex !important;
+  flex-direction: row !important;
+  width: var(--gbox-w) !important;
+  height: var(--gbox-h) !important;
+  max-width: 92vw !important;
+  max-height: 92vh !important;
+  background-color: var(--bg-card);
+  border: 2px solid var(--border);
+  border-radius: 1rem;
+  box-shadow: var(--shadow), 0 0 0.75rem color-mix(in srgb, var(--accent) 45%, transparent),
+    0 0 2rem color-mix(in srgb, var(--primary) 30%, transparent);
+  overflow: hidden;
+  box-sizing: border-box;
+}
+[data-theme="dark"] .glightbox-container .ginner-container {
+  box-shadow: var(--shadow), 0 0 0.75rem color-mix(in srgb, var(--accent) 35%, transparent),
+    0 0 2rem color-mix(in srgb, var(--secondary) 30%, transparent);
+}
+
+/* Image — left column, a fixed square sized off the dialog height */
+.glightbox-container .gslide-media {
+  order: 1;
+  flex: 0 0 var(--gbox-h);
+  width: var(--gbox-h);
+  height: 100%;
+  background-color: var(--bg-card);
+  box-shadow: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.glightbox-container .gslide-image img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+}
+
+/* Right column — title + description, stacked */
+.glightbox-container .gslide-description {
+  order: 2;
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-card);
+  border-left: 1px solid var(--border);
+  padding: 0;
+}
+.glightbox-container .gdesc-inner {
+  background: none;
+  padding: 1.5rem 3rem 1.5rem 1.75rem;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  box-sizing: border-box;
+}
+.glightbox-container .gslide-title {
+  flex: 0 0 auto;
+  color: var(--text-color);
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin: 0 0 0.85rem;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid var(--border);
+}
+.glightbox-container .gslide-desc {
+  display: block;
+  flex: 1 1 auto;
+  overflow-y: auto;
+  margin: 0;
+  color: var(--text-muted);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  line-height: 1.65;
+}
+
+/* Only a close button — no slideshow controls */
+.glightbox-container .gbtn.gnext,
+.glightbox-container .gbtn.gprev {
+  display: none !important;
+}
+.glightbox-container .gbtn.gclose {
+  top: calc((100vh - var(--gbox-h)) / 2 + 0.7rem);
+  right: calc((100vw - var(--gbox-w)) / 2 + 0.7rem);
+  width: 2.1rem;
+  height: 2.1rem;
+  background-color: var(--bg-main);
+  color: var(--text-color);
+  border-radius: 50%;
+  box-shadow: var(--shadow);
+  opacity: 1;
+}
+.glightbox-container .gbtn.gclose svg {
+  fill: var(--text-color);
+  width: 0.9rem;
+  height: 0.9rem;
+}
+.glightbox-container .gbtn.gclose:hover {
+  background-color: var(--primary);
+}
+[data-theme="dark"] .glightbox-container .gbtn.gclose:hover {
+  background-color: var(--secondary);
+}
+.glightbox-container .gbtn.gclose:hover svg {
+  fill: var(--on-primary);
+}
+
+.gcounter {
+  display: none;
+}
+
+/* Neutralize GLightbox's hardcoded mobile text colors (normally
+   white title / gray body, meant to sit on its dark gradient
+   overlay). The layout reset for `.glightbox-mobile` lives in
+   styles.css; these colors just make sure the title/desc keep
+   following the theme once that overlay is gone. */
+.glightbox-mobile .glightbox-container .gslide-title {
+  color: var(--text-color) !important;
+}
+.glightbox-mobile .glightbox-container .gslide-desc {
+  color: var(--text-muted) !important;
+}
+.glightbox-mobile .glightbox-container .gslide-desc a,
+.glightbox-mobile .glightbox-container .gslide-desc .desc-more {
+  color: var(--primary) !important;
+}
+
+/* Stack back to image-on-top / text-below on narrow dialogs, since
+   a side-by-side split gets cramped under ~700px wide. */
+@media (max-width: 700px) {
+  .glightbox-container .ginner-container {
+    flex-direction: column !important;
+  }
+  .glightbox-container .gslide-media {
+    flex: 0 0 auto;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+  }
+  .glightbox-container .gslide-description {
+    border-left: none;
+    border-top: 1px solid var(--border);
+  }
 }

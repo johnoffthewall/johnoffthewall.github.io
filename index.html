@@ -2,1043 +2,419 @@
 <html lang="en">
 
 <head>
-  <!-- Set theme before first paint to avoid flash of wrong theme -->
-  <script>
-    (function () {
-      var stored = localStorage.getItem('theme');
-      var theme = stored ? stored : (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-      document.documentElement.setAttribute('data-theme', theme);
-    })();
-  </script>
+    <!-- Set theme before first paint to avoid flash of wrong theme -->
+    <script>
+        (function () {
+            var stored = localStorage.getItem('theme');
+            var theme = stored ? stored : (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+            document.documentElement.setAttribute('data-theme', theme);
+        })();
+    </script>
 
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <meta name="description" content="Amphibian &amp; Turtle — a freelancer portfolio theme with a two-palette day/night toggle." />
-  <meta name="author" content="" />
-  <title>Riley Marsh · Freelance Designer &amp; Developer</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description"
+        content="Amphibian &amp; Turtle — a freelancer portfolio theme with a two-palette day/night toggle." />
+    <meta name="author" content="" />
+    <title>John Paul De Leon · Freelance Designer &amp; Developer</title>
 
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%2315CDCA'/%3E%3C/svg%3E" />
+    <!-- Modern browsers (Scalable & theme-aware) -->
+    <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
 
-  <!-- Bootstrap grid, utilities & components (CSS) -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" />
+    <!-- Legacy fallback -->
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon32.png">
 
-  <!-- Font Awesome icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <!-- iOS Home Screen -->
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple_favicon.png">
 
-  <!-- Google fonts: a rounded display face + a clean workhorse body face -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <!-- Bootstrap grid, utilities & components (CSS) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" />
 
-  <!-- Core theme + component CSS -->
-  <style>
-/*!
- * Amphibian (light) x Turtle (dark) — two-palette day/night theme
- * Semantic variable architecture: --bg-main, --bg-surface, --primary,
- * --secondary, --accent, --text-color (plus a few practical derivatives:
- * --bg-card, --text-muted, --border, --on-primary, --on-accent).
- */
+    <!-- Font Awesome icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
-/* ==========================================================
-   1. PALETTE DEFINITIONS
-   ========================================================== */
+    <!-- Google fonts: a rounded display face + a clean workhorse body face -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <!-- GLightbox CSS (loaded before our stylesheets so styles.css/theme.css
+         can safely override its defaults by source order) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/theme.css" />
 
-/* Light mode — "Amphibian Palette" (default, mirrors a sunlit pond) */
-:root,
-[data-theme="light"] {
-  --bg-main: #F8F9FA;             /* Base Light Background — Off-White */
-  --bg-surface: #15CDCA;          /* Surface / Highlight Elements — Teal */
-  --primary: #3E54D3;             /* Primary Accent / Hero Background — Royal Blue */
-  --secondary: #4F80E2;           /* Secondary Accent / Active Buttons — Soft Blue */
-  --accent: #4FE0B6;              /* Vibrant Accent / Success Indicators — Mint Green */
-  --text-color: #1A1D20;          /* Primary Text — Dark Charcoal */
-
-  /* Practical derivatives, built from the palette above */
-  --bg-card: #FFFFFF;
-  --text-muted: color-mix(in srgb, var(--text-color) 62%, transparent);
-  --border: color-mix(in srgb, var(--text-color) 14%, transparent);
-  --on-primary: #FFFFFF;          /* text sitting on --primary / --secondary */
-  --on-accent: #113B33;           /* text sitting on the bright --bg-surface / --accent chips */
-  --shadow: 0 10px 30px rgba(26, 29, 32, 0.12);
-}
-
-/* Dark mode — "Turtle Palette" (a slower, shelled counterpart) */
-[data-theme="dark"] {
-  --bg-main: #1C1E1E;             /* Base Dark Background — Deep Charcoal */
-  --bg-surface: #557B83;          /* Surface / Card Background — Muted Slate Blue */
-  --primary: #39AEA9;             /* Primary Accent / Brand Color — Teal Accent */
-  --secondary: #A2D5AB;           /* Secondary Accent / Links — Soft Sage Green */
-  --accent: #E5EFC1;              /* High-Contrast Text / Highlights — Light Cream */
-  --text-color: #E5EFC1;          /* High-Contrast Text / Highlights — Light Cream */
-
-  --bg-card: #263030;
-  --text-muted: color-mix(in srgb, var(--text-color) 66%, transparent);
-  --border: color-mix(in srgb, var(--accent) 20%, transparent);
-  --on-primary: #0F1717;          /* dark text reads better on the mid-value teal */
-  --on-accent: #1C1E1E;
-  --shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
-}
-
-/* ==========================================================
-   2. GLOBAL / TRANSITIONS
-   ========================================================== */
-html {
-  scroll-behavior: smooth;
-}
-
-*,
-*::before,
-*::after {
-  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  *, *::before, *::after { transition: none !important; }
-}
-
-body {
-  margin: 0;
-  background-color: var(--bg-main);
-  color: var(--text-color);
-}
-
-a {
-  color: var(--primary);
-  text-decoration: none;
-}
-[data-theme="dark"] a {
-  color: var(--secondary);
-}
-a:hover {
-  color: var(--secondary);
-}
-[data-theme="dark"] a:hover {
-  color: var(--accent);
-}
-
-::selection {
-  background-color: var(--accent);
-  color: var(--on-accent);
-}
-
-/* ==========================================================
-   3. NAVBAR
-   ========================================================== */
-#mainNav {
-  background-color: var(--bg-card);
-  border-bottom: 1px solid var(--border);
-  box-shadow: var(--shadow);
-}
-#mainNav.navbar-shrink {
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-}
-#mainNav .navbar-brand {
-  color: var(--text-color) !important;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-}
-#mainNav .navbar-nav .nav-link {
-  color: var(--text-color) !important;
-  font-weight: 600;
-  margin: 0 0.35rem;
-}
-#mainNav .navbar-nav .nav-link:hover,
-#mainNav .navbar-nav .nav-link:focus-visible {
-  color: var(--primary) !important;
-}
-[data-theme="dark"] #mainNav .navbar-nav .nav-link:hover,
-[data-theme="dark"] #mainNav .navbar-nav .nav-link:focus-visible {
-  color: var(--secondary) !important;
-}
-#mainNav .navbar-toggler {
-  color: var(--text-color);
-  border-color: var(--border);
-}
-
-/* Theme toggle switch */
-.theme-toggle {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 2.5rem;
-  height: 2.5rem;
-  margin-left: 0.25rem;
-  border: 2px solid var(--primary);
-  border-radius: 50%;
-  background-color: transparent;
-  color: var(--primary);
-  cursor: pointer;
-  font-size: 1rem;
-  padding: 0;
-}
-[data-theme="dark"] .theme-toggle {
-  border-color: var(--secondary);
-  color: var(--secondary);
-}
-.theme-toggle:hover {
-  background-color: var(--primary);
-  color: var(--on-primary);
-}
-[data-theme="dark"] .theme-toggle:hover {
-  background-color: var(--secondary);
-  color: var(--on-primary);
-}
-.theme-toggle:active {
-  transform: scale(0.92);
-}
-.theme-toggle:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
-}
-.theme-toggle .fa-sun { display: none; }
-.theme-toggle .fa-moon { display: inline-block; }
-[data-theme="dark"] .theme-toggle .fa-sun { display: inline-block; }
-[data-theme="dark"] .theme-toggle .fa-moon { display: none; }
-
-/* ==========================================================
-   4. HERO / MASTHEAD
-   ========================================================== */
-.masthead {
-  background-color: var(--primary);
-  color: var(--on-primary);
-}
-.masthead-subheading,
-.masthead-heading,
-.masthead-tagline {
-  color: var(--on-primary);
-}
-.masthead .divider-custom-line {
-  background-color: var(--on-primary);
-}
-.masthead .divider-custom-icon {
-  color: var(--on-primary);
-}
-.masthead .btn-primary {
-  background-color: var(--bg-card);
-  border-color: var(--bg-card);
-  color: var(--primary);
-}
-.masthead .btn-primary:hover {
-  background-color: var(--accent);
-  border-color: var(--accent);
-  color: var(--on-accent);
-}
-
-/* ==========================================================
-   5. SECTIONS, HEADINGS, DIVIDERS
-   ========================================================== */
-.page-section {
-  background-color: var(--bg-main);
-  color: var(--text-color);
-}
-.page-section.bg-light {
-  background-color: color-mix(in srgb, var(--bg-surface) 8%, var(--bg-main));
-}
-.page-section-heading {
-  color: var(--text-color);
-}
-.divider-custom-line {
-  background-color: var(--primary);
-}
-.divider-custom-icon {
-  color: var(--primary);
-}
-.divider-light .divider-custom-line,
-.divider-light .divider-custom-icon {
-  color: var(--on-primary);
-  background-color: var(--on-primary);
-}
-
-/* ==========================================================
-   6. BUTTONS
-   ========================================================== */
-.btn-primary {
-  background-color: var(--primary) !important;
-  border-color: var(--primary) !important;
-  color: var(--on-primary) !important;
-}
-.btn-primary:hover,
-.btn-primary:focus-visible {
-  background-color: var(--secondary) !important;
-  border-color: var(--secondary) !important;
-  color: var(--on-primary) !important;
-}
-.btn-secondary {
-  background-color: var(--secondary) !important;
-  border-color: var(--secondary) !important;
-  color: var(--on-primary) !important;
-}
-.btn-secondary:hover,
-.btn-secondary:focus-visible {
-  background-color: var(--accent) !important;
-  border-color: var(--accent) !important;
-  color: var(--on-accent) !important;
-}
-
-/* ==========================================================
-   7. PORTFOLIO GRID
-   ========================================================== */
-.portfolio-item {
-  background-color: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 0.75rem;
-  box-shadow: var(--shadow);
-  overflow: hidden;
-  height: 100%;
-}
-.portfolio-thumb {
-  height: 9rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--on-primary);
-  font-size: 2rem;
-}
-.badge-tag {
-  display: inline-block;
-  background-color: var(--bg-surface);
-  color: var(--on-accent);
-  font-size: 0.72rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  padding: 0.25rem 0.6rem;
-  border-radius: 999px;
-  margin-bottom: 0.6rem;
-}
-.portfolio-item-title {
-  color: var(--text-color);
-}
-.portfolio-item-desc {
-  color: var(--text-muted);
-}
-.portfolio-item:hover {
-  border-color: var(--secondary);
-}
-.portfolio-item:hover .portfolio-item-title {
-  color: var(--secondary);
-}
-
-/* ==========================================================
-   8. CTA SECTION
-   ========================================================== */
-.cta-section {
-  background-color: var(--secondary);
-  color: var(--on-primary);
-}
-.cta-section .page-section-heading,
-.cta-lead {
-  color: var(--on-primary);
-}
-.cta-section .btn-secondary {
-  background-color: var(--bg-card) !important;
-  border-color: var(--bg-card) !important;
-  color: var(--secondary) !important;
-}
-.cta-section .btn-secondary:hover {
-  background-color: var(--accent) !important;
-  border-color: var(--accent) !important;
-  color: var(--on-accent) !important;
-}
-
-/* ==========================================================
-   9. FORMS
-   ========================================================== */
-.form-control {
-  background-color: var(--bg-card);
-  color: var(--text-color);
-  border: 1px solid var(--border);
-}
-.form-control::placeholder {
-  color: var(--text-muted);
-}
-.form-control:focus {
-  background-color: var(--bg-card);
-  color: var(--text-color);
-  border-color: var(--primary);
-  box-shadow: 0 0 0 0.2rem color-mix(in srgb, var(--primary) 25%, transparent);
-}
-.form-floating > label {
-  color: var(--text-muted);
-}
-
-/* ==========================================================
-   10. FOOTER & COPYRIGHT
-   ========================================================== */
-.footer {
-  background-color: var(--bg-card);
-  color: var(--text-color);
-  border-top: 1px solid var(--border);
-}
-[data-theme="dark"] .footer {
-  background-color: #171919;
-}
-.footer h4 {
-  color: var(--primary);
-}
-[data-theme="dark"] .footer h4 {
-  color: var(--secondary);
-}
-.btn-social {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 2.75rem;
-  height: 2.75rem;
-  border-radius: 50%;
-  border: 2px solid var(--primary);
-  color: var(--primary);
-  margin-right: 0.5rem;
-}
-[data-theme="dark"] .btn-social {
-  border-color: var(--secondary);
-  color: var(--secondary);
-}
-.btn-social:hover {
-  background-color: var(--primary);
-  color: var(--on-primary);
-}
-[data-theme="dark"] .btn-social:hover {
-  background-color: var(--secondary);
-  color: var(--on-primary);
-}
-
-.copyright {
-  background-color: var(--bg-main);
-  color: var(--text-muted);
-  border-top: 1px solid var(--border);
-}
-
-</style>
-  <style>
-/*!
- * Structural & typographic styles for the Freelancer-layout portfolio.
- * Colors live in theme.css — this file only handles layout, spacing,
- * and type scale so the two stay cleanly separated.
- */
-
-:root {
-  --font-display: "Fraunces", Georgia, serif;
-  --font-body: "Space Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
-}
-
-body {
-  font-family: var(--font-body);
-  font-size: 1rem;
-  line-height: 1.65;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-display);
-  font-weight: 600;
-  letter-spacing: -0.01em;
-}
-
-/* ==========================================================
-   NAVBAR
-   ========================================================== */
-#mainNav {
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-  transition: padding 0.25s ease, background-color 0.3s ease, box-shadow 0.25s ease;
-}
-#mainNav.navbar-shrink {
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-}
-#mainNav .navbar-brand {
-  font-size: 1.15rem;
-}
-#mainNav .navbar-nav .nav-link {
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-  font-size: 0.85rem;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-}
-.theme-toggle {
-  font-size: 0.95rem;
-}
-.brand-mark {
-  display: inline-flex;
-}
-
-/* ==========================================================
-   HERO / MASTHEAD
-   ========================================================== */
-.masthead {
-  padding-top: 10rem;
-  padding-bottom: 6rem;
-  text-align: center;
-}
-.masthead-subheading {
-  font-family: var(--font-body);
-  font-size: 1.1rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  opacity: 0.85;
-}
-.masthead-heading {
-  font-size: 3.75rem;
-  font-weight: 700;
-  margin: 0.5rem 0 1rem;
-  line-height: 1.05;
-}
-.masthead-tagline {
-  font-family: var(--font-body);
-  font-size: 1.15rem;
-  max-width: 34rem;
-  margin: 0 auto 1rem;
-  opacity: 0.92;
-}
-.masthead .btn-xl {
-  margin-top: 1.5rem;
-}
-
-@media (min-width: 992px) {
-  .masthead-heading {
-    font-size: 5rem;
-  }
-}
-
-/* ==========================================================
-   DIVIDER
-   ========================================================== */
-.divider-custom {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  max-width: 21.25rem;
-  margin: 1.25rem auto 1.5rem;
-}
-.divider-custom-line {
-  width: 100%;
-  max-width: 7rem;
-  height: 0.25rem;
-  border-radius: 1rem;
-}
-.divider-custom-icon {
-  margin: 0 1rem;
-  font-size: 1.5rem;
-}
-
-/* ==========================================================
-   SECTIONS
-   ========================================================== */
-.page-section {
-  padding: 6rem 0;
-}
-.page-section-heading {
-  font-size: 2.25rem;
-  font-weight: 700;
-  letter-spacing: 0.01em;
-}
-.about-lead,
-.contact-lead,
-.cta-lead {
-  font-size: 1.15rem;
-}
-
-/* About stats */
-.about-stats {
-  margin-top: 3rem;
-}
-.about-stat-number {
-  font-family: var(--font-display);
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: var(--primary);
-}
-.about-stat-label {
-  font-size: 0.85rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--text-muted);
-}
-
-/* ==========================================================
-   PORTFOLIO GRID
-   ========================================================== */
-.portfolio-item {
-  transition: transform 0.2s ease, border-color 0.3s ease;
-}
-.portfolio-item:hover {
-  transform: translateY(-0.35rem);
-}
-.portfolio-item-body {
-  padding: 1.5rem;
-}
-.portfolio-item-title {
-  font-size: 1.15rem;
-  margin: 0 0 0.5rem;
-}
-.portfolio-item-desc {
-  font-size: 0.95rem;
-  margin: 0;
-}
-
-/* ==========================================================
-   CTA SECTION
-   ========================================================== */
-.cta-section {
-  padding: 5rem 0;
-}
-
-/* ==========================================================
-   CONTACT / FORM
-   ========================================================== */
-.form-control {
-  border-radius: 0.5rem;
-  padding: 1rem 0.9rem;
-}
-.form-floating {
-  margin-bottom: 0.25rem;
-}
-
-/* ==========================================================
-   FOOTER
-   ========================================================== */
-.footer {
-  padding: 4rem 0;
-}
-.footer h4 {
-  font-size: 1.1rem;
-  margin-bottom: 1rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-.social-icons {
-  display: flex;
-  gap: 0.5rem;
-}
-.copyright {
-  padding: 1.5rem 0;
-  font-size: 0.85rem;
-  text-align: center;
-}
-
-/* ==========================================================
-   FOCUS VISIBILITY (accessibility)
-   ========================================================== */
-a:focus-visible,
-button:focus-visible,
-.form-control:focus-visible {
-  outline: 2px solid var(--accent, #4FE0B6);
-  outline-offset: 2px;
-}
-
-/* ==========================================================
-   RESPONSIVE
-   ========================================================== */
-@media (max-width: 767.98px) {
-  .masthead {
-    padding-top: 8rem;
-    padding-bottom: 4rem;
-  }
-  .masthead-heading {
-    font-size: 2.5rem;
-  }
-  .page-section {
-    padding: 4rem 0;
-  }
-}
-
-</style>
 </head>
 
 <body id="page-top">
 
-  <!-- Navigation-->
-  <nav class="navbar navbar-expand-lg fixed-top" id="mainNav">
+    <!-- Dock navigation (icon-only) -->
+    <nav class="dock-nav" aria-label="Primary">
+        <a class="dock-item" href="#page-top" aria-label="Home" title="Home">
+            <i class="fas fa-house" aria-hidden="true"></i>
+        </a>
+        <a class="dock-item" href="#about" aria-label="Hobbies &amp; interests" title="Hobbies &amp; interests">
+            <i class="fas fa-heart" aria-hidden="true"></i>
+        </a>
+        <a class="dock-item" href="#contact" aria-label="Contact" title="Contact">
+            <i class="fas fa-envelope" aria-hidden="true"></i>
+        </a>
+        <button id="themeToggle" class="dock-item dock-toggle" type="button" title="Toggle theme"
+            aria-label="Toggle color theme" aria-pressed="false">
+            <span class="toggle-disc">
+                <span class="toggle-icon">
+                    <svg class="j-stripe" viewBox="0 0 512 512" aria-hidden="true">
+                        <path
+                            d="M114.09 0.86C116.79 1.31 119.56 1 122.27 1.39C130.68 2.59 139.23 4.2 147.5 6.15C181.86 14.28 215.1 29.58 244.47 49.42C253.59 55.58 271.33 71.41 277.77 80.2C280.89 84.47 283.6 89.03 286.38 93.52C287.42 95.18 288.26 97.59 290.13 98.15C292.16 96.03 292.34 85.67 292.33 82.53C292.27 63.61 282.22 47.96 275.01 31.06C273.12 26.64 267.12 14.3 270.03 10.15C273.23 8.77 276.65 11.82 279.43 12.98C287.69 16.42 296.16 20.13 304.7 22.83C313.3 25.54 321.58 29.06 330.21 31.95C333.07 32.91 336.35 33.21 339.13 34.24C343.15 35.74 346.81 38.94 350.64 40.92C360.09 45.8 369.68 50.77 378.25 57.3C386.57 63.65 394.3 70.84 401.43 78.53C404.34 81.67 406.34 87.22 410.3 89.06C414.62 85.93 419.01 77.43 422.47 72.96C431.72 61 444.28 50.58 458.56 45.97C462.95 44.56 469.46 41.8 474.07 43.25C473.91 46.2 471.46 49.21 470.16 51.87C467.23 57.84 465.41 64.03 464.62 70.56C464.62 73.38 464.62 76.21 464.62 79.03C466.24 92.66 471.18 103.71 479.04 115.03C481.92 119.17 485.68 122.39 488.84 126.25C497.57 136.87 508.71 153.31 511.04 166.93C511.33 168.32 511.63 169.71 511.92 171.09C511.92 174.09 511.92 177.09 511.92 180.09C511.63 181.47 511.35 182.85 511.06 184.23C510.44 188.91 508.56 193.75 507.1 198.23C504.44 206.4 502.17 214.82 500.13 223.14C496.89 236.36 497.66 251.35 498.42 264.88C499.11 277.43 504.08 289.18 506.72 301.39C509.15 312.57 509 323.62 508.9 335.02C508.83 342.08 509.09 349.45 507.54 356.35C490.56 432.24 423.69 479.7 353.23 499.84C337.87 504.23 321.52 506.94 305.56 508.85C295.71 510.03 285.63 509.72 275.87 511.07C271.08 510.87 266.37 511.59 261.61 511.72C253.55 511.94 245.55 510.78 237.53 511.07C222.69 509.94 207.48 509.03 192.9 505.81C142.2 494.59 93.86 474.04 55.94 437.12C53.89 435.12 51.05 433.74 49.17 431.71C47.05 429.43 45.75 426.13 43.68 423.67C39.5 418.7 36 413.31 31.93 408.28C30.75 406.81 29.27 405.67 28.28 404.02C24.53 397.84 21.66 390.6 18.89 383.92C16.32 377.72 14.2 371.47 11.89 365.2C11.3 363.59 9.97 362.79 9.17 361.36C7.82 358.94 7.37 355.63 6.82 352.94C3.28 335.58 4.63 316.54 8.22 299.31C8.97 295.73 11.16 292.64 11.98 289.09C14.01 280.4 15.62 271.49 16.94 262.72C16.95 258.68 16.96 254.64 16.98 250.6C15.8 244.25 15.73 237.7 13.8 231.38C13.23 229.49 12.69 227.03 11.38 225.48C10.27 224.17 9.01 223.61 8.31 221.93C5.11 214.21 4.22 205.84 2.57 197.79C1.75 193.77 1.37 189.47 1.03 185.4C0.9 183.8 1.66 181.33 0.08 180.49C0.08 179.53 0.08 178.57 0.08 177.61C1.49 175.6 1.47 169.39 0.08 167.39C0.08 166.46 0.08 165.52 0.08 164.59C1.76 163.88 1.32 157.44 1.49 155.49C2.25 146.67 4.19 136.87 7.13 128.43C8.61 124.18 10.51 124.01 11.98 121.2C16.53 112.53 20.83 103.96 26.43 95.86C28.89 92.29 32.47 89.77 35.56 86.75C37.91 84.45 39.7 81.44 42.12 79.31C46.15 75.76 50.75 72.86 55.2 69.9C59.88 66.8 71.09 58.36 76.42 58.68C77.49 64.97 76.78 71.59 77.24 77.84C78.42 93.76 86.04 108.29 97.7 119.02C100.2 121.32 108.82 129.68 111.99 129.15C112.05 127.54 110.73 125.58 110.49 123.66C109.66 117.13 109.03 109.66 110.51 103.21C110.99 101.13 112.65 99.67 113.31 97.59C115.27 91.33 116.82 84.99 119.19 78.79C126.98 58.42 133.71 44.76 120.89 24.26C117.46 18.76 111.59 15.77 106.77 11.76C101.57 7.42 94.78 4.72 88.45 2.57C91.7 2.01 94.95 1.45 98.19 0.89C103.49 0.88 108.79 0.87 114.09 0.86ZM235.17 483.63C237.51 483.71 239.86 483.79 242.21 483.88C247.82 483.88 253.43 483.88 259.04 483.88C262 483.79 264.96 483.71 267.92 483.63C288.44 484.11 305.65 480.35 325.32 476.19C365.52 467.69 405.44 447.05 434.34 416.79C436.1 414.95 436.95 412.46 438.53 410.69C439.47 409.63 440.96 409.31 441.97 408.09C456.17 390.83 466.99 370.14 472.01 348.33C476.91 327.04 471.48 308.2 467.34 287.64C464.65 274.3 465.37 257.86 465.68 244.31C465.89 235.29 465.7 225.82 468.31 217.02C471.48 206.37 476.51 195.72 476.82 184.46C476.9 181.62 476.4 165.54 475.77 163.57C474.45 159.5 470.55 155.57 468.29 151.97C462.81 143.21 457.43 134.43 452.22 125.48C449.25 120.37 446.8 114.88 444.23 109.6C442.73 106.52 441.86 102.45 439.76 99.77C435.27 100.08 432.05 113.34 430.77 117.2C426.36 130.56 420.75 154.66 407.5 161.71C404.99 158.86 405.6 153.61 405.25 149.9C404.5 141.98 401.83 133.37 398.89 126.01C387.17 96.71 364.8 78.95 339.67 61.77C334.18 58.01 328.28 55.03 322.55 51.72C320.5 50.54 317.88 48.65 315.54 49.33C315.41 53.5 317.69 57.45 318.43 61.51C320.06 70.52 320.97 81.3 319.86 90.48C317.62 109.05 309.89 124.89 294.46 136.21C291.77 138.18 283.42 145.34 280.09 143.76C277.17 142.37 276.22 135.4 274.82 132.67C270.27 123.72 265.29 115.04 259.72 106.63C257.61 103.45 254.87 100.94 252.27 98.18C248.4 94.07 244.88 89.74 240.83 85.78C224.98 70.3 203.9 56.92 184.56 46.7C178.62 43.56 172.63 40.36 166.5 37.59C164.02 36.47 160.95 34.15 158.28 34.28C157.99 37.21 159.18 39.63 159.67 42.43C160.96 49.68 160.64 60.23 158.72 67.33C153.02 88.4 141.38 101.66 143.6 125.53C144.21 132.17 145.51 139.1 148.07 145.31C149.3 148.29 151.82 150.57 152.81 153.6C150.6 155.21 147.81 154.78 145.18 154.89C138.67 155.15 132.07 155.2 125.54 154.95C105 154.18 93.64 151.28 76.14 140.56C72.51 138.34 70.25 134.88 67.2 132.23C66.27 131.41 65.06 131.07 64.28 130.01C61.2 125.79 58.73 120.17 57.15 115.21C56.43 112.95 56.37 110.37 55.49 108.24C52.91 108.04 51.23 113.18 49.8 115.03C44.12 122.4 40.1 131.92 37.13 140.69C33.56 151.25 31.05 162.48 32.42 173.62C34 186.44 39.84 198.11 43.74 210.33C47.5 222.08 50.94 244.28 50.04 256.47C49.44 264.55 50.44 272.73 49.58 280.78C48.42 291.61 45.71 302.39 44.17 313.17C42.19 327.03 44.35 345.43 48.27 358.79C67.07 422.85 129.95 461.59 190.8 476.24C203.98 479.41 221.56 484.31 235.17 483.63ZM397.8 243.84C395.48 247.38 386.05 246.29 382.28 252.05C379.62 256.12 380.32 260.76 379.52 265.25C378.77 269.41 377.21 273.54 375.26 277.3C367.83 291.56 350.08 303.51 333.62 302.5C323.96 301.9 317.83 297.41 309.14 296.21C305.33 295.68 301.44 296.25 297.61 295.98C290.61 295.49 284.13 293.99 277.84 291.03C274.52 289.47 269.23 286.66 268.62 282.53C270.16 279.42 274.62 280.58 277.51 280.61C285.86 280.72 295 282.53 303.17 279.94C314.73 276.28 323.31 269.12 333.32 262.49C345.14 254.65 357.65 246.51 371.41 242.97C377.78 241.34 384.06 240.76 390.69 241.58C393.21 241.89 396.38 241.55 397.8 243.84ZM110.34 262.55C113.05 258.55 126.28 256.56 131.06 255.6C144.25 252.94 159.95 253.33 172.18 259.21C184.21 264.99 194.49 274.12 207.15 278.87C215.02 281.82 223.23 284.76 231.7 286.05C237.76 286.97 243.92 286.09 249.92 286.92C252.53 287.29 253.39 290.16 252.97 292.47C252.09 297.37 247.12 299.77 242.95 301.2C234.02 304.25 224.89 302.87 215.84 305.01C211.51 306.03 207.61 308.94 203.15 309.92C183.14 314.3 163.09 304.23 150.41 288.91C148.14 286.17 145.69 283.3 144.34 279.96C142.27 274.82 143.34 272.56 138.02 269.05C131.9 265.03 124.21 264.09 117.13 263.18C114.81 262.88 112.59 263.33 110.34 262.55ZM362.86 266.29C356.85 266.25 343.11 277.79 338.11 281.76C335.79 283.6 332.35 285.85 331.41 288.73C341.27 292.9 353.93 284.4 359.32 276.3C360.89 273.95 364.21 269.02 362.86 266.29ZM198.69 296.68C196.94 294.92 191.87 293.87 189.24 292.6C182.25 289.19 175.71 284.4 168.88 280.7C166.64 279.48 161.23 275.69 158.88 277.04C158.55 280.02 164.04 283.98 165.93 285.98C173.91 294.42 186.99 302.21 198.69 296.68ZM61.2 307.2C61.21 304.55 61.23 301.9 61.24 299.25C61.98 296.97 62.94 292.48 66.16 292.61C69.34 292.74 74.87 300.8 77.2 303.18C85.44 311.58 96.07 317.17 106.09 322.88C115.22 328.09 124.88 331.9 134.4 336.17C159.42 347.39 183.19 355.59 210.65 359.98C226 362.43 241.41 362.34 256.94 362.19C301.57 361.75 344.64 354.26 385.42 336.97C401.93 329.97 417.1 319.81 432.06 309.77C436.75 306.62 448.93 296.3 453.79 295.73C459.13 301.29 453.5 317.38 450.2 323.25C448.86 325.64 446.92 327.02 446.4 329.86C445.9 332.66 446.4 335.46 446.12 338.29C445.41 345.52 444.38 352.95 441.82 359.78C429.66 392.21 405.96 418.72 376.52 436.64C362.54 445.15 347.96 450.93 332.33 455.14C325.58 456.96 318.79 459.03 311.98 460.82C300.82 463.75 288.64 464.2 277.17 465C271.71 465.38 266.23 466.11 260.68 466.32C254.6 466.54 248.41 465.79 242.44 465.08C238.92 464.66 235.33 465.05 231.81 464.56C222.04 463.2 212.33 461.8 202.71 459.63C185.28 455.71 169.45 448.68 153.03 442C148.1 440 143.37 437.45 138.74 434.75C137.51 434.03 136.54 432.79 135.22 432.22C133.65 431.55 131.83 431.48 130.31 430.59C127.94 429.22 126.19 426.79 124.09 425.06C116.01 418.44 108.35 411.68 101.25 403.97C99.82 402.42 89.85 393.13 89.65 392.68C89.23 391.74 89.51 390.59 89.03 389.54C87.62 386.49 84.99 383.8 83.42 380.68C78.66 371.2 75.13 361.59 72.39 351.45C71.97 349.92 70.22 349.29 69.75 347.6C67.46 339.46 68.32 330.8 66.66 322.53C66.16 320.04 64.41 318.67 63.42 316.5C62.07 313.55 61.62 310.39 61.2 307.2ZM96.56 341.48C95.73 339.53 90.09 334.78 87.75 336.25C84.97 338 86.64 344.84 88.14 346.96C90.94 345.14 93.75 343.31 96.56 341.48ZM423.39 358.74C426.04 355.44 427.04 342.28 423.65 339.21C421.08 336.88 410.42 343.35 408.73 345.78C413.62 350.1 418.51 354.42 423.39 358.74ZM101.62 362.88C101.68 360.06 101.74 357.24 101.8 354.43C101.9 351.85 102 349.28 102.09 346.71C100.18 346.75 99.18 348.35 97.73 349.51C91.32 354.65 92.17 361.21 95.67 367.91C96.78 370.02 97.75 373.1 100.3 373.5C100.74 369.96 101.18 366.42 101.62 362.88ZM109.26 365.59C109.27 368.71 109.27 371.84 109.28 374.96C109.6 379.26 109.27 384.89 111.52 388.68C113.92 388.01 115.19 383.53 116.43 381.35C119.13 376.62 122.59 372.26 126.39 368.36C128.5 366.2 131.84 364.01 132.93 361.21C129.78 357.73 121.13 352.19 116.75 350.59C114.73 349.85 112.31 348.08 110.42 350.06C108.43 352.17 109.08 362.63 109.26 365.59ZM409.79 382.25C412.05 382.23 414.11 377.98 415.21 376.19C419.62 369.06 416.08 361.19 410.39 355.75C408.83 354.25 406.46 351.57 404.22 352C402.74 358.08 407.06 366.3 407.87 372.43C408.28 375.47 407.95 379.79 409.79 382.25ZM399.55 387.72C401.64 384.15 400.03 380.84 399.99 377.09C399.93 371.87 398.07 354.32 391.55 353.15C388.46 352.59 384.68 355.25 382.04 356.53C380.1 357.46 378.26 358.58 376.88 360.27C377.49 365.02 390.02 376.89 393.45 381.55C395.1 383.79 396.62 387.38 399.55 387.72ZM351.86 423.86C354.84 421.26 355.08 415.35 356.3 411.73C359.71 401.56 361.7 390.13 361.68 379.44C361.67 374.99 361.94 369.26 357.68 366.38C354.6 364.29 350.59 365.48 347.19 365.82C340.07 366.53 333.01 368.16 326.12 369.84C322.34 370.77 317.34 370.83 314.09 373.22C309.84 376.36 315.19 382.45 317.62 384.93C326.59 394.05 335.7 403.11 343.45 413.32C345.08 415.47 349.54 423.7 351.86 423.86ZM139.56 366.35C136.97 366.32 134.3 370.82 132.67 372.78C127.78 378.64 117.95 389.59 118.63 397.68C118.93 401.13 124 403.92 126.34 406.02C133.35 412.29 141.15 417.87 148.88 423.18C151.3 424.83 154.36 427.84 157.34 427.73C158.53 423.79 150.63 415.5 149.23 411.2C146.1 401.63 143.09 391.72 141.52 381.78C140.71 376.68 140.55 371.32 139.56 366.35ZM364.95 421.1C369.37 423.08 376.53 415.79 379.92 413.32C383.1 411.01 388.17 408.34 389.86 404.59C393.89 395.61 384.67 380.78 378.32 374.69C376.62 373.07 370.57 366.45 368.69 366.39C366.96 369.53 368.41 376.22 368.33 379.91C368.12 388.71 367.49 397.93 365.87 406.54C365.12 410.52 362.77 417.25 364.95 421.1ZM173.63 430.87C177.89 419.25 182.52 407.53 190.36 397.74C193.66 393.62 203.87 386.95 204.39 381.78C204.92 376.57 197.87 374.54 193.81 373.93C189.64 373.29 185.63 371.75 181.54 370.99C176.76 370.1 171.83 369.69 167.09 368.64C162.58 367.64 157.25 366.41 152.74 368.11C147.05 370.24 149.07 379.24 149.31 383.64C150 396.7 156.6 410.77 163.7 421.48C165.67 424.45 169.79 431.33 173.63 430.87ZM263.48 447.12C267.09 443.65 268.96 438.19 271.42 433.89C278.26 421.91 284.24 409.29 287.6 395.82C288.71 391.38 290.38 379.35 284.23 377.16C281.13 376.05 276.57 377.87 273.3 377.74C262.72 377.32 251.16 377.64 240.66 378.94C236.74 379.43 231.65 380.28 230.27 384.72C228.77 389.51 231.02 394.79 232.77 399.15C237.8 411.65 245.66 422.92 252.79 434.29C254.81 437.5 259.74 446.66 263.48 447.12ZM301.36 381.95C297.49 384.36 297.12 392.54 295.76 396.57C291.25 409.9 284.76 422.44 279.49 435.46C277.8 439.64 273.09 447.7 279.38 449.89C283.54 451.33 290.57 450.06 294.81 449.3C306.39 447.23 317.2 445.16 328.15 441.14C330.92 440.12 340.86 437.09 342.11 434.51C344.29 430.03 340.25 423.35 338.22 419.53C332.46 408.69 322.19 398.96 313.29 390.63C310.15 387.68 305.69 382.71 301.36 381.95ZM218.59 382.9C214 382.7 208.78 389.39 205.72 392.49C197.58 400.7 190.26 409.47 185.69 420.16C183.74 424.7 181.92 431.35 184.1 436.11C185.99 440.23 190.84 441.19 194.72 442.33C203.7 444.95 212.96 447.52 222.33 448.95C228.77 449.94 234.96 450.17 241.51 450.22C244.13 450.23 247.54 450.66 249.49 448.64C249.73 443.19 242.17 433.47 239.13 428.84C233.34 420.03 228.02 409.96 224.34 400.08C222.32 394.64 221.61 387.78 218.59 382.9Z"
+                            fill="currentColor" stroke="currentColor" stroke-width="0.25" stroke-linejoin="round" />
+                        <path
+                            d="M102.87 0.08C104.89 0.08 106.92 0.08 108.95 0.08C109.02 0.21 109.1 0.34 109.18 0.47C110.74 0.47 112.3 0.47 113.86 0.47C113.93 0.6 114.01 0.73 114.09 0.86C108.79 0.87 103.49 0.88 98.19 0.89C98.27 0.75 98.35 0.61 98.43 0.47C99.83 0.47 101.23 0.47 102.63 0.47C102.71 0.34 102.79 0.21 102.87 0.08ZM464.62 70.56C464.62 73.38 464.62 76.21 464.62 79.03C464.62 76.21 464.62 73.38 464.62 70.56ZM511.04 166.93C511.33 167.24 511.63 167.55 511.92 167.86C511.92 168.94 511.92 170.02 511.92 171.09C511.63 169.71 511.33 168.32 511.04 166.93ZM0.08 167.39C1.47 169.39 1.49 175.6 0.08 177.61C0.08 174.2 0.08 170.8 0.08 167.39ZM511.92 180.09C511.92 181.31 511.92 182.54 511.92 183.76C511.63 183.91 511.35 184.07 511.06 184.23C511.35 182.85 511.63 181.47 511.92 180.09ZM16.98 250.6C16.96 254.64 16.95 258.68 16.94 262.72C16.95 258.68 16.96 254.64 16.98 250.6ZM61.24 299.25C61.23 301.9 61.21 304.55 61.2 307.2C61.06 307.12 60.92 307.04 60.79 306.97C60.79 304.47 60.79 301.98 60.79 299.48C60.94 299.41 61.09 299.33 61.24 299.25ZM101.8 354.43C101.74 357.24 101.68 360.06 101.62 362.88C101.57 360.14 101.52 357.4 101.46 354.66C101.58 354.58 101.69 354.5 101.8 354.43ZM109.26 365.59C109.27 368.71 109.27 371.84 109.28 374.96C109.27 371.84 109.27 368.71 109.26 365.59ZM235.17 483.63C237.44 483.58 239.7 483.53 241.97 483.48C242.05 483.61 242.13 483.74 242.21 483.88C239.86 483.79 237.51 483.71 235.17 483.63ZM267.92 483.63C264.96 483.71 262 483.79 259.04 483.88C259.12 483.74 259.2 483.61 259.27 483.48C262.15 483.53 265.04 483.58 267.92 483.63ZM237.53 511.07C245.55 510.78 253.55 511.94 261.61 511.72C266.37 511.59 271.08 510.87 275.87 511.07C275.79 511.23 275.72 511.38 275.64 511.53C273.14 511.53 270.65 511.53 268.16 511.53C268.08 511.66 268 511.79 267.92 511.92C260.13 511.92 252.34 511.92 244.54 511.92C244.47 511.79 244.39 511.66 244.31 511.53C242.13 511.53 239.95 511.53 237.76 511.53C237.69 511.38 237.61 511.22 237.53 511.07Z"
+                            fill="var(--bg-main)" stroke="var(--bg-main)" stroke-width="0.25" stroke-linejoin="round" />
+                    </svg>
+                </span>
+            </span>
+        </button>
+    </nav>
+
+    <!-- Masthead-->
+    <header class="masthead" id="page-top-hero">
     <div class="container">
-      <a class="navbar-brand" href="#page-top">
-        <span class="brand-mark" aria-hidden="true">
-          <svg viewBox="0 0 40 40" width="28" height="28">
-            <circle cx="20" cy="20" r="18" fill="var(--primary)"></circle>
-            <path d="M12 22c2-6 6-9 8-9s6 3 8 9c-2 3-5 5-8 5s-6-2-8-5Z" fill="var(--vibrant)"></path>
-            <circle cx="15" cy="16" r="2" fill="var(--bg-main)"></circle>
-            <circle cx="25" cy="16" r="2" fill="var(--bg-main)"></circle>
-          </svg>
-        </span>
-        Riley Marsh
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        Menu
-        <i class="fas fa-bars ms-1"></i>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-          <li class="nav-item"><a class="nav-link" href="#portfolio">Work</a></li>
-          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-          <li class="nav-item">
-            <button id="themeToggle" class="theme-toggle" type="button" title="Toggle theme" aria-label="Toggle color theme">
-              <i class="fas fa-moon" aria-hidden="true"></i>
-              <i class="fas fa-sun" aria-hidden="true"></i>
-            </button>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-
-  <!-- Masthead-->
-  <header class="masthead" id="page-top-hero">
-    <div class="container">
-      <div class="masthead-subheading">Hi there, I&rsquo;m</div>
-      <div class="masthead-heading text-uppercase">Riley Marsh</div>
-      <div class="masthead-tagline">Product design &amp; front-end development, done at a considered pace.</div>
-      <div class="divider-custom">
-        <div class="divider-custom-line"></div>
-        <div class="divider-custom-icon"><i class="fas fa-water"></i></div>
-        <div class="divider-custom-line"></div>
-      </div>
-      <a class="btn btn-primary btn-xl text-uppercase" href="#about">Learn more about me</a>
-    </div>
-  </header>
-
-  <!-- About-->
-  <section class="page-section" id="about">
-    <div class="container">
-      <h2 class="page-section-heading text-uppercase text-center">About</h2>
-      <div class="divider-custom">
-        <div class="divider-custom-line"></div>
-        <div class="divider-custom-icon"><i class="fas fa-leaf"></i></div>
-        <div class="divider-custom-line"></div>
-      </div>
-      <div class="row justify-content-center">
-        <div class="col-lg-8 text-center">
-          <p class="about-lead">I build calm, durable interfaces for small studios and independent founders. Ten years in, two constants: things should feel good to use, and the code behind them should be boring in the best way.</p>
+        <div class="hero-portrait">
+            <!-- Replaced SVG with your WebP artwork -->
+            <img src="assets/img/john.webp" alt="John Paul De Leon Portrait" class="theme-pop-art" />
         </div>
-      </div>
-      <div class="row about-stats justify-content-center">
-        <div class="col-6 col-md-3">
-          <div class="about-stat-number">63</div>
-          <div class="about-stat-label">Projects shipped</div>
-        </div>
-        <div class="col-6 col-md-3">
-          <div class="about-stat-number">11</div>
-          <div class="about-stat-label">Years freelancing</div>
-        </div>
-        <div class="col-6 col-md-3">
-          <div class="about-stat-number">24</div>
-          <div class="about-stat-label">Repeat clients</div>
-        </div>
-        <div class="col-6 col-md-3">
-          <div class="about-stat-number">2</div>
-          <div class="about-stat-label">Cups of tea a day</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Portfolio Grid-->
-  <section class="page-section bg-light" id="portfolio">
-    <div class="container">
-      <h2 class="page-section-heading text-uppercase text-center">Selected Work</h2>
-      <div class="divider-custom">
-        <div class="divider-custom-line"></div>
-        <div class="divider-custom-icon"><i class="fas fa-swatchbook"></i></div>
-        <div class="divider-custom-line"></div>
-      </div>
-      <div class="row gx-4 gx-lg-5 row-cols-1 row-cols-md-2 row-cols-lg-3">
-
-        <div class="col mb-5">
-          <div class="portfolio-item">
-            <div class="portfolio-thumb" style="background: linear-gradient(135deg, var(--primary), var(--surface));">
-              <i class="fas fa-mug-hot"></i>
-            </div>
-            <div class="portfolio-item-body">
-              <span class="badge-tag">Branding</span>
-              <h3 class="portfolio-item-title">Harbor Roast Co.</h3>
-              <p class="portfolio-item-desc">Identity and packaging system for a small-batch coffee roaster.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="col mb-5">
-          <div class="portfolio-item">
-            <div class="portfolio-thumb" style="background: linear-gradient(135deg, var(--secondary), var(--vibrant));">
-              <i class="fas fa-seedling"></i>
-            </div>
-            <div class="portfolio-item-body">
-              <span class="badge-tag">Web App</span>
-              <h3 class="portfolio-item-title">Greenhouse Ledger</h3>
-              <p class="portfolio-item-desc">Inventory dashboard for a plant nursery cooperative.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="col mb-5">
-          <div class="portfolio-item">
-            <div class="portfolio-thumb" style="background: linear-gradient(135deg, var(--vibrant), var(--primary));">
-              <i class="fas fa-water"></i>
-            </div>
-            <div class="portfolio-item-body">
-              <span class="badge-tag">Marketing Site</span>
-              <h3 class="portfolio-item-title">Tidewater Studio</h3>
-              <p class="portfolio-item-desc">Launch site for a wetlands conservation film collective.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="col mb-5">
-          <div class="portfolio-item">
-            <div class="portfolio-thumb" style="background: linear-gradient(135deg, var(--surface), var(--secondary));">
-              <i class="fas fa-shapes"></i>
-            </div>
-            <div class="portfolio-item-body">
-              <span class="badge-tag">Design System</span>
-              <h3 class="portfolio-item-title">Marrow UI Kit</h3>
-              <p class="portfolio-item-desc">Component library shared across three internal product teams.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="col mb-5">
-          <div class="portfolio-item">
-            <div class="portfolio-thumb" style="background: linear-gradient(135deg, var(--primary), var(--vibrant));">
-              <i class="fas fa-book-open"></i>
-            </div>
-            <div class="portfolio-item-body">
-              <span class="badge-tag">Editorial</span>
-              <h3 class="portfolio-item-title">Slow Field Journal</h3>
-              <p class="portfolio-item-desc">Digital edition and typesetting for a quarterly nature journal.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="col mb-5">
-          <div class="portfolio-item">
-            <div class="portfolio-thumb" style="background: linear-gradient(135deg, var(--secondary), var(--surface));">
-              <i class="fas fa-store"></i>
-            </div>
-            <div class="portfolio-item-body">
-              <span class="badge-tag">E-commerce</span>
-              <h3 class="portfolio-item-title">Fernbank Goods</h3>
-              <p class="portfolio-item-desc">Storefront and checkout flow for a maker-owned homeware shop.</p>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- Call to Action-->
-  <section class="page-section cta-section" id="services">
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-lg-9 text-center">
-          <h2 class="page-section-heading text-uppercase">Have a project in mind?</h2>
-          <div class="divider-custom divider-light">
+        <div class="masthead-subheading">Hi there, I&rsquo;m</div>
+        <div class="masthead-heading text-uppercase">John Paul / Jampol</div>
+        <div class="masthead-tagline">Product design &amp; front-end development, done at a considered pace.</div>
+        <div class="divider-custom">
             <div class="divider-custom-line"></div>
-            <div class="divider-custom-icon"><i class="fas fa-frog"></i></div>
+            <div class="divider-custom-icon"><i class="fa-solid fa-skull"></i></i></div>
             <div class="divider-custom-line"></div>
-          </div>
-          <p class="cta-lead">I take on a handful of new engagements each quarter — usually branding, product design, or a front-end build that needs a steady hand.</p>
-          <a class="btn btn-secondary btn-xl text-uppercase" href="#contact">Start a conversation</a>
         </div>
-      </div>
+        <a class="btn btn-primary btn-xl text-uppercase" href="#about">Learn more about me</a>
     </div>
-  </section>
-
-  <!-- Contact-->
-  <section class="page-section" id="contact">
-    <div class="container">
-      <h2 class="page-section-heading text-uppercase text-center">Contact</h2>
-      <div class="divider-custom">
-        <div class="divider-custom-line"></div>
-        <div class="divider-custom-icon"><i class="fas fa-envelope"></i></div>
-        <div class="divider-custom-line"></div>
-      </div>
-      <div class="row justify-content-center">
-        <div class="col-lg-8 text-center">
-          <p class="contact-lead">Tell me a little about what you&rsquo;re building and I&rsquo;ll reply within two business days.</p>
-        </div>
-      </div>
-      <div class="row justify-content-center">
-        <div class="col-lg-8">
-          <form id="contactForm" novalidate>
-            <div class="row gx-3">
-              <div class="col-md-6 mb-3">
-                <div class="form-floating">
-                  <input class="form-control" id="name" type="text" placeholder="Your Name" required />
-                  <label for="name">Full name</label>
+</header>
+    <!-- About-->
+    <section class="page-section" id="about">
+        <div class="container">
+            <h2 class="page-section-heading text-uppercase text-center">About</h2>
+            <div class="divider-custom">
+                <div class="divider-custom-line"></div>
+                <div class="divider-custom-icon"><i class="fa-solid fa-skull-crossbones"></i></div>
+                <div class="divider-custom-line"></div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <p class="about-lead">I build calm, durable interfaces for small studios and independent founders.
+                        Ten years in, two constants: things should feel good to use, and the code behind them should be
+                        boring in the best way.</p>
                 </div>
-              </div>
-              <div class="col-md-6 mb-3">
-                <div class="form-floating">
-                  <input class="form-control" id="email" type="email" placeholder="Your Email" required />
-                  <label for="email">Email address</label>
+            </div>
+            <div class="row about-stats justify-content-center">
+                <div class="col-6 col-md-3">
+                    <div class="about-stat-number">63</div>
+                    <div class="about-stat-label">Projects shipped</div>
                 </div>
-              </div>
+                <div class="col-6 col-md-3">
+                    <div class="about-stat-number">11</div>
+                    <div class="about-stat-label">Years freelancing</div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="about-stat-number">24</div>
+                    <div class="about-stat-label">Repeat clients</div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="about-stat-number">2</div>
+                    <div class="about-stat-label">Cups of tea a day</div>
+                </div>
             </div>
-            <div class="mb-3">
-              <div class="form-floating">
-                <textarea class="form-control" id="message" placeholder="Your Message" style="height: 10rem" required></textarea>
-                <label for="message">Message</label>
-              </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Grid-->
+    <section class="page-section section-tint" id="portfolio">
+        <div class="container">
+            <h2 class="page-section-heading text-uppercase text-center">Selected Work</h2>
+            <div class="divider-custom">
+                <div class="divider-custom-line"></div>
+                <div class="divider-custom-icon"><i class="fa-solid fa-gamepad"></i></i></div>
+                <div class="divider-custom-line"></div>
             </div>
-            <div class="text-center">
-              <button class="btn btn-primary btn-xl text-uppercase" id="submitButton" type="submit">Send message</button>
+            <div class="row gx-4 gx-lg-5 row-cols-1 row-cols-md-2 row-cols-lg-3">
+
+                <!-- Item 1 -->
+                <div class="col mb-5">
+                    <a href="assets/img/tech.webp" class="glightbox portfolio-item-link"
+                        data-gallery="portfolio-gallery" data-title="A Bit About My Tech Obsession"
+                        data-description="Identity and packaging system for a small-batch coffee roaster.">
+                        <div class="portfolio-item">
+                            <div class="portfolio-thumb portfolio-photo">
+                                <img src="assets/img/tech.webp" alt="tech" class="theme-pop-art" loading="lazy" />
+                                <div class="portfolio-placeholder">
+                                    <svg class="placeholder-icon" viewBox="0 0 48 48" aria-hidden="true">
+                                        <rect x="5" y="8" width="38" height="32" rx="3" fill="none" stroke="currentColor"
+                                            stroke-width="2" />
+                                        <circle cx="16" cy="18" r="3.4" fill="currentColor" />
+                                        <path d="M7 34 L18 22 L26 30 L33 20 L41 32" fill="none" stroke="currentColor"
+                                            stroke-width="2" stroke-linejoin="round" stroke-linecap="round" />
+                                    </svg>
+                                    <span class="placeholder-label">Image coming soon</span>
+                                </div>
+                            </div>
+                            <div class="portfolio-item-body">
+                                
+                                <h3 class="portfolio-item-title">Tech & Hardware</h3>
+                                <p class="portfolio-item-desc">Following tech news, upgrading and troubleshooting PCs, tweaking Windows UI, customizing mechanical keyboards, and flashing AOSP custom ROMs.</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="col mb-5">
+                    <a href="assets/img/creative.webp" class="glightbox portfolio-item-link"
+                        data-gallery="portfolio-gallery" data-title="Creative & Visuals"
+                        data-description="Inventory dashboard for a plant nursery cooperative.">
+                        <div class="portfolio-item">
+                            <div class="portfolio-thumb portfolio-photo">
+                                <img src="assets/img/creative.webp" alt="creative" class="theme-pop-art" loading="lazy" />
+                                <div class="portfolio-placeholder">
+                                    <svg class="placeholder-icon" viewBox="0 0 48 48" aria-hidden="true">
+                                        <rect x="5" y="8" width="38" height="32" rx="3" fill="none" stroke="currentColor"
+                                            stroke-width="2" />
+                                        <circle cx="16" cy="18" r="3.4" fill="currentColor" />
+                                        <path d="M7 34 L18 22 L26 30 L33 20 L41 32" fill="none" stroke="currentColor"
+                                            stroke-width="2" stroke-linejoin="round" stroke-linecap="round" />
+                                    </svg>
+                                    <span class="placeholder-label">Image coming soon</span>
+                                </div>
+                            </div>
+                            <div class="portfolio-item-body">
+                                <h3 class="portfolio-item-title">Creative & Visuals</h3>
+                                <p class="portfolio-item-desc">Travel photography, photo manipulation in Photoshop and Lightroom, color grading travel videos, and designing custom shirts.</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="col mb-5">
+                    <a href="assets/img/bike.webp" class="glightbox portfolio-item-link"
+                        data-gallery="portfolio-gallery" data-title="On the Road & Active"
+                        data-description="Launch site for a wetlands conservation film collective.">
+                        <div class="portfolio-item">
+                            <div class="portfolio-thumb portfolio-photo">
+                                <img src="assets/img/bike.webp" alt="bike" class="theme-pop-art" loading="lazy" />
+                                <div class="portfolio-placeholder">
+                                    <svg class="placeholder-icon" viewBox="0 0 48 48" aria-hidden="true">
+                                        <rect x="5" y="8" width="38" height="32" rx="3" fill="none" stroke="currentColor"
+                                            stroke-width="2" />
+                                        <circle cx="16" cy="18" r="3.4" fill="currentColor" />
+                                        <path d="M7 34 L18 22 L26 30 L33 20 L41 32" fill="none" stroke="currentColor"
+                                            stroke-width="2" stroke-linejoin="round" stroke-linecap="round" />
+                                    </svg>
+                                    <span class="placeholder-label">Image coming soon</span>
+                                </div>
+                            </div>
+                            <div class="portfolio-item-body">
+                                <h3 class="portfolio-item-title">On the Road & Active</h3>
+                                <p class="portfolio-item-desc">Traveling, driving cars, riding motorcycles, playing basketball, and cycling.
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Item 4 -->
+                <div class="col mb-5">
+                    <a href="assets/img/entertainment.webp" class="glightbox portfolio-item-link"
+                        data-gallery="portfolio-gallery" data-title="Gaming & Entertainment"
+                        data-description="Component library shared across three internal product teams.">
+                        <div class="portfolio-item">
+                            <div class="portfolio-thumb portfolio-photo">
+                                <img src="assets/img/entertainment.webp" alt="entertainment" class="theme-pop-art" loading="lazy" />
+                                <div class="portfolio-placeholder">
+                                    <svg class="placeholder-icon" viewBox="0 0 48 48" aria-hidden="true">
+                                        <rect x="5" y="8" width="38" height="32" rx="3" fill="none" stroke="currentColor"
+                                            stroke-width="2" />
+                                        <circle cx="16" cy="18" r="3.4" fill="currentColor" />
+                                        <path d="M7 34 L18 22 L26 30 L33 20 L41 32" fill="none" stroke="currentColor"
+                                            stroke-width="2" stroke-linejoin="round" stroke-linecap="round" />
+                                    </svg>
+                                    <span class="placeholder-label">Image coming soon</span>
+                                </div>
+                            </div>
+                            <div class="portfolio-item-body">
+                                <h3 class="portfolio-item-title">Gaming & Entertainment</h3>
+                                <p class="portfolio-item-desc">PC gaming and binge-watching.</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Item 5 -->
+                <div class="col mb-5">
+                    <a href="assets/img/music.webp" class="glightbox portfolio-item-link"
+                        data-gallery="portfolio-gallery" data-title="Music & Subculture"
+                        data-description="Digital edition and typesetting for a quarterly nature journal.">
+                        <div class="portfolio-item">
+                            <div class="portfolio-thumb portfolio-photo">
+                                <img src="assets/img/music.webp" alt="" class="theme-pop-art" loading="lazy" />
+                                <div class="portfolio-placeholder">
+                                    <svg class="placeholder-icon" viewBox="0 0 48 48" aria-hidden="true">
+                                        <rect x="5" y="8" width="38" height="32" rx="3" fill="none" stroke="currentColor"
+                                            stroke-width="2" />
+                                        <circle cx="16" cy="18" r="3.4" fill="currentColor" />
+                                        <path d="M7 34 L18 22 L26 30 L33 20 L41 32" fill="none" stroke="currentColor"
+                                            stroke-width="2" stroke-linejoin="round" stroke-linecap="round" />
+                                    </svg>
+                                    <span class="placeholder-label">Image coming soon</span>
+                                </div>
+                            </div>
+                            <div class="portfolio-item-body">
+                                <h3 class="portfolio-item-title">Music & Subculture</h3>
+                                <p class="portfolio-item-desc">Listening to emo, metal, punk, nu-metal, rock, and alternative music.</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Item 6 -->
+                <div class="col mb-5">
+                    <a href="assets/img/dogs.webp" class="glightbox portfolio-item-link"
+                        data-gallery="portfolio-gallery" data-title="Pets"
+                        data-description="Storefront and checkout flow for a maker-owned homeware shop.">
+                        <div class="portfolio-item">
+                            <div class="portfolio-thumb portfolio-photo">
+                                <img src="assets/img/dogs.webp" alt="" class="theme-pop-art" loading="lazy" />
+                                <div class="portfolio-placeholder">
+                                    <svg class="placeholder-icon" viewBox="0 0 48 48" aria-hidden="true">
+                                        <rect x="5" y="8" width="38" height="32" rx="3" fill="none" stroke="currentColor"
+                                            stroke-width="2" />
+                                        <circle cx="16" cy="18" r="3.4" fill="currentColor" />
+                                        <path d="M7 34 L18 22 L26 30 L33 20 L41 32" fill="none" stroke="currentColor"
+                                            stroke-width="2" stroke-linejoin="round" stroke-linecap="round" />
+                                    </svg>
+                                    <span class="placeholder-label">Image coming soon</span>
+                                </div>
+                            </div>
+                            <div class="portfolio-item-body">
+                                <h3 class="portfolio-item-title">Pets</h3>
+                                <p class="portfolio-item-desc">Dog lover.</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
             </div>
-          </form>
         </div>
-      </div>
+    </section>
+    <!-- Call to Action-->
+    <section class="page-section cta-section" id="services">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-9 text-center">
+                    <h2 class="page-section-heading text-uppercase">Have a project in mind?</h2>
+                    <div class="divider-custom divider-light">
+                        <div class="divider-custom-line"></div>
+                        <div class="divider-custom-icon"><i class="fas fa-frog"></i></div>
+                        <div class="divider-custom-line"></div>
+                    </div>
+                    <p class="cta-lead">I take on a handful of new engagements each quarter — usually branding, product
+                        design, or a front-end build that needs a steady hand.</p>
+                    <a class="btn btn-secondary btn-xl text-uppercase" href="#contact">Start a conversation</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact-->
+    <section class="page-section" id="contact">
+        <div class="container">
+            <h2 class="page-section-heading text-uppercase text-center">Contact</h2>
+            <div class="divider-custom">
+                <div class="divider-custom-line"></div>
+                <div class="divider-custom-icon"><i class="fas fa-envelope"></i></div>
+                <div class="divider-custom-line"></div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <p class="contact-lead">Tell me a little about what you&rsquo;re building and I&rsquo;ll reply
+                        within two business days.</p>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <form id="contactForm" novalidate>
+                        <div class="row gx-3">
+                            <div class="col-md-6 mb-3">
+                                <div class="form-floating">
+                                    <input class="form-control" id="name" type="text" placeholder="Your Name"
+                                        required />
+                                    <label for="name">Full name</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="form-floating">
+                                    <input class="form-control" id="email" type="email" placeholder="Your Email"
+                                        required />
+                                    <label for="email">Email address</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="form-floating">
+                                <textarea class="form-control" id="message" placeholder="Your Message"
+                                    style="height: 10rem" required></textarea>
+                                <label for="message">Message</label>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <button class="btn btn-primary btn-xl text-uppercase" id="submitButton" type="submit">Send
+                                message</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer-->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-5 mb-lg-0">
+                    <h4>Find me around the web</h4>
+                    <div class="social-icons">
+                        <a class="btn-social" href="#!" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a class="btn-social" href="#!" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a class="btn-social" href="#!" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                        <a class="btn-social" href="#!" aria-label="Dribbble"><i class="fab fa-dribbble"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-5 mb-lg-0">
+                    <h4>About this theme</h4>
+                    <p class="lead mb-0">Built on the Start Bootstrap Freelancer layout, restyled with the Amphibian /
+                        Turtle day-night palette.</p>
+                </div>
+                <div class="col-lg-4">
+                    <h4>Contact details</h4>
+                    <p class="lead mb-0">hello@rileymarsh.design<br />Portland, OR</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Copyright-->
+    <div class="copyright">
+        <div class="container text-center">
+            <small>Copyright &copy; John Paul De Leon <span id="year"></span></small>
+        </div>
     </div>
-  </section>
 
-  <!-- Footer-->
-  <footer class="footer">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-4 mb-5 mb-lg-0">
-          <h4>Find me around the web</h4>
-          <div class="social-icons">
-            <a class="btn-social" href="#!" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-            <a class="btn-social" href="#!" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-            <a class="btn-social" href="#!" aria-label="GitHub"><i class="fab fa-github"></i></a>
-            <a class="btn-social" href="#!" aria-label="Dribbble"><i class="fab fa-dribbble"></i></a>
-          </div>
-        </div>
-        <div class="col-lg-4 mb-5 mb-lg-0">
-          <h4>About this theme</h4>
-          <p class="lead mb-0">Built on the Start Bootstrap Freelancer layout, restyled with the Amphibian / Turtle day-night palette.</p>
-        </div>
-        <div class="col-lg-4">
-          <h4>Contact details</h4>
-          <p class="lead mb-0">hello@rileymarsh.design<br />Portland, OR</p>
-        </div>
-      </div>
-    </div>
-  </footer>
-
-  <!-- Copyright-->
-  <div class="copyright">
-    <div class="container text-center">
-      <small>Copyright &copy; Riley Marsh <span id="year"></span></small>
-    </div>
-  </div>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
-  <script>
-window.addEventListener('DOMContentLoaded', () => {
-  const root = document.documentElement;
-  const themeToggle = document.getElementById('themeToggle');
-  const STORAGE_KEY = 'theme';
-
-  /**
-   * Resolve the theme to use on load:
-   * 1. A theme the user explicitly picked before (localStorage)
-   * 2. Otherwise, the OS-level preference (prefers-color-scheme)
-   * 3. Otherwise, light.
-   * (This mirrors the inline <head> script that already set the
-   * attribute before first paint — this just keeps everything in sync.)
-   */
-  function getStoredTheme() {
-    return localStorage.getItem(STORAGE_KEY);
-  }
-
-  function getPreferredTheme() {
-    const stored = getStoredTheme();
-    if (stored === 'light' || stored === 'dark') return stored;
-    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-  }
-
-  function applyTheme(theme, { persist = true } = {}) {
-    root.setAttribute('data-theme', theme);
-    if (persist) {
-      localStorage.setItem(STORAGE_KEY, theme);
-    }
-    if (themeToggle) {
-      const label = theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode';
-      themeToggle.setAttribute('aria-label', label);
-      themeToggle.title = label;
-      themeToggle.setAttribute('aria-pressed', theme === 'dark' ? 'true' : 'false');
-    }
-  }
-
-  // Sync with whatever the head script already applied.
-  applyTheme(getPreferredTheme(), { persist: false });
-
-  if (themeToggle) {
-    themeToggle.addEventListener('click', () => {
-      const current = root.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
-      applyTheme(current === 'dark' ? 'light' : 'dark');
-    });
-  }
-
-  // If the user has never explicitly chosen a theme, keep following the
-  // OS preference live (e.g. their system switches to dark mode at night).
-  if (window.matchMedia) {
-    const media = window.matchMedia('(prefers-color-scheme: dark)');
-    const handleSystemChange = (event) => {
-      if (!getStoredTheme()) {
-        applyTheme(event.matches ? 'dark' : 'light', { persist: false });
-      }
-    };
-    if (media.addEventListener) {
-      media.addEventListener('change', handleSystemChange);
-    } else if (media.addListener) {
-      media.addListener(handleSystemChange);
-    }
-  }
-
-  // Navbar shrink on scroll
-  const navbarShrink = () => {
-    const nav = document.getElementById('mainNav');
-    if (!nav) return;
-    nav.classList.toggle('navbar-shrink', window.scrollY > 0);
-  };
-  navbarShrink();
-  document.addEventListener('scroll', navbarShrink);
-
-  // Bootstrap collapse: close the mobile menu after a nav link is clicked
-  document.querySelectorAll('#navbarSupportedContent .nav-link').forEach((link) => {
-    link.addEventListener('click', () => {
-      const nav = document.getElementById('navbarSupportedContent');
-      if (nav && nav.classList.contains('show') && window.bootstrap) {
-        window.bootstrap.Collapse.getOrCreateInstance(nav).hide();
-      }
-    });
-  });
-
-  // Lightweight contact form handling (no backend wired up — just UX feedback)
-  const form = document.getElementById('contactForm');
-  if (form) {
-    form.addEventListener('submit', (event) => {
-      event.preventDefault();
-      if (!form.checkValidity()) {
-        form.classList.add('was-validated');
-        return;
-      }
-      const submitButton = document.getElementById('submitButton');
-      const originalLabel = submitButton.textContent;
-      submitButton.disabled = true;
-      submitButton.textContent = 'Message sent';
-      form.reset();
-      form.classList.remove('was-validated');
-      setTimeout(() => {
-        submitButton.disabled = false;
-        submitButton.textContent = originalLabel;
-      }, 2500);
-    });
-  }
-
-  // Footer year
-  const yearEl = document.getElementById('year');
-  if (yearEl) {
-    yearEl.textContent = new Date().getFullYear();
-  }
-});
-
-</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
+    <script src="js/scripts.js"></script>
 </body>
 
 </html>

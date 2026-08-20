@@ -22,37 +22,170 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ==========================================================
-   NAVBAR
+   DOCK NAVIGATION
    ========================================================== */
-#mainNav {
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-  transition: padding 0.25s ease, background-color 0.3s ease, box-shadow 0.25s ease;
+.dock-nav {
+  position: fixed;
+  left: 50%;
+  bottom: 1.5rem;
+  transform: translateX(-50%);
+  z-index: 1040;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem;
+  border-radius: 999px;
+  backdrop-filter: blur(6px);
 }
-#mainNav.navbar-shrink {
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-}
-#mainNav .navbar-brand {
-  font-size: 1.15rem;
-}
-#mainNav .navbar-nav .nav-link {
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-  font-size: 0.85rem;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-}
-.theme-toggle {
-  font-size: 0.95rem;
-}
-.brand-mark {
+.dock-item {
   display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.85rem;
+  height: 2.85rem;
+  border-radius: 50%;
+  font-size: 1.05rem;
+  transition: transform 0.2s ease, background-color 0.3s ease, color 0.3s ease;
+}
+.dock-item:hover,
+.dock-item:focus-visible {
+  transform: translateY(-0.2rem);
+}
+
+@media (max-width: 575.98px) {
+  .dock-nav {
+    bottom: 1rem;
+    gap: 0.2rem;
+    padding: 0.4rem;
+  }
+  .dock-item {
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 0.95rem;
+  }
+}
+
+/* ==========================================================
+   THEME TOGGLE (now a dock item)
+   ========================================================== */
+.dock-toggle {
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+.dock-toggle .toggle-disc {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.85rem;
+  height: 2.85rem;
+  border-radius: 50%;
+}
+.dock-toggle .toggle-icon {
+  display: inline-flex;
+  perspective: 240px;
+}
+.dock-toggle .j-stripe {
+  width: 1.7rem;
+  height: 1.7rem;
+  display: block;
+  transform-style: preserve-3d;
+}
+
+/* Click feedback: only the icon does a full vertical rotation (tips
+   away and back, landing at its starting orientation) — the disc
+   behind it stays still and just crossfades its background between
+   the light and dark card colors. */
+.dock-toggle .toggle-icon.flip .j-stripe {
+  animation: toggleFlip 0.6s cubic-bezier(0.45, 0, 0.2, 1);
+}
+@keyframes toggleFlip {
+  0% { transform: rotateX(0deg); }
+  100% { transform: rotateX(360deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .dock-toggle .toggle-icon.flip .j-stripe {
+    animation: none;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .dock-toggle .toggle-disc {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+  .dock-toggle .j-stripe {
+    width: 1.4rem;
+    height: 1.4rem;
+  }
 }
 
 /* ==========================================================
    HERO / MASTHEAD
    ========================================================== */
+.hero-portrait {
+  width: 18rem;
+  height: 18rem;
+  margin: 0 auto 1.75rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hero-portrait svg {
+  width: 55%;
+  height: 55%;
+}
+
+/* ==========================================================
+   THEME-REACTIVE PHOTOS (duotone)
+   Any real photo — hero portrait, portfolio thumbnails, and the
+   lightbox popup image — gets desaturated then recolored with
+   mix-blend-mode using the current theme's --primary color
+   (see theme.css). Because --primary itself flips value between
+   light/dark, the photos recolor automatically on toggle, in
+   step with everything else on the page.
+   ========================================================== */
+.hero-portrait,
+.glightbox-container .gslide-image {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+/* The portfolio thumb is positioned absolute (see PORTFOLIO GRID
+   below) rather than relative, since it now fills the whole card
+   as a full-bleed background photo with the caption overlaid on
+   top — but it still needs the same clipping/blend setup. */
+.portfolio-thumb.portfolio-photo {
+  overflow: hidden;
+  isolation: isolate;
+}
+.theme-pop-art,
+.glightbox-container .gslide-image img {
+  filter: grayscale(1) contrast(1.05) brightness(1.05);
+}
+.hero-portrait::after,
+.portfolio-thumb.portfolio-photo::after,
+.glightbox-container .gslide-image::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  mix-blend-mode: color;
+}
+.hero-portrait img.theme-pop-art,
+.portfolio-thumb.portfolio-photo img.theme-pop-art {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+/* Crop from the top instead of the center — keeps faces/subjects
+   near the top of a shot from getting cut off in the short thumb. */
+.portfolio-thumb.portfolio-photo img.theme-pop-art {
+  object-position: top center;
+}
 .masthead {
   padding-top: 10rem;
   padding-bottom: 6rem;
@@ -148,13 +281,60 @@ h1, h2, h3, h4, h5, h6 {
    PORTFOLIO GRID
    ========================================================== */
 .portfolio-item {
+  position: relative;
+  aspect-ratio: 4 / 5;
   transition: transform 0.2s ease, border-color 0.3s ease;
 }
 .portfolio-item:hover {
   transform: translateY(-0.35rem);
 }
+/* Caption sits as an absolutely-positioned overlay pinned to the
+   bottom of the photo. Extra top padding gives the gradient scrim
+   (theme.css) room to fade from transparent to solid before it
+   reaches the text. */
 .portfolio-item-body {
-  padding: 1.5rem;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  padding: 3rem 1.5rem 1.5rem;
+}
+/* Thumb now fills the entire card as a full-bleed background photo
+   rather than a fixed-height strip above the caption. */
+.portfolio-thumb {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+}
+/* Real photo is the default state; the placeholder sits behind it,
+   hidden, ready to take over if the photo 404s (see scripts.js). */
+.portfolio-thumb.portfolio-photo .portfolio-placeholder {
+  display: none;
+}
+.portfolio-thumb.portfolio-photo.img-missing .theme-pop-art {
+  display: none;
+}
+.portfolio-thumb.portfolio-photo.img-missing .portfolio-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.portfolio-placeholder .placeholder-icon {
+  width: 2.25rem;
+  height: 2.25rem;
+}
+.portfolio-placeholder .placeholder-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
 }
 .portfolio-item-title {
   font-size: 1.15rem;
@@ -218,6 +398,30 @@ button:focus-visible,
 /* ==========================================================
    RESPONSIVE
    ========================================================== */
+/* ==========================================================
+   GLIGHTBOX — NEUTRALIZE BUILT-IN "MOBILE" SKIN
+   GLightbox detects touch devices and adds a `.glightbox-mobile`
+   class, which activates its own hardcoded mobile styles: the
+   description becomes a position:absolute overlay pinned to the
+   bottom of the image with a dark gradient background. That
+   selector out-specifies our normal .gslide-description rules
+   (theme.css §11) and our < 700px stacked layout below, so on
+   touch devices the panel reverts to the library's overlay
+   layout no matter what we set elsewhere. This block forces it
+   back to our stacked, in-flow layout; text colors are handled
+   alongside it in theme.css §11.
+   ========================================================== */
+.glightbox-mobile .glightbox-container .gslide-description {
+  position: static !important;
+  bottom: auto !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  max-height: none !important;
+  padding: 0 !important;
+  background: none !important;
+  overflow: visible !important;
+}
+
 @media (max-width: 767.98px) {
   .masthead {
     padding-top: 8rem;
@@ -228,5 +432,13 @@ button:focus-visible,
   }
   .page-section {
     padding: 4rem 0;
+  }
+  .hero-portrait {
+    width: 6.5rem;
+    height: 6.5rem;
+  }
+  .glightbox-container {
+    --gbox-w: 92vw;
+    --gbox-h: 70vh;
   }
 }
