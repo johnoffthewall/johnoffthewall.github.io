@@ -131,8 +131,69 @@ const lightbox = GLightbox({
     loop: false,
     autoplayVideos: true,
     descPosition: 'top',
-    closeButton: true
+    closeButton: true,
+    // Tapping the dimmed backdrop outside the dialog closes it.
+    // This is GLightbox's default, but set explicitly so it can't
+    // silently change with a library update.
+    closeOnOutsideClick: true
 });
+
+// GLightbox explicitly disables closeOnOutsideClick on touch devices
+// (it skips closing whenever document.body has the 'glightbox-mobile'
+// class, which it adds itself for touch) — so the setting above never
+// actually applies on phones. This listener replaces that behavior:
+// any touch that lands directly on the dimmed backdrop (.goverlay),
+// not the dialog itself, closes the lightbox.
+document.addEventListener('touchend', (event) => {
+  if (event.target.classList && event.target.classList.contains('goverlay')) {
+    lightbox.close();
+  }
+});
+
+// --- Close button positioning ---------------------------------------
+// The close button (.gclose) lives in GLightbox's markup as a sibling
+// of the dialog, positioned against the full page — it isn't nested
+// inside .ginner-container, so CSS can't simply say "top-right corner
+// of the dialog." theme.css used to fake that with a calc() built from
+// --gbox-w/--gbox-h + viewport units, but that only works if the
+// assumed dialog size exactly matches the real rendered size — any
+// drift (unit mismatches, stylesheet cascade order, mobile browser
+// toolbars resizing the viewport after load) pushes the button off.
+// Measuring the dialog's actual rendered box and placing the button
+// from that is the only version of this that can't drift out of sync.
+function positionLightboxClose() {
+  const dialog = document.querySelector('.glightbox-container .ginner-container');
+  const closeBtn = document.querySelector('.glightbox-container .gbtn.gclose');
+  if (!dialog || !closeBtn) return;
+
+  const rect = dialog.getBoundingClientRect();
+  const rootFontSize = parseFloat(getComputedStyle(document.documentElement).fontSize) || 16;
+  const inset = 0.7 * rootFontSize; // matches the 0.7rem corner inset in theme.css
+
+  const top = Math.max(inset, rect.top + inset);
+  const right = Math.max(inset, window.innerWidth - rect.right + inset);
+
+  closeBtn.style.top = `${top}px`;
+  closeBtn.style.right = `${right}px`;
+}
+
+lightbox.on('open', () => {
+  // Run now, then again on the next couple of frames — right after
+  // 'open' fires the dialog may not have finished its open animation/
+  // layout pass yet, so one measurement can still catch a stale rect.
+  positionLightboxClose();
+  requestAnimationFrame(positionLightboxClose);
+  requestAnimationFrame(() => requestAnimationFrame(positionLightboxClose));
+});
+lightbox.on('slide_changed', positionLightboxClose);
+
+window.addEventListener('resize', positionLightboxClose);
+// visualViewport catches mobile browser toolbar show/hide, which
+// 'resize' alone doesn't always report.
+if (window.visualViewport) {
+  window.visualViewport.addEventListener('resize', positionLightboxClose);
+  window.visualViewport.addEventListener('scroll', positionLightboxClose);
+}
 
 // Portfolio images are placeholders until real project photos are added.
 // If a slide's image 404s, swap in an inline placeholder frame instead of

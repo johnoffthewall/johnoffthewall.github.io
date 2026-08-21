@@ -534,8 +534,22 @@ a:hover {
   display: none !important;
 }
 .glightbox-container .gbtn.gclose {
+  /* This button lives in GLightbox's markup as a sibling of the
+     dialog, positioned against the full viewport — so it has to be
+     nudged inward by half the leftover space to line up with the
+     dialog's corner. On mobile, 100vh doesn't reliably match the
+     visible viewport (browser address/tab bars resize it after
+     load), which was shoving this calc's result down and off the
+     visible screen — i.e. no visible close button. 100dvh tracks
+     the real visible viewport; the vh line stays first as a fallback
+     for browsers that don't support dvh (an invalid value is simply
+     ignored, not the whole rule). The outer max() is a hard safety
+     net so the button can never end up negative/off-screen even if
+     --gbox-w/--gbox-h and the viewport ever drift out of sync.  */
   top: calc((100vh - var(--gbox-h)) / 2 + 0.7rem);
+  top: max(0.7rem, calc((100dvh - var(--gbox-h)) / 2 + 0.7rem));
   right: calc((100vw - var(--gbox-w)) / 2 + 0.7rem);
+  right: max(0.7rem, calc((100dvw - var(--gbox-w)) / 2 + 0.7rem));
   width: 2.1rem;
   height: 2.1rem;
   background-color: var(--bg-main);
@@ -543,6 +557,7 @@ a:hover {
   border-radius: 50%;
   box-shadow: var(--shadow);
   opacity: 1;
+  z-index: 3;
 }
 .glightbox-container .gbtn.gclose svg {
   width: 0.9rem;
@@ -584,8 +599,12 @@ a:hover {
 }
 
 /* Stack back to image-on-top / text-below on narrow dialogs, since
-   a side-by-side split gets cramped under ~700px wide. */
-@media (max-width: 700px) {
+   a side-by-side split gets cramped under ~700px wide. Breakpoint
+   matches the 767.98px one in styles.css that switches --gbox-w/
+   --gbox-h to vw/vh — they must change together, otherwise phones
+   in the 701–767px range get the small vw/vh box size while still
+   laid out side-by-side (row), which looks broken/skewed. */
+@media (max-width: 767.98px) {
   .glightbox-container .ginner-container {
     flex-direction: column !important;
   }
@@ -594,10 +613,26 @@ a:hover {
     width: 100%;
     height: auto;
     aspect-ratio: 1 / 1;
+    /* Cap the image so it can't eat the whole dialog height on
+       short/landscape phones, starving the description panel
+       below it down to almost nothing. */
+    max-height: 55%;
   }
   .glightbox-container .gslide-description {
     border-left: none;
     border-top: 1px solid var(--border);
+    /* Flex items default to min-height:auto (i.e. their content's
+       natural height), which stops them from shrinking to fit the
+       fixed-height dialog above. That pushed the title/description/
+       "See more" toggle past the bottom edge, where ginner-container's
+       overflow:hidden just clipped it — instead of the intended
+       internal scroll on .gslide-desc. min-height:0 lets this panel
+       actually shrink so its own content can scroll. */
+    min-height: 0;
+  }
+  .glightbox-container .gdesc-inner,
+  .glightbox-container .gslide-desc {
+    min-height: 0;
   }
 }
 
@@ -614,4 +649,3 @@ a:hover {
   background-position: 0 0, 0 0.4rem, 0.4rem -0.4rem, -0.4rem 0;
   background-repeat: repeat;
 }
-

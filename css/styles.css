@@ -269,12 +269,14 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 2.5rem;
   font-weight: 700;
   color: var(--primary);
+  text-align: center;
 }
 .about-stat-label {
   font-size: 0.85rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   color: var(--text-muted);
+  text-align: center;
 }
 
 /* ==========================================================
@@ -405,7 +407,7 @@ button:focus-visible,
    description becomes a position:absolute overlay pinned to the
    bottom of the image with a dark gradient background. That
    selector out-specifies our normal .gslide-description rules
-   (theme.css §11) and our < 700px stacked layout below, so on
+   (theme.css §11) and our ≤767.98px stacked layout below, so on
    touch devices the panel reverts to the library's overlay
    layout no matter what we set elsewhere. This block forces it
    back to our stacked, in-flow layout; text colors are handled
@@ -438,8 +440,19 @@ button:focus-visible,
     height: 6.5rem;
   }
   .glightbox-container {
+    /* Must stay in the same units as the close button's position
+       calc in theme.css §11 (which uses dvh/dvw with a vh/vw
+       fallback). Mixing vh here with dvh there was the bug: on
+       phones the two units diverge as the browser's address/tab
+       bar shows or hides, so the button's offset was computed
+       against a dialog size that no longer matched the dialog's
+       real on-screen size — shoving it outside the dialog. Setting
+       dvw/dvh here too (as a progressive-enhancement override, same
+       pattern as theme.css) keeps both calcs reading off the same
+       real viewport. */
     --gbox-w: 92vw;
+    --gbox-w: 92dvw;
     --gbox-h: 70vh;
+    --gbox-h: 70dvh;
   }
 }
-
