@@ -4,7 +4,8 @@ A responsive personal website built with HTML5, CSS3, and Bootstrap to document 
 
 ## 🚀 Live Website
 
-[![Live Site](https://img.shields.io/badge/Website-Live_Demo-0070f3?style=for-the-badge&logo=googlechrome&logoColor=white)](https://johnoffthewall.github.io)
+[![Website](https://img.shields.io/badge/Website-0070f3?style=for-the-badge&logo=googlechrome&logoColor=white)](https://johnoffthewall.github.io)
+
 ---
 
 ## 📖 About The Site
