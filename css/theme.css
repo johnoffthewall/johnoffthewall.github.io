@@ -9,22 +9,22 @@
    1. PALETTE DEFINITIONS
    ========================================================== */
 
-/* Light mode — "Amphibian Palette" (default, mirrors a sunlit pond) */
+/* Light mode — "Cove Palette" (deep-water blue to warm sand) */
 :root,
 [data-theme="light"] {
-  --bg-main: #F8F9FA;             /* Base Light Background — Off-White */
-  --bg-surface: #15CDCA;          /* Surface / Highlight Elements — Teal */
-  --primary: #3E54D3;             /* Primary Accent / Hero Background — Royal Blue */
-  --secondary: #4F80E2;           /* Secondary Accent / Active Buttons — Soft Blue */
-  --accent: #4FE0B6;              /* Vibrant Accent / Success Indicators — Mint Green */
+  --bg-main: #FFF0D5;             /* Base Light Background — Warm Sand Cream */
+  --bg-surface: #FFE3B3;          /* Surface / Highlight Elements — Pale Sand */
+  --primary: #006BBB;             /* Primary Accent / Hero Background — Cove Blue */
+  --secondary: #30A0E0;           /* Secondary Accent / Active Buttons — Shallow Blue */
+  --accent: #FFC872;              /* Vibrant Accent / Success Indicators — Sand Gold */
   --text-color: #1A1D20;          /* Primary Text — Dark Charcoal */
 
   /* Practical derivatives, built from the palette above */
-  --bg-card: #FFFFFF;
+  --bg-card: #FFF7E8;             /* Lighter sand tint than --bg-main so cards still lift off the page */
   --text-muted: color-mix(in srgb, var(--text-color) 62%, transparent);
   --border: color-mix(in srgb, var(--text-color) 14%, transparent);
-  --on-primary: #FFFFFF;          /* text sitting on --primary / --secondary */
-  --on-accent: #113B33;           /* text sitting on the bright --bg-surface / --accent chips */
+  --on-primary: #FFF0D5;          /* text sitting on --primary / --secondary */
+  --on-accent: #1A1D20;           /* text sitting on the bright --bg-surface / --accent chips */
   --shadow: 0 10px 30px rgba(26, 29, 32, 0.12);
 }
 
@@ -227,7 +227,6 @@ a:hover {
 .divider-light .divider-custom-line,
 .divider-light .divider-custom-icon {
   color: var(--on-primary);
-  background-color: var(--on-primary);
 }
 
 /* ==========================================================
@@ -418,7 +417,7 @@ a:hover {
    overrides in styles.css).
    ========================================================== */
 .glightbox-container {
-  --gbox-w: 920px;
+  --gbox-w: 1100px;
   --gbox-h: 600px;
 }
 
@@ -484,7 +483,7 @@ a:hover {
 }
 .glightbox-container .gdesc-inner {
   background: none;
-  padding: 1.5rem 3rem 1.5rem 1.75rem;
+  padding: 1.5rem 2rem 1.5rem 1.75rem;
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -509,6 +508,24 @@ a:hover {
   font-family: var(--font-body);
   font-size: 0.95rem;
   line-height: 1.65;
+
+  /* Themed scrollbar — Firefox */
+  scrollbar-width: thin;
+  scrollbar-color: var(--primary) transparent;
+}
+/* Themed scrollbar — WebKit (Chrome, Safari, Edge) */
+.glightbox-container .gslide-desc::-webkit-scrollbar {
+  width: 0.5rem;
+}
+.glightbox-container .gslide-desc::-webkit-scrollbar-track {
+  background: transparent;
+}
+.glightbox-container .gslide-desc::-webkit-scrollbar-thumb {
+  background-color: var(--primary);
+  border-radius: 999px;
+}
+.glightbox-container .gslide-desc::-webkit-scrollbar-thumb:hover {
+  background-color: var(--secondary);
 }
 
 /* Only a close button — no slideshow controls */
@@ -528,18 +545,22 @@ a:hover {
   opacity: 1;
 }
 .glightbox-container .gbtn.gclose svg {
-  fill: var(--text-color);
   width: 0.9rem;
   height: 0.9rem;
+}
+.glightbox-container .gbtn.gclose svg,
+.glightbox-container .gbtn.gclose svg path {
+  fill: var(--primary) !important;
+}
+.glightbox-container .gbtn.gclose:hover svg,
+.glightbox-container .gbtn.gclose:hover svg path {
+  fill: var(--on-primary) !important;
 }
 .glightbox-container .gbtn.gclose:hover {
   background-color: var(--primary);
 }
 [data-theme="dark"] .glightbox-container .gbtn.gclose:hover {
   background-color: var(--secondary);
-}
-.glightbox-container .gbtn.gclose:hover svg {
-  fill: var(--on-primary);
 }
 
 .gcounter {
@@ -579,3 +600,18 @@ a:hover {
     border-top: 1px solid var(--border);
   }
 }
+
+.divider-checkerboard-small {
+  width: 12.8rem;
+  height: 0.8rem;
+  margin: 1.5rem auto;
+  background-image:
+    linear-gradient(45deg, #000 25%, transparent 25%),
+    linear-gradient(-45deg, #000 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #000 75%),
+    linear-gradient(-45deg, transparent 75%, #000 75%);
+  background-size: 0.8rem 0.8rem;
+  background-position: 0 0, 0 0.4rem, 0.4rem -0.4rem, -0.4rem 0;
+  background-repeat: repeat;
+}
+

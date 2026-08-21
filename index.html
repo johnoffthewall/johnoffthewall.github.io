@@ -77,31 +77,34 @@
     </nav>
 
     <!-- Masthead-->
+     <div class="divider-checkerboard"></div>
     <header class="masthead" id="page-top-hero">
-    <div class="container">
-        <div class="hero-portrait">
-            <!-- Replaced SVG with your WebP artwork -->
-            <img src="assets/img/john.webp" alt="John Paul De Leon Portrait" class="theme-pop-art" />
+        <div class="container">
+            <div class="hero-portrait">
+                <!-- Replaced SVG with your WebP artwork -->
+                <img src="assets/img/john.webp" alt="John Paul De Leon Portrait" class="theme-pop-art" />
+            </div>
+            <div class="masthead-subheading">Hi there, I&rsquo;m</div>
+            <div class="masthead-heading text-uppercase">John Paul / Jampol</div>
+            <div class="masthead-tagline">Product design &amp; front-end development, done at a considered pace.</div>
+            <div class="divider-custom">
+                <div class="divider-checkerboard-small"></div>
+                <div class="divider-custom-icon"><i class="fa-solid fa-skull"></i></i></div>
+                <div class="divider-checkerboard-small"></div>
+            </div>
+            <a class="btn btn-primary btn-xl text-uppercase" href="#about">Learn more about me</a>
         </div>
-        <div class="masthead-subheading">Hi there, I&rsquo;m</div>
-        <div class="masthead-heading text-uppercase">John Paul / Jampol</div>
-        <div class="masthead-tagline">Product design &amp; front-end development, done at a considered pace.</div>
-        <div class="divider-custom">
-            <div class="divider-custom-line"></div>
-            <div class="divider-custom-icon"><i class="fa-solid fa-skull"></i></i></div>
-            <div class="divider-custom-line"></div>
-        </div>
-        <a class="btn btn-primary btn-xl text-uppercase" href="#about">Learn more about me</a>
-    </div>
-</header>
+    </header>
+    
+
     <!-- About-->
     <section class="page-section" id="about">
         <div class="container">
             <h2 class="page-section-heading text-uppercase text-center">About</h2>
             <div class="divider-custom">
-                <div class="divider-custom-line"></div>
+                <div class="divider-checkerboard-small"></div>
                 <div class="divider-custom-icon"><i class="fa-solid fa-skull-crossbones"></i></div>
-                <div class="divider-custom-line"></div>
+                <div class="divider-checkerboard-small"></div>
             </div>
             <div class="row justify-content-center">
                 <div class="col-lg-8 text-center">
@@ -134,26 +137,26 @@
     <!-- Portfolio Grid-->
     <section class="page-section section-tint" id="portfolio">
         <div class="container">
-            <h2 class="page-section-heading text-uppercase text-center">Selected Work</h2>
+            <h2 class="page-section-heading text-uppercase text-center">Off the Wall</h2>
             <div class="divider-custom">
-                <div class="divider-custom-line"></div>
+                <div class="divider-checkerboard-small"></div>
                 <div class="divider-custom-icon"><i class="fa-solid fa-gamepad"></i></i></div>
-                <div class="divider-custom-line"></div>
+                <div class="divider-checkerboard-small"></div>
             </div>
             <div class="row gx-4 gx-lg-5 row-cols-1 row-cols-md-2 row-cols-lg-3">
 
                 <!-- Item 1 -->
                 <div class="col mb-5">
                     <a href="assets/img/tech.webp" class="glightbox portfolio-item-link"
-                        data-gallery="portfolio-gallery" data-title="A Bit About My Tech Obsession"
-                        data-description="Identity and packaging system for a small-batch coffee roaster.">
+                        data-gallery="portfolio-gallery"
+                        data-glightbox="title: Tech Obsessive; description: .tech-desc">
                         <div class="portfolio-item">
                             <div class="portfolio-thumb portfolio-photo">
                                 <img src="assets/img/tech.webp" alt="tech" class="theme-pop-art" loading="lazy" />
                                 <div class="portfolio-placeholder">
                                     <svg class="placeholder-icon" viewBox="0 0 48 48" aria-hidden="true">
-                                        <rect x="5" y="8" width="38" height="32" rx="3" fill="none" stroke="currentColor"
-                                            stroke-width="2" />
+                                        <rect x="5" y="8" width="38" height="32" rx="3" fill="none"
+                                            stroke="currentColor" stroke-width="2" />
                                         <circle cx="16" cy="18" r="3.4" fill="currentColor" />
                                         <path d="M7 34 L18 22 L26 30 L33 20 L41 32" fill="none" stroke="currentColor"
                                             stroke-width="2" stroke-linejoin="round" stroke-linecap="round" />
@@ -162,26 +165,35 @@
                                 </div>
                             </div>
                             <div class="portfolio-item-body">
-                                
-                                <h3 class="portfolio-item-title">Tech & Hardware</h3>
-                                <p class="portfolio-item-desc">Following tech news, upgrading and troubleshooting PCs, tweaking Windows UI, customizing mechanical keyboards, and flashing AOSP custom ROMs.</p>
+                                <h3 class="portfolio-item-title">Tech Obsessive</h3>
                             </div>
                         </div>
                     </a>
+                </div>
+
+                <!-- Hidden description, referenced by the .tech-desc selector above -->
+                <div class="tech-desc" style="display:none;">
+                    <p>I started tweaking icons on my Nokia 6680 as a kid, just messing around with wallpapers and themes. When I got my first Android phone, the Galaxy Y, I immediately flashed Hyperion ROM because I wanted something cleaner. Been doing it ever since. CyanogenMod, LineageOS, PixelExperience, EvolutionX, Derpfest, CrDroid, PixelOS. I just prefer stock Android.</p>
+
+<p>I read tech articles about phones, PCs, keyboards, and reviews. Watch YouTube videos about it too. Not because I'm buying everything, just because I'm interested. I like understanding how things work and what's new in tech.</p>
+
+<p>My Nothing Phone 2 is good enough that I don't need to flash a ROM anymore. But I still tinker with my older phones running CrDroid and Derpfest. I like the whole process of flashing, testing, seeing what works. Respect the dev community for keeping old devices alive.</p>
+
+<p>It's just something I enjoy doing. When I see something interesting in tech, I dive into it. Learn how it works, test it out, figure things out. That's pretty much it.</p>
                 </div>
 
                 <!-- Item 2 -->
                 <div class="col mb-5">
                     <a href="assets/img/creative.webp" class="glightbox portfolio-item-link"
-                        data-gallery="portfolio-gallery" data-title="Creative & Visuals"
-                        data-description="Inventory dashboard for a plant nursery cooperative.">
+                        data-gallery="portfolio-gallery"
+                        data-glightbox="title: Self-Taught Creative; description: .creative-desc">
                         <div class="portfolio-item">
                             <div class="portfolio-thumb portfolio-photo">
                                 <img src="assets/img/creative.webp" alt="creative" class="theme-pop-art" loading="lazy" />
                                 <div class="portfolio-placeholder">
                                     <svg class="placeholder-icon" viewBox="0 0 48 48" aria-hidden="true">
-                                        <rect x="5" y="8" width="38" height="32" rx="3" fill="none" stroke="currentColor"
-                                            stroke-width="2" />
+                                        <rect x="5" y="8" width="38" height="32" rx="3" fill="none"
+                                            stroke="currentColor" stroke-width="2" />
                                         <circle cx="16" cy="18" r="3.4" fill="currentColor" />
                                         <path d="M7 34 L18 22 L26 30 L33 20 L41 32" fill="none" stroke="currentColor"
                                             stroke-width="2" stroke-linejoin="round" stroke-linecap="round" />
@@ -190,25 +202,35 @@
                                 </div>
                             </div>
                             <div class="portfolio-item-body">
-                                <h3 class="portfolio-item-title">Creative & Visuals</h3>
-                                <p class="portfolio-item-desc">Travel photography, photo manipulation in Photoshop and Lightroom, color grading travel videos, and designing custom shirts.</p>
+                                <h3 class="portfolio-item-title">Self-Taught Creative</h3>
                             </div>
                         </div>
                     </a>
+                </div>
+
+                <!-- Hidden description, referenced by the .tech-desc selector above -->
+                <div class="creative-desc" style="display:none;">
+                   <p>I'm not a professional photographer or editor. I just see something cool and think, "I want to know how to do that."</p>
+
+<p>Color grading in Lightroom? I watched YouTube videos and practiced. Photo manipulation in Photoshop? Same thing. Video color grading and transitions? Figured it out. Made custom t-shirts for my friends' anniversaries. The process is always the same: I get curious, I look it up, I try it, and eventually I get it done.</p>
+
+<p>I can teach myself stuff pretty fast. I don't need to be an expert before I start, I just start and learn along the way. When I see something I like, I break it down and figure out how it works. Try the tool, practice, apply it, repeat.</p>
+
+<p>It's not complicated. I'm just interested in how things work, so I learn them. That's it.</p>
                 </div>
 
                 <!-- Item 3 -->
                 <div class="col mb-5">
                     <a href="assets/img/bike.webp" class="glightbox portfolio-item-link"
-                        data-gallery="portfolio-gallery" data-title="On the Road & Active"
-                        data-description="Launch site for a wetlands conservation film collective.">
+                        data-gallery="portfolio-gallery"
+                        data-glightbox="title: Two Wheels & Open Roads; description: .active-desc">
                         <div class="portfolio-item">
                             <div class="portfolio-thumb portfolio-photo">
-                                <img src="assets/img/bike.webp" alt="bike" class="theme-pop-art" loading="lazy" />
+                                <img src="assets/img/bike.webp" alt="active" class="theme-pop-art" loading="lazy" />
                                 <div class="portfolio-placeholder">
                                     <svg class="placeholder-icon" viewBox="0 0 48 48" aria-hidden="true">
-                                        <rect x="5" y="8" width="38" height="32" rx="3" fill="none" stroke="currentColor"
-                                            stroke-width="2" />
+                                        <rect x="5" y="8" width="38" height="32" rx="3" fill="none"
+                                            stroke="currentColor" stroke-width="2" />
                                         <circle cx="16" cy="18" r="3.4" fill="currentColor" />
                                         <path d="M7 34 L18 22 L26 30 L33 20 L41 32" fill="none" stroke="currentColor"
                                             stroke-width="2" stroke-linejoin="round" stroke-linecap="round" />
@@ -217,26 +239,35 @@
                                 </div>
                             </div>
                             <div class="portfolio-item-body">
-                                <h3 class="portfolio-item-title">On the Road & Active</h3>
-                                <p class="portfolio-item-desc">Traveling, driving cars, riding motorcycles, playing basketball, and cycling.
-                                </p>
+                                <h3 class="portfolio-item-title">Two Wheels & Open Roads</h3>
                             </div>
                         </div>
                     </a>
+                </div>
+
+                <!-- Hidden description, referenced by the .tech-desc selector above -->
+                <div class="active-desc" style="display:none;">
+                   <p>I like traveling, motorcycles, cars, cycling, basketball, exploring. These are things I enjoy, so they don't feel like work.</p>
+
+<p>I'm always picking up stories and experiences from traveling and riding. Every ride has something different about it, every road trip is its own thing. Exploring new places, feeling the freedom on the road, the rush of riding, it all shapes how I see things.</p>
+
+<p>Motorcycles and cars give me that sense of freedom. Cycling and basketball keep me moving and sharp. Traveling ties it all together. I'm not just going places, I'm collecting experiences and memories.</p>
+
+<p>It's just a part of who I am. Need to be on the move, exploring, doing stuff.</p>
                 </div>
 
                 <!-- Item 4 -->
                 <div class="col mb-5">
                     <a href="assets/img/entertainment.webp" class="glightbox portfolio-item-link"
-                        data-gallery="portfolio-gallery" data-title="Gaming & Entertainment"
-                        data-description="Component library shared across three internal product teams.">
+                        data-gallery="portfolio-gallery"
+                        data-glightbox="title: Grind & Chill; description: .entertainment-desc">
                         <div class="portfolio-item">
                             <div class="portfolio-thumb portfolio-photo">
                                 <img src="assets/img/entertainment.webp" alt="entertainment" class="theme-pop-art" loading="lazy" />
                                 <div class="portfolio-placeholder">
                                     <svg class="placeholder-icon" viewBox="0 0 48 48" aria-hidden="true">
-                                        <rect x="5" y="8" width="38" height="32" rx="3" fill="none" stroke="currentColor"
-                                            stroke-width="2" />
+                                        <rect x="5" y="8" width="38" height="32" rx="3" fill="none"
+                                            stroke="currentColor" stroke-width="2" />
                                         <circle cx="16" cy="18" r="3.4" fill="currentColor" />
                                         <path d="M7 34 L18 22 L26 30 L33 20 L41 32" fill="none" stroke="currentColor"
                                             stroke-width="2" stroke-linejoin="round" stroke-linecap="round" />
@@ -245,25 +276,33 @@
                                 </div>
                             </div>
                             <div class="portfolio-item-body">
-                                <h3 class="portfolio-item-title">Gaming & Entertainment</h3>
-                                <p class="portfolio-item-desc">PC gaming and binge-watching.</p>
+                                <h3 class="portfolio-item-title">Grind & Chill</h3>
                             </div>
                         </div>
                     </a>
+                </div>
+
+                <!-- Hidden description, referenced by the .tech-desc selector above -->
+                <div class="entertainment-desc" style="display:none;">
+                    <p>I play competitive games like Counter Strike, Dota 2, Half-Life, NBA 2K, and other FPS games. I like strategy, the mechanics, the competition. Recently got into poker too because the strategy and mind games are interesting.</p>
+
+<p>On the flip side, I rewatch shows like The Office, The Big Bang Theory, How I Met Your Mother, Community, and Brooklyn Nine-Nine. I watch anime. It's just something I do to chill and unwind. Not about catching everything new, just comfort watching.</p>
+
+<p>It's a balance. I need the competitive stuff to stay sharp, and I need the comfort shows to decompress. Both matter.</p>
                 </div>
 
                 <!-- Item 5 -->
                 <div class="col mb-5">
                     <a href="assets/img/music.webp" class="glightbox portfolio-item-link"
-                        data-gallery="portfolio-gallery" data-title="Music & Subculture"
-                        data-description="Digital edition and typesetting for a quarterly nature journal.">
+                        data-gallery="portfolio-gallery"
+                        data-glightbox="title: Amplified; description: .music-desc">
                         <div class="portfolio-item">
                             <div class="portfolio-thumb portfolio-photo">
-                                <img src="assets/img/music.webp" alt="" class="theme-pop-art" loading="lazy" />
+                                <img src="assets/img/music.webp" alt="music" class="theme-pop-art" loading="lazy" />
                                 <div class="portfolio-placeholder">
                                     <svg class="placeholder-icon" viewBox="0 0 48 48" aria-hidden="true">
-                                        <rect x="5" y="8" width="38" height="32" rx="3" fill="none" stroke="currentColor"
-                                            stroke-width="2" />
+                                        <rect x="5" y="8" width="38" height="32" rx="3" fill="none"
+                                            stroke="currentColor" stroke-width="2" />
                                         <circle cx="16" cy="18" r="3.4" fill="currentColor" />
                                         <path d="M7 34 L18 22 L26 30 L33 20 L41 32" fill="none" stroke="currentColor"
                                             stroke-width="2" stroke-linejoin="round" stroke-linecap="round" />
@@ -272,25 +311,33 @@
                                 </div>
                             </div>
                             <div class="portfolio-item-body">
-                                <h3 class="portfolio-item-title">Music & Subculture</h3>
-                                <p class="portfolio-item-desc">Listening to emo, metal, punk, nu-metal, rock, and alternative music.</p>
+                                <h3 class="portfolio-item-title">Amplified</h3>
                             </div>
                         </div>
                     </a>
+                </div>
+
+                <!-- Hidden description, referenced by the .tech-desc selector above -->
+                <div class="music-desc" style="display:none;">
+                    <p>Linkin Park, Metallica, Green Day, My Chemical Romance, The Used, Silverstein, Slapshock, Wolfgang, Guns N' Roses, Korn, Slipknot. This is my music.</p>
+
+<p>Emo, metal, punk, nu-metal, rock, alternative. These genres are what I listen to when I'm driving, working, or just doing anything. It's my constant soundtrack. Been into this stuff for years, it's just part of who I am.</p>
+
+<p>It's not background noise. It's intentional. It helps me focus when I work, hypes me up when I drive, calms me down when I need it. It's just always there.</p>
                 </div>
 
                 <!-- Item 6 -->
                 <div class="col mb-5">
                     <a href="assets/img/dogs.webp" class="glightbox portfolio-item-link"
-                        data-gallery="portfolio-gallery" data-title="Pets"
-                        data-description="Storefront and checkout flow for a maker-owned homeware shop.">
+                        data-gallery="portfolio-gallery"
+                        data-glightbox="title: Four-Legged Friends; description: .dogs-desc">
                         <div class="portfolio-item">
                             <div class="portfolio-thumb portfolio-photo">
-                                <img src="assets/img/dogs.webp" alt="" class="theme-pop-art" loading="lazy" />
+                                <img src="assets/img/dogs.webp" alt="dogs" class="theme-pop-art" loading="lazy" />
                                 <div class="portfolio-placeholder">
                                     <svg class="placeholder-icon" viewBox="0 0 48 48" aria-hidden="true">
-                                        <rect x="5" y="8" width="38" height="32" rx="3" fill="none" stroke="currentColor"
-                                            stroke-width="2" />
+                                        <rect x="5" y="8" width="38" height="32" rx="3" fill="none"
+                                            stroke="currentColor" stroke-width="2" />
                                         <circle cx="16" cy="18" r="3.4" fill="currentColor" />
                                         <path d="M7 34 L18 22 L26 30 L33 20 L41 32" fill="none" stroke="currentColor"
                                             stroke-width="2" stroke-linejoin="round" stroke-linecap="round" />
@@ -299,13 +346,20 @@
                                 </div>
                             </div>
                             <div class="portfolio-item-body">
-                                <h3 class="portfolio-item-title">Pets</h3>
-                                <p class="portfolio-item-desc">Dog lover.</p>
+                                <h3 class="portfolio-item-title">Four-Legged Friends</h3>
                             </div>
                         </div>
                     </a>
                 </div>
 
+                <!-- Hidden description, referenced by the .tech-desc selector above -->
+                <div class="dogs-desc" style="display:none;">
+                   <p>I've been a dog lover since I was a kid. Had multiple dogs over the years, each with their own personality. They're all sweet and fun in their own ways.</p>
+
+<p>Right now I've got Bucky and Loki. They're pretty different from each other, but both are just good company. Dogs are simple like that, they just make things better.</p>
+
+<p>That's it really. Just love dogs.</p>
+                </div>
             </div>
         </div>
     </section>
@@ -314,66 +368,14 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-9 text-center">
-                    <h2 class="page-section-heading text-uppercase">Have a project in mind?</h2>
+                    <h2 class="page-section-heading text-uppercase">Reach Out</h2>
                     <div class="divider-custom divider-light">
-                        <div class="divider-custom-line"></div>
-                        <div class="divider-custom-icon"><i class="fas fa-frog"></i></div>
-                        <div class="divider-custom-line"></div>
+                        <div class="divider-checkerboard-small"></div>
+                        <div class="divider-custom-icon"><i class="fa-solid fa-motorcycle"></i></div>
+                        <div class="divider-checkerboard-small"></div>
                     </div>
-                    <p class="cta-lead">I take on a handful of new engagements each quarter — usually branding, product
-                        design, or a front-end build that needs a steady hand.</p>
-                    <a class="btn btn-secondary btn-xl text-uppercase" href="#contact">Start a conversation</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact-->
-    <section class="page-section" id="contact">
-        <div class="container">
-            <h2 class="page-section-heading text-uppercase text-center">Contact</h2>
-            <div class="divider-custom">
-                <div class="divider-custom-line"></div>
-                <div class="divider-custom-icon"><i class="fas fa-envelope"></i></div>
-                <div class="divider-custom-line"></div>
-            </div>
-            <div class="row justify-content-center">
-                <div class="col-lg-8 text-center">
-                    <p class="contact-lead">Tell me a little about what you&rsquo;re building and I&rsquo;ll reply
-                        within two business days.</p>
-                </div>
-            </div>
-            <div class="row justify-content-center">
-                <div class="col-lg-8">
-                    <form id="contactForm" novalidate>
-                        <div class="row gx-3">
-                            <div class="col-md-6 mb-3">
-                                <div class="form-floating">
-                                    <input class="form-control" id="name" type="text" placeholder="Your Name"
-                                        required />
-                                    <label for="name">Full name</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <div class="form-floating">
-                                    <input class="form-control" id="email" type="email" placeholder="Your Email"
-                                        required />
-                                    <label for="email">Email address</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <div class="form-floating">
-                                <textarea class="form-control" id="message" placeholder="Your Message"
-                                    style="height: 10rem" required></textarea>
-                                <label for="message">Message</label>
-                            </div>
-                        </div>
-                        <div class="text-center">
-                            <button class="btn btn-primary btn-xl text-uppercase" id="submitButton" type="submit">Send
-                                message</button>
-                        </div>
-                    </form>
+                    <p class="cta-lead">Need a travel buddy? I'll drive. Want tech advice? I got you. Looking for music or gaming recommendations? I'm your guy.</p>
+                    <a class="btn btn-secondary btn-xl text-uppercase" href="mailto:jpleonard.deleon@gmail.com">Hit me up</a>
                 </div>
             </div>
         </div>
@@ -386,10 +388,10 @@
                 <div class="col-lg-4 mb-5 mb-lg-0">
                     <h4>Find me around the web</h4>
                     <div class="social-icons">
-                        <a class="btn-social" href="#!" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                        <a class="btn-social" href="#!" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                        <a class="btn-social" href="#!" aria-label="GitHub"><i class="fab fa-github"></i></a>
-                        <a class="btn-social" href="#!" aria-label="Dribbble"><i class="fab fa-dribbble"></i></a>
+                        <a class="btn-social" href="https://jpldeleon.github.io/" aria-label="Portfolio"><i class="fa-solid fa-briefcase"></i></a>
+                        <a class="btn-social" href="https://github.com/jpldeleon" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                        <a class="btn-social" href="https://www.linkedin.com/in/jpldl/" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                        <a class="btn-social" href="mailto:jpleonard.deleon@gmail.com" aria-label="Gmail"><i class="fa-regular fa-paper-plane"></i></a>
                     </div>
                 </div>
                 <div class="col-lg-4 mb-5 mb-lg-0">
@@ -399,7 +401,9 @@
                 </div>
                 <div class="col-lg-4">
                     <h4>Contact details</h4>
-                    <p class="lead mb-0">hello@rileymarsh.design<br />Portland, OR</p>
+                    <p class="lead mb-0"><a
+                            href="mailto:jpleonard.deleon@gmail.com">jpleonard.deleon@gmail.com</a><br />Portland, OR
+                    </p>
                 </div>
             </div>
         </div>
