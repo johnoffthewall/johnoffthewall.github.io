@@ -93,10 +93,6 @@ h1, h2, h3, h4, h5, h6 {
   transform-style: preserve-3d;
 }
 
-/* Click feedback: only the icon does a full vertical rotation (tips
-   away and back, landing at its starting orientation) — the disc
-   behind it stays still and just crossfades its background between
-   the light and dark card colors. */
 .dock-toggle .toggle-icon.flip .j-stripe {
   animation: toggleFlip 0.6s cubic-bezier(0.45, 0, 0.2, 1);
 }
@@ -140,12 +136,6 @@ h1, h2, h3, h4, h5, h6 {
 
 /* ==========================================================
    THEME-REACTIVE PHOTOS (duotone)
-   Any real photo — hero portrait, portfolio thumbnails, and the
-   lightbox popup image — gets desaturated then recolored with
-   mix-blend-mode using the current theme's --primary color
-   (see theme.css). Because --primary itself flips value between
-   light/dark, the photos recolor automatically on toggle, in
-   step with everything else on the page.
    ========================================================== */
 .hero-portrait,
 .glightbox-container .gslide-image {
@@ -153,10 +143,6 @@ h1, h2, h3, h4, h5, h6 {
   overflow: hidden;
   isolation: isolate;
 }
-/* The portfolio thumb is positioned absolute (see PORTFOLIO GRID
-   below) rather than relative, since it now fills the whole card
-   as a full-bleed background photo with the caption overlaid on
-   top — but it still needs the same clipping/blend setup. */
 .portfolio-thumb.portfolio-photo {
   overflow: hidden;
   isolation: isolate;
@@ -181,8 +167,6 @@ h1, h2, h3, h4, h5, h6 {
   height: 100%;
   object-fit: cover;
 }
-/* Crop from the top instead of the center — keeps faces/subjects
-   near the top of a shot from getting cut off in the short thumb. */
 .portfolio-thumb.portfolio-photo img.theme-pop-art {
   object-position: top center;
 }
@@ -232,12 +216,6 @@ h1, h2, h3, h4, h5, h6 {
   max-width: 21.25rem;
   margin: 1.25rem auto 1.5rem;
 }
-.divider-custom-line {
-  width: 100%;
-  max-width: 7rem;
-  height: 0.25rem;
-  border-radius: 1rem;
-}
 .divider-custom-icon {
   margin: 0 1rem;
   font-size: 1.5rem;
@@ -254,8 +232,6 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
   letter-spacing: 0.01em;
 }
-.about-lead,
-.contact-lead,
 .cta-lead {
   font-size: 1.15rem;
 }
@@ -290,10 +266,6 @@ h1, h2, h3, h4, h5, h6 {
 .portfolio-item:hover {
   transform: translateY(-0.35rem);
 }
-/* Caption sits as an absolutely-positioned overlay pinned to the
-   bottom of the photo. Extra top padding gives the gradient scrim
-   (theme.css) room to fade from transparent to solid before it
-   reaches the text. */
 .portfolio-item-body {
   position: absolute;
   left: 0;
@@ -302,8 +274,6 @@ h1, h2, h3, h4, h5, h6 {
   z-index: 2;
   padding: 3rem 1.5rem 1.5rem;
 }
-/* Thumb now fills the entire card as a full-bleed background photo
-   rather than a fixed-height strip above the caption. */
 .portfolio-thumb {
   position: absolute;
   inset: 0;
@@ -312,8 +282,6 @@ h1, h2, h3, h4, h5, h6 {
   justify-content: center;
   font-size: 2rem;
 }
-/* Real photo is the default state; the placeholder sits behind it,
-   hidden, ready to take over if the photo 404s (see scripts.js). */
 .portfolio-thumb.portfolio-photo .portfolio-placeholder {
   display: none;
 }
@@ -342,27 +310,12 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 1.15rem;
   margin: 0 0 0.5rem;
 }
-.portfolio-item-desc {
-  font-size: 0.95rem;
-  margin: 0;
-}
 
 /* ==========================================================
    CTA SECTION
    ========================================================== */
 .cta-section {
   padding: 5rem 0;
-}
-
-/* ==========================================================
-   CONTACT / FORM
-   ========================================================== */
-.form-control {
-  border-radius: 0.5rem;
-  padding: 1rem 0.9rem;
-}
-.form-floating {
-  margin-bottom: 0.25rem;
 }
 
 /* ==========================================================
@@ -391,8 +344,7 @@ h1, h2, h3, h4, h5, h6 {
    FOCUS VISIBILITY (accessibility)
    ========================================================== */
 a:focus-visible,
-button:focus-visible,
-.form-control:focus-visible {
+button:focus-visible {
   outline: 2px solid var(--accent, #4FE0B6);
   outline-offset: 2px;
 }
@@ -402,16 +354,6 @@ button:focus-visible,
    ========================================================== */
 /* ==========================================================
    GLIGHTBOX — NEUTRALIZE BUILT-IN "MOBILE" SKIN
-   GLightbox detects touch devices and adds a `.glightbox-mobile`
-   class, which activates its own hardcoded mobile styles: the
-   description becomes a position:absolute overlay pinned to the
-   bottom of the image with a dark gradient background. That
-   selector out-specifies our normal .gslide-description rules
-   (theme.css §11) and our ≤767.98px stacked layout below, so on
-   touch devices the panel reverts to the library's overlay
-   layout no matter what we set elsewhere. This block forces it
-   back to our stacked, in-flow layout; text colors are handled
-   alongside it in theme.css §11.
    ========================================================== */
 .glightbox-mobile .glightbox-container .gslide-description {
   position: static !important;
@@ -440,16 +382,6 @@ button:focus-visible,
     height: 6.5rem;
   }
   .glightbox-container {
-    /* Must stay in the same units as the close button's position
-       calc in theme.css §11 (which uses dvh/dvw with a vh/vw
-       fallback). Mixing vh here with dvh there was the bug: on
-       phones the two units diverge as the browser's address/tab
-       bar shows or hides, so the button's offset was computed
-       against a dialog size that no longer matched the dialog's
-       real on-screen size — shoving it outside the dialog. Setting
-       dvw/dvh here too (as a progressive-enhancement override, same
-       pattern as theme.css) keeps both calcs reading off the same
-       real viewport. */
     --gbox-w: 92vw;
     --gbox-w: 92dvw;
     --gbox-h: 70vh;

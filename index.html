@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-    <!-- Set theme before first paint to avoid flash of wrong theme -->
     <script>
         (function () {
             var stored = localStorage.getItem('theme');
@@ -18,28 +17,17 @@
     <meta name="author" content="" />
     <title>JP De Leon - Off the Wall</title>
 
-    <!-- Modern browsers (Scalable & theme-aware) -->
     <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
-
-    <!-- Legacy fallback -->
     <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon32.png">
-
-    <!-- iOS Home Screen -->
     <link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple_favicon.png">
 
-    <!-- Bootstrap grid, utilities & components (CSS) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" />
-
-    <!-- Font Awesome icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
-    <!-- Google fonts: a rounded display face + a clean workhorse body face -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link
         href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
         rel="stylesheet" />
-    <!-- GLightbox CSS (loaded before our stylesheets so styles.css/theme.css
-         can safely override its defaults by source order) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
     <link rel="stylesheet" href="css/styles.css" />
     <link rel="stylesheet" href="css/theme.css" />
@@ -48,7 +36,6 @@
 
 <body id="page-top">
 
-    <!-- Dock navigation (icon-only) -->
     <nav class="dock-nav" aria-label="Primary">
         <a class="dock-item" href="#page-top" aria-label="Home" title="Home">
             <i class="fas fa-house" aria-hidden="true"></i>
@@ -76,12 +63,10 @@
         </button>
     </nav>
 
-    <!-- Masthead-->
     <header class="masthead" id="page-top-hero">
         <div class="container">
             <div class="hero-portrait">
-                <!-- Replaced SVG with your WebP artwork -->
-                <img src="assets/img/john.webp" alt="John Paul De Leon Portrait" class="theme-pop-art" />
+                <img src="assets/img/john_thumb.webp" alt="John Paul De Leon Portrait" class="theme-pop-art" />
             </div>
             <div class="masthead-subheading">Hi there, I&rsquo;m</div>
             <h1>
@@ -98,8 +83,6 @@
         </div>
     </header>
 
-
-    <!-- About-->
     <section class="page-section" id="about">
         <div class="container">
             <h2 class="page-section-heading text-uppercase text-center">John Off the Wall</h2>
@@ -156,7 +139,6 @@
         </div>
     </section>
 
-    <!-- Portfolio Grid-->
     <section class="page-section section-tint" id="portfolio">
         <div class="container">
             <h2 class="page-section-heading text-uppercase text-center">Off the Wall</h2>
@@ -167,24 +149,13 @@
             </div>
             <div class="row gx-4 gx-lg-5 row-cols-1 row-cols-md-2 row-cols-lg-3">
 
-                <!-- Item 1 -->
                 <div class="col mb-5">
                     <a href="assets/img/tech.webp" class="glightbox portfolio-item-link"
                         data-gallery="portfolio-gallery"
                         data-glightbox="title: Tech Obsessive; description: .tech-desc">
                         <div class="portfolio-item">
                             <div class="portfolio-thumb portfolio-photo">
-                                <img src="assets/img/tech.webp" alt="tech" class="theme-pop-art" loading="lazy" />
-                                <div class="portfolio-placeholder">
-                                    <svg class="placeholder-icon" viewBox="0 0 48 48" aria-hidden="true">
-                                        <rect x="5" y="8" width="38" height="32" rx="3" fill="none"
-                                            stroke="currentColor" stroke-width="2" />
-                                        <circle cx="16" cy="18" r="3.4" fill="currentColor" />
-                                        <path d="M7 34 L18 22 L26 30 L33 20 L41 32" fill="none" stroke="currentColor"
-                                            stroke-width="2" stroke-linejoin="round" stroke-linecap="round" />
-                                    </svg>
-                                    <span class="placeholder-label">Image coming soon</span>
-                                </div>
+                                <img src="assets/img/tech_thumb.webp" alt="tech" class="theme-pop-art" loading="lazy" />
                             </div>
                             <div class="portfolio-item-body">
                                 <h3 class="portfolio-item-title">Tech Obsessive</h3>
@@ -193,7 +164,6 @@
                     </a>
                 </div>
 
-                <!-- Hidden description, referenced by the .tech-desc selector above -->
                 <div class="tech-desc" style="display:none;">
                     <p>I started tweaking icons on my Nokia 6680 as a kid, just messing around with wallpapers and
                         themes. When I got my first Android phone, the Galaxy Y, I immediately flashed Hyperion ROM
@@ -212,25 +182,15 @@
                         Learn how it works, test it out, figure things out. That's pretty much it.</p>
                 </div>
 
-                <!-- Item 2 -->
                 <div class="col mb-5">
                     <a href="assets/img/creative.webp" class="glightbox portfolio-item-link"
                         data-gallery="portfolio-gallery"
                         data-glightbox="title: Self-Taught Creative; description: .creative-desc">
                         <div class="portfolio-item">
                             <div class="portfolio-thumb portfolio-photo">
-                                <img src="assets/img/creative.webp" alt="creative" class="theme-pop-art"
+                                <img src="assets/img/creative_thumb.webp" alt="creative" class="theme-pop-art"
                                     loading="lazy" />
-                                <div class="portfolio-placeholder">
-                                    <svg class="placeholder-icon" viewBox="0 0 48 48" aria-hidden="true">
-                                        <rect x="5" y="8" width="38" height="32" rx="3" fill="none"
-                                            stroke="currentColor" stroke-width="2" />
-                                        <circle cx="16" cy="18" r="3.4" fill="currentColor" />
-                                        <path d="M7 34 L18 22 L26 30 L33 20 L41 32" fill="none" stroke="currentColor"
-                                            stroke-width="2" stroke-linejoin="round" stroke-linecap="round" />
-                                    </svg>
-                                    <span class="placeholder-label">Image coming soon</span>
-                                </div>
+
                             </div>
                             <div class="portfolio-item-body">
                                 <h3 class="portfolio-item-title">Self-Taught Creative</h3>
@@ -239,7 +199,6 @@
                     </a>
                 </div>
 
-                <!-- Hidden description, referenced by the .tech-desc selector above -->
                 <div class="creative-desc" style="display:none;">
                     <p>I'm not a professional photographer or editor. I just see something cool and think, "I want to
                         know how to do that."</p>
@@ -256,24 +215,15 @@
                     <p>It's not complicated. I'm just interested in how things work, so I learn them. That's it.</p>
                 </div>
 
-                <!-- Item 3 -->
                 <div class="col mb-5">
                     <a href="assets/img/bike.webp" class="glightbox portfolio-item-link"
                         data-gallery="portfolio-gallery"
                         data-glightbox="title: Two Wheels & Open Roads; description: .active-desc">
                         <div class="portfolio-item">
                             <div class="portfolio-thumb portfolio-photo">
-                                <img src="assets/img/bike.webp" alt="active" class="theme-pop-art" loading="lazy" />
-                                <div class="portfolio-placeholder">
-                                    <svg class="placeholder-icon" viewBox="0 0 48 48" aria-hidden="true">
-                                        <rect x="5" y="8" width="38" height="32" rx="3" fill="none"
-                                            stroke="currentColor" stroke-width="2" />
-                                        <circle cx="16" cy="18" r="3.4" fill="currentColor" />
-                                        <path d="M7 34 L18 22 L26 30 L33 20 L41 32" fill="none" stroke="currentColor"
-                                            stroke-width="2" stroke-linejoin="round" stroke-linecap="round" />
-                                    </svg>
-                                    <span class="placeholder-label">Image coming soon</span>
-                                </div>
+                                <img src="assets/img/bike_thumb.webp" alt="active" class="theme-pop-art"
+                                    loading="lazy" />
+
                             </div>
                             <div class="portfolio-item-body">
                                 <h3 class="portfolio-item-title">Two Wheels & Open Roads</h3>
@@ -282,7 +232,6 @@
                     </a>
                 </div>
 
-                <!-- Hidden description, referenced by the .tech-desc selector above -->
                 <div class="active-desc" style="display:none;">
                     <p>I like traveling, motorcycles, cars, cycling, basketball, exploring. These are things I enjoy, so
                         they don't feel like work.</p>
@@ -298,25 +247,15 @@
                     <p>It's just a part of who I am. Need to be on the move, exploring, doing stuff.</p>
                 </div>
 
-                <!-- Item 4 -->
                 <div class="col mb-5">
                     <a href="assets/img/entertainment.webp" class="glightbox portfolio-item-link"
                         data-gallery="portfolio-gallery"
                         data-glightbox="title: Grind & Chill; description: .entertainment-desc">
                         <div class="portfolio-item">
                             <div class="portfolio-thumb portfolio-photo">
-                                <img src="assets/img/entertainment.webp" alt="entertainment" class="theme-pop-art"
+                                <img src="assets/img/entertainment_thumb.webp" alt="entertainment" class="theme-pop-art"
                                     loading="lazy" />
-                                <div class="portfolio-placeholder">
-                                    <svg class="placeholder-icon" viewBox="0 0 48 48" aria-hidden="true">
-                                        <rect x="5" y="8" width="38" height="32" rx="3" fill="none"
-                                            stroke="currentColor" stroke-width="2" />
-                                        <circle cx="16" cy="18" r="3.4" fill="currentColor" />
-                                        <path d="M7 34 L18 22 L26 30 L33 20 L41 32" fill="none" stroke="currentColor"
-                                            stroke-width="2" stroke-linejoin="round" stroke-linecap="round" />
-                                    </svg>
-                                    <span class="placeholder-label">Image coming soon</span>
-                                </div>
+
                             </div>
                             <div class="portfolio-item-body">
                                 <h3 class="portfolio-item-title">Grind & Chill</h3>
@@ -325,37 +264,28 @@
                     </a>
                 </div>
 
-                <!-- Hidden description, referenced by the .tech-desc selector above -->
                 <div class="entertainment-desc" style="display:none;">
                     <p>I play competitive games like Counter Strike, Dota 2, Half-Life, NBA 2K, and other FPS games. I
                         like strategy, the mechanics, the competition. Recently got into poker too because the strategy
                         and mind games are interesting.</p>
 
                     <p>On the flip side, I rewatch shows like The Office, The Big Bang Theory, How I Met Your Mother,
-                        Community, and Brooklyn Nine-Nine. I watch anime. It's just something I do to chill and unwind.
+                        Community, Modern Family, and Brooklyn Nine-Nine. I watch anime. It's just something I do to
+                        chill and unwind.
                         Not about catching everything new, just comfort watching.</p>
 
                     <p>It's a balance. I need the competitive stuff to stay sharp, and I need the comfort shows to
                         decompress. Both matter.</p>
                 </div>
 
-                <!-- Item 5 -->
                 <div class="col mb-5">
                     <a href="assets/img/music.webp" class="glightbox portfolio-item-link"
                         data-gallery="portfolio-gallery" data-glightbox="title: Amplified; description: .music-desc">
                         <div class="portfolio-item">
                             <div class="portfolio-thumb portfolio-photo">
-                                <img src="assets/img/music.webp" alt="music" class="theme-pop-art" loading="lazy" />
-                                <div class="portfolio-placeholder">
-                                    <svg class="placeholder-icon" viewBox="0 0 48 48" aria-hidden="true">
-                                        <rect x="5" y="8" width="38" height="32" rx="3" fill="none"
-                                            stroke="currentColor" stroke-width="2" />
-                                        <circle cx="16" cy="18" r="3.4" fill="currentColor" />
-                                        <path d="M7 34 L18 22 L26 30 L33 20 L41 32" fill="none" stroke="currentColor"
-                                            stroke-width="2" stroke-linejoin="round" stroke-linecap="round" />
-                                    </svg>
-                                    <span class="placeholder-label">Image coming soon</span>
-                                </div>
+                                <img src="assets/img/music_thumb.webp" alt="music" class="theme-pop-art"
+                                    loading="lazy" />
+
                             </div>
                             <div class="portfolio-item-body">
                                 <h3 class="portfolio-item-title">Amplified</h3>
@@ -364,10 +294,9 @@
                     </a>
                 </div>
 
-                <!-- Hidden description, referenced by the .tech-desc selector above -->
                 <div class="music-desc" style="display:none;">
                     <p>Linkin Park, Metallica, Green Day, My Chemical Romance, The Used, Silverstein, Slapshock,
-                        Wolfgang, Guns N' Roses, Korn, Slipknot. This is my music.</p>
+                        Wolfgang, Guns N' Roses, Korn, Slipknot, Parokya ni Edgar and Eraserheads. This is my music.</p>
 
                     <p>Emo, metal, punk, nu-metal, rock, alternative. These genres are what I listen to when I'm
                         driving, working, or just doing anything. It's my constant soundtrack. Been into this stuff for
@@ -377,24 +306,14 @@
                         drive, calms me down when I need it. It's just always there.</p>
                 </div>
 
-                <!-- Item 6 -->
                 <div class="col mb-5">
                     <a href="assets/img/dogs.webp" class="glightbox portfolio-item-link"
                         data-gallery="portfolio-gallery"
                         data-glightbox="title: Four-Legged Friends; description: .dogs-desc">
                         <div class="portfolio-item">
                             <div class="portfolio-thumb portfolio-photo">
-                                <img src="assets/img/dogs.webp" alt="dogs" class="theme-pop-art" loading="lazy" />
-                                <div class="portfolio-placeholder">
-                                    <svg class="placeholder-icon" viewBox="0 0 48 48" aria-hidden="true">
-                                        <rect x="5" y="8" width="38" height="32" rx="3" fill="none"
-                                            stroke="currentColor" stroke-width="2" />
-                                        <circle cx="16" cy="18" r="3.4" fill="currentColor" />
-                                        <path d="M7 34 L18 22 L26 30 L33 20 L41 32" fill="none" stroke="currentColor"
-                                            stroke-width="2" stroke-linejoin="round" stroke-linecap="round" />
-                                    </svg>
-                                    <span class="placeholder-label">Image coming soon</span>
-                                </div>
+                                <img src="assets/img/dogs_thumb.webp" alt="dogs" class="theme-pop-art" loading="lazy" />
+
                             </div>
                             <div class="portfolio-item-body">
                                 <h3 class="portfolio-item-title">Four-Legged Friends</h3>
@@ -403,7 +322,6 @@
                     </a>
                 </div>
 
-                <!-- Hidden description, referenced by the .tech-desc selector above -->
                 <div class="dogs-desc" style="display:none;">
                     <p>I've been a dog lover since I was a kid. Had multiple dogs over the years, each with their own
                         personality. They're all sweet and fun in their own ways.</p>
@@ -416,7 +334,7 @@
             </div>
         </div>
     </section>
-    <!-- Call to Action-->
+
     <section class="page-section cta-section" id="services">
         <div class="container">
             <div class="row justify-content-center">
@@ -436,7 +354,6 @@
         </div>
     </section>
 
-    <!-- Footer-->
     <footer class="footer">
         <div class="container">
             <div class="row">
@@ -469,7 +386,6 @@
         </div>
     </footer>
 
-    <!-- Copyright-->
     <div class="copyright">
         <div class="container text-center">
             <small>Copyright &copy; John Paul De Leon <span id="year"></span></small>

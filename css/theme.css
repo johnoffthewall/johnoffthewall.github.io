@@ -1,53 +1,34 @@
-/*!
- * Amphibian (light) x Turtle (dark) — two-palette day/night theme
- * Semantic variable architecture: --bg-main, --bg-surface, --primary,
- * --secondary, --accent, --text-color (plus a few practical derivatives:
- * --bg-card, --text-muted, --border, --on-primary, --on-accent).
- */
-
-/* ==========================================================
-   1. PALETTE DEFINITIONS
-   ========================================================== */
-
-/* Light mode — "Cove Palette" (deep-water blue to warm sand) */
 :root,
 [data-theme="light"] {
-  --bg-main: #FFF0D5;             /* Base Light Background — Warm Sand Cream */
-  --bg-surface: #FFE3B3;          /* Surface / Highlight Elements — Pale Sand */
-  --primary: #006BBB;             /* Primary Accent / Hero Background — Cove Blue */
-  --secondary: #30A0E0;           /* Secondary Accent / Active Buttons — Shallow Blue */
-  --accent: #FFC872;              /* Vibrant Accent / Success Indicators — Sand Gold */
-  --text-color: #1A1D20;          /* Primary Text — Dark Charcoal */
-
-  /* Practical derivatives, built from the palette above */
-  --bg-card: #FFF7E8;             /* Lighter sand tint than --bg-main so cards still lift off the page */
+  --bg-main: #FFF0D5;
+  --bg-surface: #FFE3B3;
+  --primary: #006BBB;
+  --secondary: #30A0E0;
+  --accent: #FFC872;
+  --text-color: #1A1D20;
+  --bg-card: #FFF7E8;
   --text-muted: color-mix(in srgb, var(--text-color) 62%, transparent);
   --border: color-mix(in srgb, var(--text-color) 14%, transparent);
-  --on-primary: #FFF0D5;          /* text sitting on --primary / --secondary */
-  --on-accent: #1A1D20;           /* text sitting on the bright --bg-surface / --accent chips */
+  --on-primary: #FFF0D5;
+  --on-accent: #1A1D20;
   --shadow: 0 10px 30px rgba(26, 29, 32, 0.12);
 }
 
-/* Dark mode — "Turtle Palette" (a slower, shelled counterpart) */
 [data-theme="dark"] {
-  --bg-main: #1C1E1E;             /* Base Dark Background — Deep Charcoal */
-  --bg-surface: #557B83;          /* Surface / Card Background — Muted Slate Blue */
-  --primary: #39AEA9;             /* Primary Accent / Brand Color — Teal Accent */
-  --secondary: #A2D5AB;           /* Secondary Accent / Links — Soft Sage Green */
-  --accent: #E5EFC1;              /* High-Contrast Text / Highlights — Light Cream */
-  --text-color: #E5EFC1;          /* High-Contrast Text / Highlights — Light Cream */
-
+  --bg-main: #1C1E1E;
+  --bg-surface: #557B83;
+  --primary: #39AEA9;
+  --secondary: #A2D5AB;
+  --accent: #E5EFC1;
+  --text-color: #E5EFC1;
   --bg-card: #263030;
   --text-muted: color-mix(in srgb, var(--text-color) 66%, transparent);
   --border: color-mix(in srgb, var(--accent) 20%, transparent);
-  --on-primary: #0F1717;          /* dark text reads better on the mid-value teal */
+  --on-primary: #0F1717;
   --on-accent: #1C1E1E;
   --shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
 }
 
-/* ==========================================================
-   2. GLOBAL / TRANSITIONS
-   ========================================================== */
 html {
   scroll-behavior: smooth;
 }
@@ -88,9 +69,6 @@ a:hover {
   color: var(--on-accent);
 }
 
-/* ==========================================================
-   3. DOCK NAVIGATION
-   ========================================================== */
 .dock-nav {
   background-color: color-mix(in srgb, var(--bg-card) 88%, transparent);
   border: 1px solid var(--border);
@@ -121,18 +99,12 @@ a:hover {
   background-color: color-mix(in srgb, var(--secondary) 16%, transparent);
 }
 
-/* Hero portrait placeholder */
 .hero-portrait {
   border: 3px solid var(--on-primary);
   color: var(--on-primary);
   background-color: color-mix(in srgb, var(--on-primary) 12%, transparent);
 }
 
-/* Theme-reactive photo duotone — the actual tint color for the
-   hero portrait, portfolio thumbnails, and lightbox popup photo.
-   Uses --primary directly, so it re-colors on its own whenever
-   the theme (and therefore --primary) changes; the grayscale +
-   blend mechanics live in styles.css. */
 .hero-portrait::after,
 .portfolio-thumb.portfolio-photo::after,
 .glightbox-container .gslide-image::after {
@@ -145,13 +117,6 @@ a:hover {
   opacity: 0.75;
 }
 
-/* ==========================================================
-   THEME TOGGLE (dock item)
-   A J-shaped sidestripe mark on its own disc within the dock.
-   The disc's colors follow the palette (so it visibly changes
-   between the "Amphibian" light look and the "Turtle" dark look);
-   the flip animation itself lives in styles.css.
-   ========================================================== */
 .dock-toggle {
   color: inherit;
 }
@@ -176,9 +141,6 @@ a:hover {
   transform: scale(0.92);
 }
 
-/* ==========================================================
-   4. HERO / MASTHEAD
-   ========================================================== */
 .masthead {
   background-color: var(--primary);
   color: var(--on-primary);
@@ -205,9 +167,6 @@ a:hover {
   color: var(--on-accent);
 }
 
-/* ==========================================================
-   5. SECTIONS, HEADINGS, DIVIDERS
-   ========================================================== */
 .page-section {
   background-color: var(--bg-main);
   color: var(--text-color);
@@ -229,9 +188,6 @@ a:hover {
   color: var(--on-primary);
 }
 
-/* ==========================================================
-   6. BUTTONS
-   ========================================================== */
 .btn-primary {
   background-color: var(--primary) !important;
   border-color: var(--primary) !important;
@@ -255,9 +211,6 @@ a:hover {
   color: var(--on-accent) !important;
 }
 
-/* ==========================================================
-   7. PORTFOLIO GRID
-   ========================================================== */
 .portfolio-item {
   background-color: var(--bg-card);
   border: 1px solid var(--border);
@@ -310,9 +263,6 @@ a:hover {
   color: var(--secondary);
 }
 
-/* ==========================================================
-   8. CTA SECTION
-   ========================================================== */
 .cta-section {
   background-color: var(--secondary);
   color: var(--on-primary);
@@ -332,9 +282,6 @@ a:hover {
   color: var(--on-accent) !important;
 }
 
-/* ==========================================================
-   9. FORMS
-   ========================================================== */
 .form-control {
   background-color: var(--bg-card);
   color: var(--text-color);
@@ -353,9 +300,6 @@ a:hover {
   color: var(--text-muted);
 }
 
-/* ==========================================================
-   10. FOOTER & COPYRIGHT
-   ========================================================== */
 .footer {
   background-color: var(--bg-card);
   color: var(--text-color);
@@ -400,36 +344,16 @@ a:hover {
   border-top: 1px solid var(--border);
 }
 
-/* ==========================================================
-   11. GLIGHTBOX THEMING — "dialog box" skin
-   Re-skins GLightbox as a centered, bordered, rounded dialog
-   that matches the site palette: a transparent/tinted backdrop
-   (no dark scrim), a square image on the left and a title +
-   description panel on the right. Next/prev are hidden — this
-   is a single-image viewer, not a slideshow.
-
-   --gbox-w / --gbox-h are fixed pixel targets (not vw/vh): the
-   left image column is a square sized off --gbox-h (so ~600px
-   tall pairs with a ~600px-wide image), and the right column
-   takes the rest of --gbox-w. max-width / max-height still cap
-   things on small viewports. The close button's position is
-   calculated from the same variables (see the responsive
-   overrides in styles.css).
-   ========================================================== */
 .glightbox-container {
   --gbox-w: 1100px;
   --gbox-h: 600px;
 }
 
-/* Transparent, theme-tinted backdrop instead of a dark scrim */
 .glightbox-container .goverlay {
   background: color-mix(in srgb, var(--bg-main) 22%, transparent);
   backdrop-filter: blur(3px);
 }
 
-/* The dialog panel itself. GLightbox's JS sets inline width/height
-   on this element based on the loaded image's natural size — the
-   !important overrides make sure our fixed dialog size always wins. */
 .glightbox-container .ginner-container {
   display: flex !important;
   flex-direction: row !important;
@@ -450,7 +374,6 @@ a:hover {
     0 0 2rem color-mix(in srgb, var(--secondary) 30%, transparent);
 }
 
-/* Image — left column, a fixed square sized off the dialog height */
 .glightbox-container .gslide-media {
   order: 1;
   flex: 0 0 var(--gbox-h);
@@ -470,7 +393,6 @@ a:hover {
   max-height: 100% !important;
 }
 
-/* Right column — title + description, stacked */
 .glightbox-container .gslide-description {
   order: 2;
   flex: 1 1 auto;
@@ -508,12 +430,9 @@ a:hover {
   font-family: var(--font-body);
   font-size: 0.95rem;
   line-height: 1.65;
-
-  /* Themed scrollbar — Firefox */
   scrollbar-width: thin;
   scrollbar-color: var(--primary) transparent;
 }
-/* Themed scrollbar — WebKit (Chrome, Safari, Edge) */
 .glightbox-container .gslide-desc::-webkit-scrollbar {
   width: 0.5rem;
 }
@@ -528,24 +447,11 @@ a:hover {
   background-color: var(--secondary);
 }
 
-/* Only a close button — no slideshow controls */
 .glightbox-container .gbtn.gnext,
 .glightbox-container .gbtn.gprev {
   display: none !important;
 }
 .glightbox-container .gbtn.gclose {
-  /* This button lives in GLightbox's markup as a sibling of the
-     dialog, positioned against the full viewport — so it has to be
-     nudged inward by half the leftover space to line up with the
-     dialog's corner. On mobile, 100vh doesn't reliably match the
-     visible viewport (browser address/tab bars resize it after
-     load), which was shoving this calc's result down and off the
-     visible screen — i.e. no visible close button. 100dvh tracks
-     the real visible viewport; the vh line stays first as a fallback
-     for browsers that don't support dvh (an invalid value is simply
-     ignored, not the whole rule). The outer max() is a hard safety
-     net so the button can never end up negative/off-screen even if
-     --gbox-w/--gbox-h and the viewport ever drift out of sync.  */
   top: calc((100vh - var(--gbox-h)) / 2 + 0.7rem);
   top: max(0.7rem, calc((100dvh - var(--gbox-h)) / 2 + 0.7rem));
   right: calc((100vw - var(--gbox-w)) / 2 + 0.7rem);
@@ -582,11 +488,6 @@ a:hover {
   display: none;
 }
 
-/* Neutralize GLightbox's hardcoded mobile text colors (normally
-   white title / gray body, meant to sit on its dark gradient
-   overlay). The layout reset for `.glightbox-mobile` lives in
-   styles.css; these colors just make sure the title/desc keep
-   following the theme once that overlay is gone. */
 .glightbox-mobile .glightbox-container .gslide-title {
   color: var(--text-color) !important;
 }
@@ -598,12 +499,6 @@ a:hover {
   color: var(--primary) !important;
 }
 
-/* Stack back to image-on-top / text-below on narrow dialogs, since
-   a side-by-side split gets cramped under ~700px wide. Breakpoint
-   matches the 767.98px one in styles.css that switches --gbox-w/
-   --gbox-h to vw/vh — they must change together, otherwise phones
-   in the 701–767px range get the small vw/vh box size while still
-   laid out side-by-side (row), which looks broken/skewed. */
 @media (max-width: 767.98px) {
   .glightbox-container .ginner-container {
     flex-direction: column !important;
@@ -613,21 +508,11 @@ a:hover {
     width: 100%;
     height: auto;
     aspect-ratio: 1 / 1;
-    /* Cap the image so it can't eat the whole dialog height on
-       short/landscape phones, starving the description panel
-       below it down to almost nothing. */
     max-height: 55%;
   }
   .glightbox-container .gslide-description {
     border-left: none;
     border-top: 1px solid var(--border);
-    /* Flex items default to min-height:auto (i.e. their content's
-       natural height), which stops them from shrinking to fit the
-       fixed-height dialog above. That pushed the title/description/
-       "See more" toggle past the bottom edge, where ginner-container's
-       overflow:hidden just clipped it — instead of the intended
-       internal scroll on .gslide-desc. min-height:0 lets this panel
-       actually shrink so its own content can scroll. */
     min-height: 0;
   }
   .glightbox-container .gdesc-inner,
