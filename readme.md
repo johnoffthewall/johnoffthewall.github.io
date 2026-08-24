@@ -1,6 +1,6 @@
 # John Off The Wall
 
-A responsive personal website built with HTML5, CSS3, and Bootstrap to document my personal journey, interests, hobbies, and life outside of work.
+A personal capstone website built with HTML5 and CSS3 to introduce myself, showcase my background, and share the projects and interests that make up my life outside of work.
 
 ## 🚀 Live Website
 
@@ -8,29 +8,31 @@ A responsive personal website built with HTML5, CSS3, and Bootstrap to document 
 
 ---
 
-## 📖 About The Site
+## 📖 Project Description
 
-"John Off The Wall" is a personal space created to share who I am off the wall. Rather than focusing on a professional resume, this site documents my personal experiences, self-taught tinkering, tech curiosity, love for motorcycles, music, dogs, and casual gaming. Built using semantic web standards and the Bootstrap grid system, it offers a clean, mobile-first experience with custom light/dark theme support.
+This project's goal was to build a personal website that showcases my skills, experience, and interests in a way that's visually appealing and easy to navigate. Rather than a straightforward resume site, "John Off The Wall" documents who I am outside of work - my tech curiosity, self-taught tinkering, and passions like motorcycles, music, dogs, and casual gaming - while still surfacing the relevant background info a visitor or recruiter would want to see.
 
 ---
 
-## ✨ Key Features & Sections
+## ✨ Features
 
-* **Hero Section:** Personal intro introducing "John Paul / Jampol" with custom branding and quick links.
-* **About Me (John Off the Wall):** A deeper dive into my personal mindset, philosophy, and life milestones.
-* **Off the Wall (Interests & Hobbies):** Interactive grid highlighting key passions—Tech, Self-Taught Creative Work, Riding/Road Trips, Gaming, Music, and Dogs.
-* **Reach Out:** Simple CTA section for connecting, sharing recommendations, or reaching out directly via email.
-* **Custom Theme Toggle:** Seamless light and dark mode switching with custom CSS variables.
+* **Hero Section:** A brief introduction to me - "John Paul / Jampol" - with custom branding and quick links.
+* **About Me (Off the Wall):** An interactive grid covering my interests and hobbies - Tech, Self-Taught Creative Work, Riding/Road Trips, Gaming, Music, and Dogs.
+* **Contact Me:** A "Reach Out" section with a direct way to get in touch.
+* **Light/Dark Theme:** Custom light and dark mode support using CSS variables, so the site is comfortable to browse in either setting.
 
 ---
 
 ## 🛠️ Tech Stack & Requirements
 
 * **HTML5:** Semantic structural layout (`<header>`, `<nav>`, `<section>`, `<footer>`) for accessibility.
-* **Bootstrap 5:** Utility-first layout framework for flexible grid systems and responsive spacing.
-* **Custom CSS3:** Tailored stylesheets (`styles.css`, `theme.css`) implementing custom color palettes and theme variables.
-* **Typography & Icons:** Integrated Font Awesome icon set and Google Fonts (`Space Grotesk`, `Fraunces`).
-* **Media & Assets:** WebP compressed imagery complete with descriptive `alt` attributes for performance and screen-reader accessibility.
+* **CSS3:** Custom stylesheets (`styles.css`, `theme.css`) with theme variables for the color palette, responsive layout, and component styling.
+* **Bootstrap 5:** Utility classes for grid layout and responsive spacing.
+* **Typography & Icons:** Font Awesome icon set and Google Fonts (`Space Grotesk`, `Fraunces`).
+* **Media & Assets:** Compressed imagery with descriptive `alt` attributes for performance and screen-reader accessibility.
+* **JavaScript:** A small amount of vanilla JS powers the theme toggle and a couple of interactive UI bits (like the quick-links popup and the "copy email" action). Everything else is built with plain HTML and CSS.
+
+> Note: the original capstone brief calls for an HTML/CSS-only build. This site is HTML/CSS first, with a light layer of JS reserved for progressive-enhancement features (theme switching and clipboard copy) that don't affect the core content or navigation - the site is fully readable and usable with JS disabled.
 
 ---
 
@@ -39,11 +41,12 @@ A responsive personal website built with HTML5, CSS3, and Bootstrap to document 
 ```text
 .
 ├── index.html        # Primary HTML structure of the personal site
-├── css/              
+├── css/
 │   ├── styles.css    # Main layout, typography, and component styling
 │   └── theme.css     # Theme variables (light/dark mode palettes)
-├── js/               
+├── js/
 │   └── scripts.js    # Theme switching logic and UI interactions
-├── assets/           
+├── assets/
 │   └── img/          # Personal photos, icons, and thumbnails
 └── README.md         # Project documentation
+```
