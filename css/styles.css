@@ -89,12 +89,29 @@ h1, h2, h3, h4, h5, h6 {
 
 @keyframes dockEmberGlow {
   0%, 100% {
-    box-shadow: var(--shadow), 0 0 0 0 color-mix(in srgb, var(--accent) 0%, transparent);
+    box-shadow: var(--shadow), 0 0 0 0 color-mix(in srgb, var(--primary) 0%, transparent);
     border-color: var(--border);
   }
   50% {
-    box-shadow: var(--shadow), 0 0 0.85rem 0.15rem color-mix(in srgb, var(--accent) 60%, transparent);
-    border-color: color-mix(in srgb, var(--accent) 65%, var(--border));
+    box-shadow: var(--shadow), 0 0 0.85rem 0.15rem color-mix(in srgb, var(--primary) 60%, transparent);
+    border-color: color-mix(in srgb, var(--primary) 65%, var(--border));
+  }
+}
+
+/* If you use --secondary for dark mode styling, ensure dark mode uses it */
+[data-theme="dark"] .dock-nav,
+[data-theme="dark"] .dock-popup {
+  animation-name: dockEmberGlowDark;
+}
+
+@keyframes dockEmberGlowDark {
+  0%, 100% {
+    box-shadow: var(--shadow), 0 0 0 0 color-mix(in srgb, var(--secondary) 0%, transparent);
+    border-color: var(--border);
+  }
+  50% {
+    box-shadow: var(--shadow), 0 0 0.85rem 0.15rem color-mix(in srgb, var(--secondary) 60%, transparent);
+    border-color: color-mix(in srgb, var(--secondary) 65%, var(--border));
   }
 }
 
