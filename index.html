@@ -46,10 +46,65 @@
         <a class="dock-item" href="#portfolio" aria-label="Contact" title="Off the Wall">
             <i class="fa-solid fa-gamepad" aria-hidden="true"></i>
         </a>
-        <a class="dock-item" href="#contact" aria-label="Contact" title="Contact">
-            <i class="fas fa-envelope" aria-hidden="true"></i>
-        </a>
-        
+        <div class="dock-rocket-wrap">
+            <button id="rocketToggle" class="dock-item dock-rocket" type="button" aria-haspopup="true"
+                aria-expanded="false" aria-controls="rocketMenu" title="Quick links" aria-label="Quick links">
+                <i class="fa-solid fa-rocket" aria-hidden="true"></i>
+            </button>
+
+            <div class="dock-popup" id="rocketMenu" role="menu" aria-hidden="true">
+                <a class="dock-popup-item" role="menuitem" target="_blank" rel="noopener"
+                    href="https://github.com/johnoffthewall/johnoffthewall.github.io">
+                    <i class="fa-brands fa-github" aria-hidden="true"></i>
+                    <span>John Off the Wall</span>
+                </a>
+
+                <button type="button" class="dock-popup-item js-email-trigger" role="menuitem"
+                    data-email="jpleonard.deleon@gmail.com">
+                    <i class="fa-regular fa-envelope" aria-hidden="true"></i>
+                    <span>Email</span>
+                </button>
+
+                <a class="dock-popup-item" role="menuitem" target="_blank" rel="noopener"
+                    href="https://jpldeleon.github.io/">
+                    <i class="fa-regular fa-file-lines" aria-hidden="true"></i>
+                    <span>CV</span>
+                </a>
+
+                <div class="dock-popup-sub-wrap">
+                    <button type="button" class="dock-popup-item dock-popup-parent" id="projectDirToggle"
+                        role="menuitem" aria-haspopup="true" aria-expanded="false" aria-controls="projectDirMenu">
+                        <i class="fa-solid fa-folder-open" aria-hidden="true"></i>
+                        <span>Project Directory</span>
+                        <i class="fa-solid fa-chevron-right dock-popup-caret" aria-hidden="true"></i>
+                    </button>
+
+                    <div class="dock-popup-nested" id="projectDirMenu" role="menu" aria-hidden="true">
+                        <a class="dock-popup-item" role="menuitem" target="_blank" rel="noopener"
+                            href="https://github.com/jpldeleon/JamporuDEX">
+                            <i class="fa-brands fa-github" aria-hidden="true"></i>
+                            <span>JamporuDEX</span>
+                        </a>
+                        <a class="dock-popup-item" role="menuitem" target="_blank" rel="noopener"
+                            href="https://github.com/jpldeleon/AuditKit">
+                            <i class="fa-brands fa-github" aria-hidden="true"></i>
+                            <span>AuditKit</span>
+                        </a>
+                        <a class="dock-popup-item" role="menuitem" target="_blank" rel="noopener"
+                            href="https://github.com/jpldeleon/route196">
+                            <i class="fa-brands fa-github" aria-hidden="true"></i>
+                            <span>Route 196</span>
+                        </a>
+                        <a class="dock-popup-item" role="menuitem" target="_blank" rel="noopener"
+                            href="https://github.com/jpldeleon/pixellog">
+                            <i class="fa-brands fa-github" aria-hidden="true"></i>
+                            <span>PixelLog</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <button id="themeToggle" class="dock-item dock-toggle" type="button" title="Toggle theme"
             aria-label="Toggle color theme" aria-pressed="false">
             <span class="toggle-disc">
@@ -351,7 +406,8 @@
                     </div>
                     <p class="cta-lead">Need a travel buddy? I'll drive. Want tech advice? I got you. Looking for music
                         or gaming recommendations? I'm your guy.</p>
-                    <a class="btn btn-secondary btn-xl text-uppercase" href="mailto:jpleonard.deleon@gmail.com">Hit me
+                    <a class="btn btn-secondary btn-xl text-uppercase js-email-trigger"
+                        href="mailto:jpleonard.deleon@gmail.com" data-email="jpleonard.deleon@gmail.com">Hit me
                         up</a>
                 </div>
             </div>
@@ -362,30 +418,14 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 mb-5 mb-lg-0">
-                    <h4>Find me around the web</h4>
-                    <div class="social-icons">
-                        <a class="btn-social" href="https://jpldeleon.github.io/" aria-label="Portfolio"><i
-                                class="fa-solid fa-briefcase"></i></a>
-                        <a class="btn-social" href="https://github.com/johnoffthewall/johnoffthewall.github.io" aria-label="GitHub"><i
-                                class="fab fa-github"></i></a>
-                        <a class="btn-social" href="https://www.linkedin.com/in/jpldl/" aria-label="LinkedIn"><i
-                                class="fa-brands fa-linkedin-in"></i></a>
-                        <a class="btn-social" href="mailto:jpleonard.deleon@gmail.com" aria-label="Gmail"><i
-                                class="fa-regular fa-paper-plane"></i></a>
-                    </div>
+
                 </div>
-                <div class="col-lg-4 mb-5 mb-lg-0">
+                <div class="col-lg-4 mb-5 mb-lg-0 text-center">
                     <h4>About this theme</h4>
                     <p class="lead mb-0">Built with Start Bootstrap Freelancer, customized to document my personal
                         projects and journey beyond work.</p>
                 </div>
-                <div class="col-lg-4">
-                    <h4>Contact details</h4>
-                    <p class="lead mb-0"><a
-                            href="mailto:jpleonard.deleon@gmail.com">jpleonard.deleon@gmail.com</a><br />Metro Manila,
-                        PH
-                    </p>
-                </div>
+
             </div>
         </div>
     </footer>
@@ -396,9 +436,115 @@
         </div>
     </div>
 
+    <div class="app-toast-container position-fixed bottom-0 start-50 translate-middle-x p-3">
+        <div id="emailToast" class="app-toast toast" role="status" aria-live="polite" aria-atomic="true">
+            <div class="toast-body">
+                <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
+                <span id="emailToastBody">Email copied to clipboard.</span>
+                <button type="button" class="btn-close ms-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
     <script src="js/scripts.js"></script>
+
+    <script>
+        (function () {
+            'use strict';
+
+            /* ---------- Rocket dock popup menu ---------- */
+            var rocketToggle = document.getElementById('rocketToggle');
+            var rocketMenu = document.getElementById('rocketMenu');
+            var projectDirToggle = document.getElementById('projectDirToggle');
+            var projectDirMenu = document.getElementById('projectDirMenu');
+
+            function closeSubmenu() {
+                projectDirMenu.classList.remove('is-open');
+                projectDirMenu.setAttribute('aria-hidden', 'true');
+                projectDirToggle.setAttribute('aria-expanded', 'false');
+            }
+
+            function closeRocketMenu() {
+                rocketMenu.classList.remove('is-open');
+                rocketMenu.setAttribute('aria-hidden', 'true');
+                rocketToggle.setAttribute('aria-expanded', 'false');
+                rocketToggle.classList.remove('is-active');
+                closeSubmenu();
+            }
+
+            function openRocketMenu() {
+                rocketMenu.classList.add('is-open');
+                rocketMenu.setAttribute('aria-hidden', 'false');
+                rocketToggle.setAttribute('aria-expanded', 'true');
+                rocketToggle.classList.add('is-active');
+            }
+
+            rocketToggle.addEventListener('click', function (e) {
+                e.stopPropagation();
+                if (rocketMenu.classList.contains('is-open')) {
+                    closeRocketMenu();
+                } else {
+                    openRocketMenu();
+                }
+            });
+
+            projectDirToggle.addEventListener('click', function (e) {
+                e.stopPropagation();
+                var isOpen = projectDirMenu.classList.contains('is-open');
+                if (isOpen) {
+                    closeSubmenu();
+                } else {
+                    projectDirMenu.classList.add('is-open');
+                    projectDirMenu.setAttribute('aria-hidden', 'false');
+                    projectDirToggle.setAttribute('aria-expanded', 'true');
+                }
+            });
+
+            document.addEventListener('click', function (e) {
+                if (!rocketMenu.contains(e.target) && e.target !== rocketToggle) {
+                    closeRocketMenu();
+                }
+            });
+
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape') {
+                    closeRocketMenu();
+                    rocketToggle.focus();
+                }
+            });
+
+            /* ---------- Email links -> toast (anti-scrape + confirmation) ---------- */
+            var emailToastEl = document.getElementById('emailToast');
+            var emailToastBody = document.getElementById('emailToastBody');
+            var emailToast = window.bootstrap ? new bootstrap.Toast(emailToastEl, { delay: 4000 }) : null;
+
+            function showEmailToast(address, copied) {
+                emailToastBody.textContent = copied
+                    ? 'Copied to clipboard: ' + address
+                    : 'Email: ' + address;
+                if (emailToast) {
+                    emailToast.show();
+                }
+            }
+
+            document.querySelectorAll('.js-email-trigger').forEach(function (el) {
+                el.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    closeRocketMenu();
+                    var address = el.getAttribute('data-email');
+                    if (navigator.clipboard && navigator.clipboard.writeText) {
+                        navigator.clipboard.writeText(address)
+                            .then(function () { showEmailToast(address, true); })
+                            .catch(function () { showEmailToast(address, false); });
+                    } else {
+                        showEmailToast(address, false);
+                    }
+                });
+            });
+        })();
+    </script>
 </body>
 
 </html>

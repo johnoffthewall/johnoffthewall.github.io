@@ -1,9 +1,3 @@
-/*!
- * Structural & typographic styles for the Freelancer-layout portfolio.
- * Colors live in theme.css — this file only handles layout, spacing,
- * and type scale so the two stay cleanly separated.
- */
-
 :root {
   --font-display: "Fraunces", Georgia, serif;
   --font-body: "Space Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -65,9 +59,194 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
+.dock-nav {
+  animation: dockEmberGlow 2.6s ease-in-out infinite;
+}
+.dock-nav::before,
+.dock-nav::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -0.2rem;
+  width: 45%;
+  height: 1.4rem;
+  border-radius: 50%;
+  background: radial-gradient(circle,
+      color-mix(in srgb, var(--accent) 55%, transparent) 0%,
+      transparent 72%);
+  filter: blur(7px);
+  opacity: 0;
+  pointer-events: none;
+  animation: dockSmokeRise 3.4s ease-in infinite;
+}
+.dock-nav::after {
+  left: 38%;
+  width: 30%;
+  height: 1rem;
+  animation-delay: 1.6s;
+  animation-duration: 4.1s;
+}
+
+@keyframes dockEmberGlow {
+  0%, 100% {
+    box-shadow: var(--shadow), 0 0 0 0 color-mix(in srgb, var(--accent) 0%, transparent);
+    border-color: var(--border);
+  }
+  50% {
+    box-shadow: var(--shadow), 0 0 0.85rem 0.15rem color-mix(in srgb, var(--accent) 60%, transparent);
+    border-color: color-mix(in srgb, var(--accent) 65%, var(--border));
+  }
+}
+
+@keyframes dockSmokeRise {
+  0% {
+    transform: translate(-50%, 0) scale(0.55);
+    opacity: 0;
+  }
+  18% {
+    opacity: 0.6;
+  }
+  70% {
+    opacity: 0.2;
+  }
+  100% {
+    transform: translate(-50%, -2.4rem) scale(1.7);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dock-nav,
+  .dock-nav::before,
+  .dock-nav::after {
+    animation: none;
+  }
+}
+
 /* ==========================================================
-   THEME TOGGLE (now a dock item)
+   DOCK ROCKET POPUP MENU
    ========================================================== */
+.dock-rocket-wrap {
+  display: inline-flex;
+}
+
+.dock-popup {
+  animation: dockEmberGlow 2.6s ease-in-out infinite;
+  position: absolute;
+  bottom: calc(100% + 0.75rem);
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--bg-card);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  display: none;
+  z-index: 1000;
+  border-radius: 0.75rem;
+  padding: 0.5rem;
+  min-width: 15rem;
+  max-width: calc(100vw - 2rem);
+  box-sizing: border-box;
+}
+
+.dock-popup.is-open {
+  display: block;
+}
+
+
+.dock-popup-nested {
+  display: none;
+  position: static !important;
+  box-shadow: none !important;
+  border: none !important;
+  background: transparent !important;
+  padding-left: 1rem;
+  margin-top: 0.25rem;
+}
+
+.dock-popup-nested.is-open {
+  display: block !important;
+}
+
+.dock-popup-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0.6rem 0.85rem;
+  border-radius: 0.5rem;
+  text-align: left;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--text-color);
+}
+
+.dock-popup-item i {
+  color: var(--primary);
+}
+[data-theme="dark"] .dock-popup-item i {
+  color: var(--secondary);
+}
+.dock-popup-item:hover,
+.dock-popup-item:focus-visible {
+  background-color: color-mix(in srgb, var(--primary) 12%, transparent);
+  color: var(--primary);
+}
+[data-theme="dark"] .dock-popup-item:hover,
+[data-theme="dark"] .dock-popup-item:focus-visible {
+  background-color: color-mix(in srgb, var(--secondary) 16%, transparent);
+  color: var(--secondary);
+}
+.dock-popup-item:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+}
+.dock-popup-parent[aria-expanded="true"] {
+  background-color: color-mix(in srgb, var(--primary) 12%, transparent);
+  color: var(--primary);
+}
+[data-theme="dark"] .dock-popup-parent[aria-expanded="true"] {
+  background-color: color-mix(in srgb, var(--secondary) 16%, transparent);
+  color: var(--secondary);
+}
+
+@media (max-width: 767.98px) {
+  .dock-popup {
+    width: calc(100vw - 2rem);
+    max-width: 22rem;
+    max-height: calc(100dvh - 6rem);
+    overflow-y: auto;
+  }
+  .dock-popup-item {
+    padding: 0.75rem 1rem;
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .dock-popup {
+    bottom: calc(100% + 0.6rem);
+    width: calc(100vw - 1.5rem);
+    max-height: calc(100dvh - 5.5rem);
+  }
+}
+
+.app-toast-container {
+  z-index: 1080;
+}
+.app-toast {
+  border-radius: 0.85rem;
+  min-width: 17rem;
+}
+.app-toast .toast-body {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  padding: 0.85rem 1rem;
+}
+
 .dock-toggle {
   padding: 0;
   border: none;
